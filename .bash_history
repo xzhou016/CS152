@@ -1,10 +1,3 @@
-mv --help 
-exit
-lex calculator.l
-ls
-cd CS152/
-ls
-cd lab1/
 ls
 ./calculator.compile
 lex calculator.l
@@ -98,3 +91,10 @@ git push -u origin master
 ls
 cd CS152/
 ls
+git pull
+git add -all
+git add --all
+git commint -m "added some grammar"
+git commit -m "added some grammar"
+git push
+exit
