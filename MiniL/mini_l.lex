@@ -12,7 +12,9 @@ WHITE_SPACE	[ \t]+
 %%
 \(	return L_PARENT;
 \)	return R_PARENT;
-\[	return L_BRAC
+\[	return L_BRAC;
+\]	return R_BRAC;
+
 
 %%
 
