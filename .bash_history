@@ -1,57 +1,3 @@
-ls
-./calculator.compile
-lex calculator.l
-cc lex.yy.c y.tab.c -o calculator.l
-flex calculator.l
-ls
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-./a.out
-flex calculator.l
-cc lex.yy.c -o calculator.l -lfl
-ls
-./calculator.l
-flex calculator.l
-cc lex.yy.c -o -lfl
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-cc lex.yy.c -o calculator.o -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-flex calculator.l
-./calculator.o
-cc lex.yy.c -o calculator.o -lfl
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
-./calculator.o
-flex calculator.l
-cc lex.yy.c -o calculator.o -lfl
 ./calculator.o
 cc lex.yy.c -o calculator.o -lfl
 flex calculator.l
@@ -98,3 +44,57 @@ git commint -m "added some grammar"
 git commit -m "added some grammar"
 git push
 exit
+git pull
+ls 
+cs MiniL/
+cd MiniL/
+ls
+flex mini_l.lex 
+git commit -m "added some grammar"
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+cat primes.min | lexer
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+flex mini_l.lex 
+gcc -o lexer lex.yy.c -lfl
+cat primes.min | lexer
+./lexer
+git add all
+git add -all
+git add --all
+ls
+cd ..
+git status
+git add --all
+git commit -m "Phase 1 finished"
+git push
+git tag phase1
+git commit -m added tag
+git commit -m "added tag"
+git push
+git push origin --tags
