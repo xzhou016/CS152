@@ -69,8 +69,8 @@ write			{return WRITE;		printf("WRITE\n");		colNum += yyleng;}
 {WHITE_SPACE}		{colNum += yyleng;}
 \n			{++lineNum;				colNum = 1;}
 {COMMENT}		{colNum += yyleng;}
-{ID}			{printf("ID %s\n", yytext);		colNum += yyleng;}
-{NUMBER}		{printf("NUMBER %s\n", yytext);		colNum += yyleng;}
+{ID}			{return ID;		printf("ID %s\n", yytext);		colNum += yyleng;}
+{NUMBER}		{return NUMBER;		printf("NUMBER %s\n", yytext);		colNum += yyleng;}
 .			{yyerr(1, yytext);}
 {ID_ERR_1}		{yyerr(2, yytext);}
 {ID_ERR_2}		{yyerr(3, yytext);}
