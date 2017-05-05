@@ -1,32 +1,3 @@
-git push -u origin master
-ls
-cd CS152/
-ls
-git pull
-git add -all
-git add --all
-git commint -m "added some grammar"
-git commit -m "added some grammar"
-git push
-exit
-git pull
-ls 
-cs MiniL/
-cd MiniL/
-ls
-flex mini_l.lex 
-git commit -m "added some grammar"
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
-flex mini_l.lex 
 gcc -o lexer lex.yy.c -lfl
 cat primes.min | lexer
 flex mini_l.lex 
@@ -98,3 +69,32 @@ bison -d example4.y
 ls
 gcc lex.yy.c y.tab.c -o example4
 ./example4 
+ls
+git add --all
+git commit -m "did some bison tut and init phase 2 of proj"
+git push
+exit
+bison -v -d --file-prefix=y calc.y
+bison -v -d --file-prefix=y calculator.y
+ls
+cd lab 2/
+cd lab2/
+ls
+cd lab_2/
+cd lab\ 2/
+ls
+bison -v -d --file-prefix=y calculator.y
+flex calculator.l
+gcc -o calc y.tab.c lex.yy.c -lfl
+bison -v -d --file-prefix=y calculator.y
+flex calculator.l
+gcc -o calc y.tab.c lex.yy.c -lfl
+bison -v -d --file-prefix=y calculator.y
+flex calculator.l
+gcc -o calc y.tab.c lex.yy.c -lfl
+./calc
+bison -v -d --file-prefix=y calculator.y
+flex calculator.l
+gcc -o calc y.tab.c lex.yy.c -lfl
+./calc
+bison -v -d --file-prefix=y calculator.y

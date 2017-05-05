@@ -1,9 +1,9 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
+	#include "tok.h"
 	int lineNum = 1;
 	int colNum = 1;
-	void yyerr(int, char *);
 %}
 
 DIGIT 		[0-9]
@@ -17,57 +17,57 @@ ID_ERR_1 	{NUMBER}+{ID}
 ID_ERR_2	{ID}{UNDERLINE}
 
 %%
-\(			{printf("L_PARENT\n");		colNum += yyleng;}
-\)			{printf("R_PARENT\n");		colNum += yyleng;}
-\[			{printf("L_BRAC\n");		colNum += yyleng;}
-\]			{printf("R_BRAC\n");		colNum += yyleng;}
-\-			{printf("SUB\n");		colNum += yyleng;}
-\;			{printf("SEMICOLON\n");		colNum += yyleng;}
-\:			{printf("COLON\n");		colNum += yyleng;}
-\,			{printf("COMMA\n");		colNum += yyleng;}
+\(			{return L_PARENT; 	printf("L_PARENT\n");		colNum += yyleng;}
+\)			{return R_PARENT;	printf("R_PARENT\n");		colNum += yyleng;}
+\[			{return L_BRAC;		printf("L_BRAC\n");		colNum += yyleng;}
+\]			{return R_BARC;		printf("R_BRAC\n");		colNum += yyleng;}
+\-			{return SUB;		printf("SUB\n");		colNum += yyleng;}
+\;			{return SEMICOLON;	printf("SEMICOLON\n");		colNum += yyleng;}
+\:			{return COLON;		printf("COLON\n");		colNum += yyleng;}
+\,			{return COMMA;		printf("COMMA\n");		colNum += yyleng;}
 
-\*			{printf("TIMES\n");		colNum += yyleng;}
-\/			{printf("DIV\n");		colNum += yyleng;}
-\%			{printf("MOD\n");		colNum += yyleng;}
-\+			{printf("ADD\n");		colNum += yyleng;}
+\*			{return TIMES;		printf("TIMES\n");		colNum += yyleng;}
+\/			{return DIV;		printf("DIV\n");		colNum += yyleng;}
+\%			{return MOD;		printf("MOD\n");		colNum += yyleng;}
+\+			{return ADD;		printf("ADD\n");		colNum += yyleng;}
 
-\<			{printf("LT\n");		colNum += yyleng;}
-\<=			{printf("LTE\n");		colNum += yyleng;}
-\>			{printf("GT\n");		colNum += yyleng;}
-\>=			{printf("GTE\n");		colNum += yyleng;}
-\==			{printf("EQ\n");		colNum += yyleng;}
-\<\>			{printf("NEQ\n");		colNum += yyleng;}
+\<			{return LT;		printf("LT\n");			colNum += yyleng;}
+\<=			{return LTE;		printf("LTE\n");		colNum += yyleng;}
+\>			{return GT;		printf("GT\n");			colNum += yyleng;}
+\>=			{return GTE;		printf("GTE\n");		colNum += yyleng;}
+\==			{return EQ;		printf("EQ\n");			colNum += yyleng;}
+\<\>			{return NEQ;		printf("NEQ\n");		colNum += yyleng;}
 
-not			{printf("NOT\n");		colNum += yyleng;}
-and			{printf("AND\n");		colNum += yyleng;}
-or			{printf("OR\n");		colNum += yyleng;}
-\:=			{printf("ASSIGN\n");		colNum += yyleng;}
+not			{return NOT;		printf("NOT\n");		colNum += yyleng;}
+and			{return AND;		printf("AND\n");		colNum += yyleng;}
+or			{return OR;		printf("OR\n");			colNum += yyleng;}
+\:=			{return ASSIGN;		printf("ASSIGN\n");		colNum += yyleng;}
 	
 
-function		{printf("FUNCTION\n");		colNum += yyleng;}
-beginparams		{printf("BEGIN_PARAMS\n");	colNum += yyleng;}
-endparams		{printf("END_PARAMS\n");	colNum += yyleng;}
-beginlocals		{printf("BEGIN_LOCALS\n");	colNum += yyleng;}
-endlocals		{printf("END_LOCALS\n");	colNum += yyleng;}
-beginboday		{printf("BEGIN_BODY\n");	colNum += yyleng;}
-endbody			{printf("END_BODY\n");		colNum += yyleng;}
-interger		{printf("INTERGER\n");		colNum += yyleng;}
-array			{printf("ARRAY\n");		colNum += yyleng;}
-of			{printf("OF\n");		colNum += yyleng;}
-if			{printf("IF\n");		colNum += yyleng;}
-then			{printf("THEN\n");		colNum += yyleng;}
-endif			{printf("ENDIF\n");		colNum += yyleng;}
-else			{printf("ELSE\n");		colNum += yyleng;}
-while			{printf("WHILE\n");		colNum += yyleng;}
-do			{printf("DO\n");		colNum += yyleng;}
-beginloop		{printf("BEGINLOOP\n");		colNum += yyleng;}
-endloop			{printf("ENDLOOP\n");		colNum += yyleng;}
-continue		{printf("CONTINUE\n");		colNum += yyleng;}
-read			{printf("READ\n");		colNum += yyleng;}
-write			{printf("WRITE\n");		colNum += yyleng;}
+function		{return FUNCTION;	printf("FUNCTION\n");		colNum += yyleng;}
+beginparams		{return BEGIN_PARAMS;	printf("BEGIN_PARAMS\n");	colNum += yyleng;}
+endparams		{return END_PARAMS;	printf("END_PARAMS\n");		colNum += yyleng;}
+beginlocals		{return BEGIN_LOCALS;	printf("BEGIN_LOCALS\n");	colNum += yyleng;}
+endlocals		{return END_LOCALS;	printf("END_LOCALS\n");		colNum += yyleng;}
+beginboday		{return BEGIN_BODY;	printf("BEGIN_BODY\n");		colNum += yyleng;}
+endbody			{return END_BODY;	printf("END_BODY\n");		colNum += yyleng;}
+interger		{return INTERGER;	printf("INTERGER\n");		colNum += yyleng;}
+array			{return ARRAY;		printf("ARRAY\n");		colNum += yyleng;}
+of			{return OF;		printf("OF\n");			colNum += yyleng;}
+if			{return IF;		printf("IF\n");			colNum += yyleng;}
+then			{return THEN;		printf("THEN\n");		colNum += yyleng;}
+endif			{return ENDIF;		printf("ENDIF\n");		colNum += yyleng;}
+else			{return ELSE;		printf("ELSE\n");		colNum += yyleng;}
+while			{return WHILE;		printf("WHILE\n");		colNum += yyleng;}
+do			{return DO;		printf("DO\n");			colNum += yyleng;}
+beginloop		{return BEGINLOOP;	printf("BEGINLOOP\n");		colNum += yyleng;}
+endloop			{return ENDLOOP;	printf("ENDLOOP\n");		colNum += yyleng;}
+continue		{return CONTINUE;	printf("CONTINUE\n");		colNum += yyleng;}
+read			{return READ;		printf("READ\n");		colNum += yyleng;}
+write			{return WRITE;		printf("WRITE\n");		colNum += yyleng;}
 
 {WHITE_SPACE}		{colNum += yyleng;}
-\n			{++lineNum;			colNum = 1;}
+\n			{++lineNum;				colNum = 1;}
 {COMMENT}		{colNum += yyleng;}
 {ID}			{printf("ID %s\n", yytext);		colNum += yyleng;}
 {NUMBER}		{printf("NUMBER %s\n", yytext);		colNum += yyleng;}
@@ -75,33 +75,3 @@ write			{printf("WRITE\n");		colNum += yyleng;}
 {ID_ERR_1}		{yyerr(2, yytext);}
 {ID_ERR_2}		{yyerr(3, yytext);}
 
-
-%%	
-void yyerr(int error_code, char* error_symbol) {
-	switch (error_code)  {
-		case 1: {
-			printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);
-		break;		
-		}
-		case 2: {
-			printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", lineNum, colNum, error_symbol);
-		break;		
-		}
-		case 3: {
-			printf("Error at line %d, column %d: identifier \"%s\" cannot end with an underscore\n", lineNum, colNum, error_symbol);
-		break;		
-		}
-	}
-	exit(1);
-}
-
-int main(int argc, char** argv){
-    FILE *fh;
-
-    if(argc == 2 && (fh = fopen(argv[1], "r")))
-        yyin = fh;
-    else 
-	yyin = stdin;
-    yylex();
-
-}
