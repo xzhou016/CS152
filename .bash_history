@@ -1,13 +1,6 @@
 gcc -o lexer lex.yy.c -lfl
 cat primes.min | lexer
 flex mini_l.lex 
-cat primes.min | lexer
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
-flex mini_l.lex 
 gcc -o lexer lex.yy.c -lfl
 cat primes.min | lexer
 flex mini_l.lex 
@@ -98,3 +91,10 @@ flex calculator.l
 gcc -o calc y.tab.c lex.yy.c -lfl
 ./calc
 bison -v -d --file-prefix=y calculator.y
+git add --all
+git commit -m "added bison tutorial, working on MINIL"
+git push
+git add --all
+git commit -m "still working on minil"
+git push
+exit
