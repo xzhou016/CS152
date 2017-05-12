@@ -1,7 +1,3 @@
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
 cat primes.min | lexer
 flex mini_l.lex 
 gcc -o lexer lex.yy.c -lfl
@@ -96,5 +92,9 @@ git commit -m "added bison tutorial, working on MINIL"
 git push
 git add --all
 git commit -m "still working on minil"
+git push
+exit
+git add --all
+git commit -m "tiny addition"
 git push
 exit
