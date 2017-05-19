@@ -1,7 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
-	void yyerr(int, char *);
+	void yyerr(char *);
 	extern int lineNum;
 	extern int colNum;
 	FILE *yyin;
@@ -126,22 +126,8 @@ var_comma:																					{printf("Empty var_comma\n");}
 
 
 %%
-void yyerr(int error_code, char* error_symbol) {
-	switch (error_code)  {
-		case 1: {
+void yyerr( char* error_symbol) {
 			printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);
-		break;
-		}
-		case 2: {
-			printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", lineNum, colNum, error_symbol);
-		break;
-		}
-		case 3: {
-			printf("Error at line %d, column %d: identifier \"%s\" cannot end with an underscore\n", lineNum, colNum, error_symbol);
-		break;
-		}
-	}
-	exit(1);
 }
 
 

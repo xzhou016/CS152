@@ -75,6 +75,6 @@ return				{return RETURN;							colNum += yyleng;}
 {COMMENT}				{colNum += yyleng;}
 {ID}						{return ID;				printf("ID %s\n", yytext);		colNum += yyleng;}
 {NUMBER}				{return NUMBER;		printf("NUMBER %s\n", yytext);		colNum += yyleng;}
-.								{yyerr(1, yytext);}
-{ID_ERR_1}			{yyerr(2, yytext);}
-{ID_ERR_2}			{yyerr(3, yytext);}
+.								{printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);}
+{ID_ERR_1}			{printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", lineNum, colNum, error_symbol);}
+{ID_ERR_2}			{printf("Error at line %d, column %d: identifier \"%s\" cannot end with an underscore\n", lineNum, colNum, error_symbol);}
