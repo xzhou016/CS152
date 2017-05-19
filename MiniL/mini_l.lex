@@ -1,7 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
-	#include "tok.h"
+	#include "y.tab.h"
 	int lineNum = 1;
 	int colNum = 1;
 %}
