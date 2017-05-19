@@ -135,7 +135,7 @@ int main(int argc, char** argv){
         yyin = fh;
     else
 		yyin = stdin;
-  	yylex();
+  	yyparse();
 		return 0;
 }
 
