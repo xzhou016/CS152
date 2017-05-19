@@ -17,61 +17,64 @@ ID_ERR_1 	{NUMBER}+{ID}
 ID_ERR_2	{ID}{UNDERLINE}
 
 %%
-\(			{return L_PARENT; 	printf("L_PARENT\n");		colNum += yyleng;}
-\)			{return R_PARENT;	printf("R_PARENT\n");		colNum += yyleng;}
-\[			{return L_BRAC;		printf("L_BRAC\n");		colNum += yyleng;}
-\]			{return R_BARC;		printf("R_BRAC\n");		colNum += yyleng;}
-\-			{return SUB;		printf("SUB\n");		colNum += yyleng;}
-\;			{return SEMICOLON;	printf("SEMICOLON\n");		colNum += yyleng;}
-\:			{return COLON;		printf("COLON\n");		colNum += yyleng;}
-\,			{return COMMA;		printf("COMMA\n");		colNum += yyleng;}
+\(			{return L_PARENT; 		colNum += yyleng;}
+\)			{return R_PARENT;			colNum += yyleng;}
+\[			{return L_BRAC;				colNum += yyleng;}
+\]			{return R_BARC;				colNum += yyleng;}
+\-			{return SUB;					colNum += yyleng;}
+\;			{return SEMICOLON;		colNum += yyleng;}
+\:			{return COLON;				colNum += yyleng;}
+\,			{return COMMA;				colNum += yyleng;}
 
-\*			{return TIMES;		printf("TIMES\n");		colNum += yyleng;}
-\/			{return DIV;		printf("DIV\n");		colNum += yyleng;}
-\%			{return MOD;		printf("MOD\n");		colNum += yyleng;}
-\+			{return ADD;		printf("ADD\n");		colNum += yyleng;}
+\*			{return TIMES;				colNum += yyleng;}
+\/			{return DIV;					colNum += yyleng;}
+\%			{return MOD;					colNum += yyleng;}
+\+			{return ADD;					colNum += yyleng;}
 
-\<			{return LT;		printf("LT\n");			colNum += yyleng;}
-\<=			{return LTE;		printf("LTE\n");		colNum += yyleng;}
-\>			{return GT;		printf("GT\n");			colNum += yyleng;}
-\>=			{return GTE;		printf("GTE\n");		colNum += yyleng;}
-\==			{return EQ;		printf("EQ\n");			colNum += yyleng;}
-\<\>			{return NEQ;		printf("NEQ\n");		colNum += yyleng;}
+\<			{return LT;						colNum += yyleng;}
+\<=			{return LTE;					colNum += yyleng;}
+\>			{return GT;						colNum += yyleng;}
+\>=			{return GTE;					colNum += yyleng;}
+\==			{return EQ;						colNum += yyleng;}
+\<\>		{return NEQ;					colNum += yyleng;}
 
-not			{return NOT;		printf("NOT\n");		colNum += yyleng;}
-and			{return AND;		printf("AND\n");		colNum += yyleng;}
-or			{return OR;		printf("OR\n");			colNum += yyleng;}
-\:=			{return ASSIGN;		printf("ASSIGN\n");		colNum += yyleng;}
-	
+not			{return NOT;					colNum += yyleng;}
+and			{return AND;					colNum += yyleng;}
+or			{return OR;						colNum += yyleng;}
+\:=			{return ASSIGN;				colNum += yyleng;}
 
-function		{return FUNCTION;	printf("FUNCTION\n");		colNum += yyleng;}
-beginparams		{return BEGIN_PARAMS;	printf("BEGIN_PARAMS\n");	colNum += yyleng;}
-endparams		{return END_PARAMS;	printf("END_PARAMS\n");		colNum += yyleng;}
-beginlocals		{return BEGIN_LOCALS;	printf("BEGIN_LOCALS\n");	colNum += yyleng;}
-endlocals		{return END_LOCALS;	printf("END_LOCALS\n");		colNum += yyleng;}
-beginboday		{return BEGIN_BODY;	printf("BEGIN_BODY\n");		colNum += yyleng;}
-endbody			{return END_BODY;	printf("END_BODY\n");		colNum += yyleng;}
-interger		{return INTERGER;	printf("INTERGER\n");		colNum += yyleng;}
-array			{return ARRAY;		printf("ARRAY\n");		colNum += yyleng;}
-of			{return OF;		printf("OF\n");			colNum += yyleng;}
-if			{return IF;		printf("IF\n");			colNum += yyleng;}
-then			{return THEN;		printf("THEN\n");		colNum += yyleng;}
-endif			{return ENDIF;		printf("ENDIF\n");		colNum += yyleng;}
-else			{return ELSE;		printf("ELSE\n");		colNum += yyleng;}
-while			{return WHILE;		printf("WHILE\n");		colNum += yyleng;}
-do			{return DO;		printf("DO\n");			colNum += yyleng;}
-beginloop		{return BEGINLOOP;	printf("BEGINLOOP\n");		colNum += yyleng;}
-endloop			{return ENDLOOP;	printf("ENDLOOP\n");		colNum += yyleng;}
-continue		{return CONTINUE;	printf("CONTINUE\n");		colNum += yyleng;}
-read			{return READ;		printf("READ\n");		colNum += yyleng;}
-write			{return WRITE;		printf("WRITE\n");		colNum += yyleng;}
+true		{return TRUE;					colNum += yyleng;}
+false 	{return FALSE; 				colNum += yyleng;}
+
+
+function			{return FUNCTION;						colNum += yyleng;}
+beginparams		{return BEGIN_PARAMS;				colNum += yyleng;}
+endparams			{return END_PARAMS;					colNum += yyleng;}
+beginlocals		{return BEGIN_LOCALS;				colNum += yyleng;}
+endlocals			{return END_LOCALS;					colNum += yyleng;}
+beginboday		{return BEGIN_BODY;					colNum += yyleng;}
+endbody				{return END_BODY;						colNum += yyleng;}
+interger			{return INTERGER;						colNum += yyleng;}
+array					{return ARRAY;							colNum += yyleng;}
+of						{return OF;									colNum += yyleng;}
+if						{return IF;									colNum += yyleng;}
+then					{return THEN;								colNum += yyleng;}
+endif					{return ENDIF;							colNum += yyleng;}
+else					{return ELSE;								colNum += yyleng;}
+while					{return WHILE;							colNum += yyleng;}
+do						{return DO;									colNum += yyleng;}
+beginloop			{return BEGINLOOP;					colNum += yyleng;}
+endloop				{return ENDLOOP;						colNum += yyleng;}
+continue			{return CONTINUE;						colNum += yyleng;}
+read					{return READ;								colNum += yyleng;}
+write					{return WRITE;							colNum += yyleng;}
+return				{return RETURN;							colNum += yyleng;}
 
 {WHITE_SPACE}		{colNum += yyleng;}
-\n			{++lineNum;				colNum = 1;}
-{COMMENT}		{colNum += yyleng;}
-{ID}			{return ID;		printf("ID %s\n", yytext);		colNum += yyleng;}
-{NUMBER}		{return NUMBER;		printf("NUMBER %s\n", yytext);		colNum += yyleng;}
-.			{yyerr(1, yytext);}
-{ID_ERR_1}		{yyerr(2, yytext);}
-{ID_ERR_2}		{yyerr(3, yytext);}
-
+\n							{++lineNum;				colNum = 1;}
+{COMMENT}				{colNum += yyleng;}
+{ID}						{return ID;				printf("ID %s\n", yytext);		colNum += yyleng;}
+{NUMBER}				{return NUMBER;		printf("NUMBER %s\n", yytext);		colNum += yyleng;}
+.								{yyerr(1, yytext);}
+{ID_ERR_1}			{yyerr(2, yytext);}
+{ID_ERR_2}			{yyerr(3, yytext);}
