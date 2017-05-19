@@ -42,14 +42,14 @@ array:															{printf("array -> Empty array\n");}
 	;
 
 
-statement: 																																			{printf("statement -> Empty statement\n");}
-	|	var ASSIGN 																																	{printf("statement -> var ASSIGN\n");}
-	| IF bool_expr THEN statement SEMICOLON more_statement else ENDIF 						{printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
-	| WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP 				{printf("statement -> WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
-	| DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr			{printf("statement -> DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
-	| READ var var_comma 																													{printf("statement -> READ var var_comma\n");}
-	| CONTINUE 																																		{printf("statement -> CONTINUE\n");}
-	| RETURN expression																														{printf("statement -> RETURN expression\n");}
+statement: 																																												{printf("statement -> Empty statement\n");}
+	|	var ASSIGN 																																										{printf("statement -> var ASSIGN\n");}
+	| IF L_PARENT bool_expr R_PARENT THEN statement SEMICOLON more_statement else ENDIF 						{printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
+	| WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP 													{printf("statement -> WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
+	| DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr												{printf("statement -> DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
+	| READ var var_comma 																																						{printf("statement -> READ var var_comma\n");}
+	| CONTINUE 																																											{printf("statement -> CONTINUE\n");}
+	| RETURN expression																																							{printf("statement -> RETURN expression\n");}
 	;
 more_statement: 												{printf("statement -> Empty statement\n");}
 	| statement SEMICOLON more_statement	{printf("statement -> statement SEMICOLON more_statement\n");}
