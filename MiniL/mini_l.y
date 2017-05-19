@@ -2,7 +2,6 @@
 	#include<stdio.h>
 	#include<string.h>
 	void yyerr(int, char *);
-	void yyerr(char *);
 	extern int lineNum;
 	extern int colNum;
 	FILE *yyin;
@@ -145,9 +144,6 @@ void yyerr(int error_code, char* error_symbol) {
 	exit(1);
 }
 
-void yyerr(char* error_symbol){
-	printf("Unrecognized on line %d, colNum %d: %s\n",  lineNum, colNum);
-}
 
 int main(int argc, char** argv){
     FILE *fh;
