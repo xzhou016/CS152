@@ -32,7 +32,7 @@ program: /* empty */
 function: FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY {printf("function -> FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY\n");}
 	;
 declaration: 																							{printf("declaration -> Empty declaration\n");}
-	| ID comma COLON array INTEGER SEMICOLON declaration 		{printf("declaration -> ID comma COLON array INTEGER SEMICOLON declaration\n");}
+	| ID comma COLON array INTEGER SEMICOLON more_declaration 		{printf("declaration -> ID comma COLON array INTEGER SEMICOLON more_declaration\n");}
 	;
 comma: 								{printf("comma -> Empty comma\n");}
 	| COMMA ID comma 		{printf("comma -> COMMA ID comma\n");}

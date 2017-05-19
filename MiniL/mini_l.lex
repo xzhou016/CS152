@@ -54,7 +54,7 @@ beginlocals		{return BEGIN_LOCALS;				colNum += yyleng;}
 endlocals			{return END_LOCALS;					colNum += yyleng;}
 beginboday		{return BEGIN_BODY;					colNum += yyleng;}
 endbody				{return END_BODY;						colNum += yyleng;}
-integer			{return INTEGER;						colNum += yyleng;}
+integer				{return INTEGER;						colNum += yyleng;}
 array					{return ARRAY;							colNum += yyleng;}
 of						{return OF;									colNum += yyleng;}
 if						{return IF;									colNum += yyleng;}
@@ -73,8 +73,8 @@ return				{return RETURN;							colNum += yyleng;}
 {WHITE_SPACE}		{colNum += yyleng;}
 \n							{++lineNum;				colNum = 1;}
 {COMMENT}				{colNum += yyleng;}
-{ID}						{return ID;				printf("ID %s\n", yytext);		colNum += yyleng;}
-{NUMBER}				{return NUMBER;		printf("NUMBER %s\n", yytext);		colNum += yyleng;}
+{ID}						{printf("ID %s\n", yytext);		colNum += yyleng; return ID;}
+{NUMBER}				{printf("NUMBER %s\n", yytext);		colNum += yyleng; return NUMBER;}
 .								{printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, yytext);}
 {ID_ERR_1}			{printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", lineNum, colNum, yytext);}
 {ID_ERR_2}			{printf("Error at line %d, column %d: identifier \"%s\" cannot end with an underscore\n", lineNum, colNum, yytext);}
