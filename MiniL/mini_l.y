@@ -1,7 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
-	void yyerr(char * error_symbol);
+	void yyerr(const char * error_symbol);
 	extern int lineNum;
 	extern int colNum;
 	FILE *yyin;
@@ -29,104 +29,104 @@
 program: /* empty */
 	| function program
 	;
-function: FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY {printf("FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY\n");}
+function: FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY {printf("function -> FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY\n");}
 	;
-declaration: 																							{printf("Empty declaration.\n");}
-	| ID comma COLON array INTERGER SEMICOLON declaration 		{printf("ID comma COLON array INTEGER SEMICOLON declaration\n");}
+declaration: 																							{printf("declaration -> Empty declaration\n");}
+	| ID comma COLON array INTERGER SEMICOLON declaration 		{printf("declaration ->ID comma COLON array INTEGER SEMICOLON declaration\n");}
 	;
-comma: 								{printf("Empty comma\n");}
-	| COMMA ID comma 		{printf("COMMA ID comma\n");}
+comma: 								{printf("comma -> Empty comma\n");}
+	| COMMA ID comma 		{printf("comma -> COMMA ID comma\n");}
 	;
-array:															{printf("No array\n");}
-	| ARRAY L_BRAC NUMBER R_BRAC OF 	{printf("ARRAY L_BRAC NUMBER R_BRAC OF\n");}
-	;
-
-
-statement: 																																			{printf("Empty statement\n");}
-	|	var ASSIGN 																																	{printf("var ASSIGN\n");}
-	| IF bool_expr THEN statement SEMICOLON more_statement else ENDIF 						{printf("IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
-	| WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP 				{printf("WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
-	| DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr			{printf("DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
-	| READ var var_comma 																													{printf("READ var var_comma\n");}
-	| CONTINUE 																																		{printf("CONTINUE\n");}
-	| RETURN expression																														{printf("RETURN expression\n");}
-	;
-more_statement: 												{printf("Empty statement\n");}
-	| statement SEMICOLON more_statement	{printf("statement SEMICOLON more_statement\n");}
+array:															{printf("array -> Empty array\n");}
+	| ARRAY L_BRAC NUMBER R_BRAC OF 	{printf("array -> ARRAY L_BRAC NUMBER R_BRAC OF\n");}
 	;
 
 
-bool_expr: relation_and_expr more_bool_expr 						{printf("relation_and_expr more_bool_expr\n");}
+statement: 																																			{printf("statement -> Empty statement\n");}
+	|	var ASSIGN 																																	{printf("statement -> var ASSIGN\n");}
+	| IF bool_expr THEN statement SEMICOLON more_statement else ENDIF 						{printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
+	| WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP 				{printf("statement -> WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
+	| DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr			{printf("statement -> DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
+	| READ var var_comma 																													{printf("statement -> READ var var_comma\n");}
+	| CONTINUE 																																		{printf("statement -> CONTINUE\n");}
+	| RETURN expression																														{printf("statement -> RETURN expression\n");}
 	;
-relation_and_expr: relation_expr more_relation_and_expr {printf("relation_expr more_relation_and_expr\n");}
-	;
-more_bool_expr:																			{printf("Empty bool expression\n");}
-	| OR relation_and_expr more_bool_expr 						{printf("OR relation_and_expr bool_expr\n");}
-	;
-more_relation_and_expr: 														{printf("Empty relation_and_expr\n");}
-	| AND relation_expr  more_relation_and_expr				{printf("AND relation_expr  more_relation_and_expr\n");}
-	;
-
-relation_expr: NOT more_relation_expr 							{printf("NOT more_relation_expr\n");}
-	| more_relation_expr															{printf("more_relation_expr\n");}
-	;
-more_relation_expr: expression compare expression 	{printf("expression compare expression\n");}
- 	| TRUE																						{printf("TRUE\n");}
-	| FALSE																						{printf("FALSE\n");}
-	| L_PARENT bool_expr R_PARENT											{printf("L_PARENT bool_expr R_PARENT\n");}
-	;
-expression: multiplicative_expr more_expression			{printf("multiplicative_expr more_expression\n");}
-	;
-compare: EQ																					{printf("EQ\n");}
-	|	NEQ																							{printf("NEQ\n");}
-	|	LT																							{printf("LT\n");}
-	| GT																							{printf("GT\n");}
-	| LTE																							{printf("LTE\n");}
-	| GTE																							{printf("GTE\n");}
-more_expression:																		{printf("Empty expression\n");}
-	| ADD multiplicative_expr more_expression					{printf("ADD multiplicative_expr more_expression\n");}
-	| SUB multiplicative_expr more_expression					{printf("SUB multiplicative_expr more_expression\n");}
-	;
-multiplicative_expr: term more_multiplicative_expr	{printf("term more_multiplicative_expr\n");}
-	;
-more_multiplicative_expr:														{printf("Empty multiplicative_expr\n");}
-	| TIMES term more_multiplicative_expr							{printf("TIMES term more_multiplicative_expr\n");}
-	| DIV term more_multiplicative_expr								{printf("DIV term more_multiplicative_expr\n");}
-	| MOD term more_multiplicative_expr								{printf("MOD term more_multiplicative_expr\n");}
+more_statement: 												{printf("statement -> Empty statement\n");}
+	| statement SEMICOLON more_statement	{printf("statement -> statement SEMICOLON more_statement\n");}
 	;
 
 
-term: SUB var																				{printf("SUB var\n");}
-	| NUMBER																					{printf("NUMBER\n");}
-	| L_PARENT expression R_PARENT										{printf("L_PARENT expression R_PARENT\n");}
-	| ID L_PARENT term_expr term_comma R_PARENT				{printf("ID L_PARENT term_expr term_comma R_PARENT\n");}
+bool_expr: relation_and_expr more_bool_expr 						{printf("bool_expr -> relation_and_expr more_bool_expr\n");}
 	;
-term_expr:																					{printf("Empty term_expr\n");}
-	| expression																			{printf("expression\n");}
+relation_and_expr: relation_expr more_relation_and_expr {printf("relation_and_expr -> relation_expr more_relation_and_expr\n");}
 	;
-term_comma:																					{printf("Empty term_comma\n");}
-	| COMMA expression term_comma											{printf("COMMA expression term_comma\n");}
+more_bool_expr:																					{printf("bool_expr -> Empty bool expression\n");}
+	| OR relation_and_expr more_bool_expr 								{printf("bool_expr -> OR relation_and_expr bool_expr\n");}
+	;
+more_relation_and_expr: 																{printf("relation_and_expr -> Empty relation_and_expr\n");}
+	| AND relation_expr  more_relation_and_expr						{printf("relation_and_expr -> AND relation_expr  more_relation_and_expr\n");}
+	;
+
+relation_expr: NOT more_relation_expr 							{printf("relation_expr -> NOT more_relation_expr\n");}
+	| more_relation_expr															{printf("relation_expr -> more_relation_expr\n");}
+	;
+more_relation_expr: expression compare expression 	{printf("relation_expr -> expression compare expression\n");}
+ 	| TRUE																						{printf("relation_expr -> TRUE\n");}
+	| FALSE																						{printf("relation_expr -> FALSE\n");}
+	| L_PARENT bool_expr R_PARENT											{printf("relation_expr -> L_PARENT bool_expr R_PARENT\n");}
+	;
+expression: multiplicative_expr more_expression			{printf("expression -> multiplicative_expr more_expression\n");}
+	;
+compare: EQ																					{printf("compare -> EQ\n");}
+	|	NEQ																							{printf("compare -> NEQ\n");}
+	|	LT																							{printf("compare -> LT\n");}
+	| GT																							{printf("compare -> GT\n");}
+	| LTE																							{printf("compare -> LTE\n");}
+	| GTE																							{printf("compare -> GTE\n");}
+more_expression:																		{printf("expression -> Empty expression\n");}
+	| ADD multiplicative_expr more_expression					{printf("expression -> ADD multiplicative_expr more_expression\n");}
+	| SUB multiplicative_expr more_expression					{printf("expression -> SUB multiplicative_expr more_expression\n");}
+	;
+multiplicative_expr: term more_multiplicative_expr	{printf("multiplicative_expr -> term more_multiplicative_expr\n");}
+	;
+more_multiplicative_expr:														{printf("multiplicative_expr -> Empty multiplicative_expr\n");}
+	| TIMES term more_multiplicative_expr							{printf("multiplicative_expr -> TIMES term more_multiplicative_expr\n");}
+	| DIV term more_multiplicative_expr								{printf("multiplicative_expr -> DIV term more_multiplicative_expr\n");}
+	| MOD term more_multiplicative_expr								{printf("multiplicative_expr -> MOD term more_multiplicative_expr\n");}
 	;
 
 
-else:																								{printf("Empty else\n");}
-	| ELSE statement SEMICOLON more_statement					{printf("ELSE statement SEMICOLON more_statement\n");}
+term: SUB var																				{printf("term -> SUB var\n");}
+	| NUMBER																					{printf("term -> NUMBER\n");}
+	| L_PARENT expression R_PARENT										{printf("term -> L_PARENT expression R_PARENT\n");}
+	| ID L_PARENT term_expr term_comma R_PARENT				{printf("term -> ID L_PARENT term_expr term_comma R_PARENT\n");}
+	;
+term_expr:																					{printf("term_expr -> Empty term_expr\n");}
+	| expression																			{printf("term_expr -> expression\n");}
+	;
+term_comma:																					{printf("term_comma -> Empty term_comma\n");}
+	| COMMA expression term_comma											{printf("term_comma -> COMMA expression term_comma\n");}
 	;
 
 
-var: ID more_var																		{printf("ID more_var\n");}
+else:																								{printf("else -> Empty else\n");}
+	| ELSE statement SEMICOLON more_statement					{printf("else -> ELSE statement SEMICOLON more_statement\n");}
+	;
+
+
+var: ID more_var																		{printf("var -> ID more_var\n");}
 		;
-more_var:																						{printf("Empty var\n");}
-	| L_BRAC expression R_BRAC												{printf("L_BRAC expression R_BRAC\n");}
+more_var:																						{printf("var -> Empty var\n");}
+	| L_BRAC expression R_BRAC												{printf("var -> L_BRAC expression R_BRAC\n");}
 	;
-var_comma:																					{printf("Empty var_comma\n");}
-	| COMMA var var_comma															{printf("COMMA var var_comma\n");}
+var_comma:																					{printf("var_comma -> Empty var_comma\n");}
+	| COMMA var var_comma															{printf("var_comma -> COMMA var var_comma\n");}
 	;
 
 
 
 %%
-void yyerr( char* error_symbol) {
+void yyerr( const char* error_symbol) {
 			printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);
 }
 
@@ -137,7 +137,7 @@ int main(int argc, char** argv){
     if(argc == 2 && (fh = fopen(argv[1], "r")))
         yyin = fh;
     else
-	yyin = stdin;
-    yylex();
-
+		yyin = stdin;
+  	yylex();
+		return 0;
 }
