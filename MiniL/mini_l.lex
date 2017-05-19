@@ -73,7 +73,7 @@ return				{return RETURN;							colNum += yyleng;}
 {WHITE_SPACE}		{colNum += yyleng;}
 \n							{++lineNum;				colNum = 1;}
 {COMMENT}				{colNum += yyleng;}
-{ID}						{return ID; printf("ID %s\n", yytext);		colNum += yyleng; }
+{ID}						{ printf("ID %s\n", yytext);		return ID; colNum += yyleng; }
 {NUMBER}				{return NUMBER; printf("NUMBER %s\n", yytext);		colNum += yyleng; }
 .								{printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, yytext);}
 {ID_ERR_1}			{printf("Error at line %d, column %d: identifier \"%s\" must begin with a letter\n", lineNum, colNum, yytext);}
