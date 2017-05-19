@@ -73,7 +73,7 @@
 	FILE *yyin;
 
 /* Line 371 of yacc.c  */
-#line 77 "y.tab.c"
+#line 77 "bison.tab.c"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -92,9 +92,9 @@
 #endif
 
 /* In a future release of Bison, this section will be replaced
-   by #include "y.tab.h".  */
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
+   by #include "bison.tab.h".  */
+#ifndef YY_YY_BISON_TAB_H_INCLUDED
+# define YY_YY_BISON_TAB_H_INCLUDED
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -172,7 +172,7 @@ typedef union YYSTYPE
 
 
 /* Line 387 of yacc.c  */
-#line 176 "y.tab.c"
+#line 176 "bison.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -195,12 +195,12 @@ int yyparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_YY_BISON_TAB_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 204 "y.tab.c"
+#line 204 "bison.tab.c"
 
 #ifdef short
 # undef short
@@ -1866,7 +1866,7 @@ yyreduce:
 
 
 /* Line 1792 of yacc.c  */
-#line 1870 "y.tab.c"
+#line 1870 "bison.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

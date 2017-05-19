@@ -8,6 +8,7 @@
 # hlsearch on (H) or off (h):
 ~H
 # Command Line History (newest to oldest):
+:q
 :wq
 
 # Search String History (newest to oldest):
@@ -21,13 +22,53 @@
 # Registers:
 
 # File marks:
-'0  5  8  ~/CS152/calculator.lex
+'0  65  1  ~/MiniL/mini_l.y
+'1  23  0  ~/MiniL/fibonacci.min
+'2  331  0  ~/MiniL/y.tab.c
+'3  5  8  ~/CS152/calculator.lex
 
 # Jumplist (newest first):
+-'  65  1  ~/MiniL/mini_l.y
+-'  1  0  ~/MiniL/mini_l.y
+-'  23  0  ~/MiniL/fibonacci.min
+-'  1  0  ~/MiniL/fibonacci.min
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  23  0  ~/MiniL/fibonacci.min
+-'  1  0  ~/MiniL/fibonacci.min
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
 -'  5  8  ~/CS152/calculator.lex
 -'  1  0  ~/CS152/calculator.lex
 
 # History of marks within files (newest to oldest):
+
+> ~/MiniL/mini_l.y
+	"	65	1
+
+> ~/MiniL/fibonacci.min
+	"	23	0
+
+> ~/MiniL/y.tab.c
+	"	331	0
 
 > ~/CS152/calculator.lex
 	"	5	8
