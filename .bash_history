@@ -1,10 +1,3 @@
-flex mini_l.lex
-gcc -o parser y.tab.c lex.yy.c -lfl
-nano y.tab.c
-vi y.tab.c
-git pull
-bison -v -d --file-prefix=y mini_l.y
-flex mini_l.lex
 gcc -o parser y.tab.c lex.yy.c -lfl
 git pull
 bison -v -d --file-prefix=y mini_l.y
@@ -97,4 +90,11 @@ make
 cat fibonacci.min | parser
 make
 cat fibonacci.min | parser
+exit
+git add --all :/
+git commit -m "Finished project"
+git push
+git tag
+git tag phase2
+git push origin --tags
 exit

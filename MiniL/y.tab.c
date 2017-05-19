@@ -518,13 +518,13 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    29,    29,    30,    32,    34,    35,    37,    38,    40,
-      41,    45,    46,    47,    48,    49,    50,    51,    52,    53,
-      55,    56,    60,    62,    64,    65,    67,    68,    71,    72,
-      74,    75,    76,    77,    79,    81,    82,    83,    84,    85,
-      86,    87,    88,    89,    91,    93,    94,    95,    96,   100,
-     101,   102,   104,   105,   106,   108,   109,   111,   112,   116,
-     117,   121,   123,   124,   126,   127
+       0,    29,    29,    30,    32,    38,    39,    41,    42,    44,
+      45,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      59,    60,    64,    66,    68,    69,    71,    72,    75,    76,
+      78,    79,    80,    81,    83,    85,    86,    87,    88,    89,
+      90,    91,    92,    93,    95,    97,    98,    99,   100,   104,
+     105,   106,   108,   109,   110,   113,   114,   116,   117,   121,
+     122,   126,   128,   129,   131,   132
 };
 #endif
 
@@ -1523,373 +1523,379 @@ yyreduce:
     {
         case 4:
 /* Line 1792 of yacc.c  */
-#line 32 "mini_l.y"
+#line 36 "mini_l.y"
     {printf("function -> FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement more_statement SEMICOLON END_BODY\n");}
     break;
 
   case 5:
 /* Line 1792 of yacc.c  */
-#line 34 "mini_l.y"
+#line 38 "mini_l.y"
     {printf("declaration -> Empty declaration\n");}
     break;
 
   case 6:
 /* Line 1792 of yacc.c  */
-#line 35 "mini_l.y"
+#line 39 "mini_l.y"
     {printf("declaration -> ID comma COLON array INTEGER SEMICOLON declaration\n");}
     break;
 
   case 7:
 /* Line 1792 of yacc.c  */
-#line 37 "mini_l.y"
+#line 41 "mini_l.y"
     {printf("comma -> Empty comma\n");}
     break;
 
   case 8:
 /* Line 1792 of yacc.c  */
-#line 38 "mini_l.y"
+#line 42 "mini_l.y"
     {printf("comma -> COMMA ID comma\n");}
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 40 "mini_l.y"
+#line 44 "mini_l.y"
     {printf("array -> Empty array\n");}
     break;
 
   case 10:
 /* Line 1792 of yacc.c  */
-#line 41 "mini_l.y"
+#line 45 "mini_l.y"
     {printf("array -> ARRAY L_BRAC NUMBER R_BRAC OF\n");}
     break;
 
   case 11:
 /* Line 1792 of yacc.c  */
-#line 45 "mini_l.y"
+#line 49 "mini_l.y"
     {printf("statement -> Empty statement\n");}
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 46 "mini_l.y"
+#line 50 "mini_l.y"
     {printf("statement -> var ASSIGN\n");}
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 47 "mini_l.y"
+#line 51 "mini_l.y"
     {printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 48 "mini_l.y"
+#line 52 "mini_l.y"
     {printf("statement -> WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 49 "mini_l.y"
+#line 53 "mini_l.y"
     {printf("statement -> DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 50 "mini_l.y"
+#line 54 "mini_l.y"
     {printf("statement -> READ var var_comma\n");}
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 51 "mini_l.y"
+#line 55 "mini_l.y"
     {printf("statement -> CONTINUE\n");}
     break;
 
   case 18:
 /* Line 1792 of yacc.c  */
-#line 52 "mini_l.y"
+#line 56 "mini_l.y"
     {printf("statement -> RETURN expression\n");}
     break;
 
   case 19:
 /* Line 1792 of yacc.c  */
-#line 53 "mini_l.y"
+#line 57 "mini_l.y"
     {printf("statement -> READ var var_comma\n");}
     break;
 
   case 20:
 /* Line 1792 of yacc.c  */
-#line 55 "mini_l.y"
+#line 59 "mini_l.y"
     {printf("statement -> Empty statement\n");}
     break;
 
   case 21:
 /* Line 1792 of yacc.c  */
-#line 56 "mini_l.y"
+#line 60 "mini_l.y"
     {printf("statement -> statement SEMICOLON more_statement\n");}
     break;
 
   case 22:
 /* Line 1792 of yacc.c  */
-#line 60 "mini_l.y"
+#line 64 "mini_l.y"
     {printf("bool_expr -> relation_and_expr more_bool_expr\n");}
     break;
 
   case 23:
 /* Line 1792 of yacc.c  */
-#line 62 "mini_l.y"
+#line 66 "mini_l.y"
     {printf("relation_and_expr -> relation_expr more_relation_and_expr\n");}
     break;
 
   case 24:
 /* Line 1792 of yacc.c  */
-#line 64 "mini_l.y"
+#line 68 "mini_l.y"
     {printf("bool_expr -> Empty bool expression\n");}
     break;
 
   case 25:
 /* Line 1792 of yacc.c  */
-#line 65 "mini_l.y"
+#line 69 "mini_l.y"
     {printf("bool_expr -> OR relation_and_expr bool_expr\n");}
     break;
 
   case 26:
 /* Line 1792 of yacc.c  */
-#line 67 "mini_l.y"
+#line 71 "mini_l.y"
     {printf("relation_and_expr -> Empty relation_and_expr\n");}
     break;
 
   case 27:
 /* Line 1792 of yacc.c  */
-#line 68 "mini_l.y"
+#line 72 "mini_l.y"
     {printf("relation_and_expr -> AND relation_expr  more_relation_and_expr\n");}
     break;
 
   case 28:
 /* Line 1792 of yacc.c  */
-#line 71 "mini_l.y"
+#line 75 "mini_l.y"
     {printf("relation_expr -> NOT more_relation_expr\n");}
     break;
 
   case 29:
 /* Line 1792 of yacc.c  */
-#line 72 "mini_l.y"
+#line 76 "mini_l.y"
     {printf("relation_expr -> more_relation_expr\n");}
     break;
 
   case 30:
 /* Line 1792 of yacc.c  */
-#line 74 "mini_l.y"
+#line 78 "mini_l.y"
     {printf("relation_expr -> expression compare expression\n");}
     break;
 
   case 31:
 /* Line 1792 of yacc.c  */
-#line 75 "mini_l.y"
+#line 79 "mini_l.y"
     {printf("relation_expr -> TRUE\n");}
     break;
 
   case 32:
 /* Line 1792 of yacc.c  */
-#line 76 "mini_l.y"
+#line 80 "mini_l.y"
     {printf("relation_expr -> FALSE\n");}
     break;
 
   case 33:
 /* Line 1792 of yacc.c  */
-#line 77 "mini_l.y"
+#line 81 "mini_l.y"
     {printf("relation_expr -> L_PARENT bool_expr R_PARENT\n");}
     break;
 
   case 34:
 /* Line 1792 of yacc.c  */
-#line 79 "mini_l.y"
+#line 83 "mini_l.y"
     {printf("expression -> multiplicative_expr more_expression\n");}
     break;
 
   case 35:
 /* Line 1792 of yacc.c  */
-#line 81 "mini_l.y"
+#line 85 "mini_l.y"
     {printf("compare -> EQ\n");}
     break;
 
   case 36:
 /* Line 1792 of yacc.c  */
-#line 82 "mini_l.y"
+#line 86 "mini_l.y"
     {printf("compare -> NEQ\n");}
     break;
 
   case 37:
 /* Line 1792 of yacc.c  */
-#line 83 "mini_l.y"
+#line 87 "mini_l.y"
     {printf("compare -> LT\n");}
     break;
 
   case 38:
 /* Line 1792 of yacc.c  */
-#line 84 "mini_l.y"
+#line 88 "mini_l.y"
     {printf("compare -> GT\n");}
     break;
 
   case 39:
 /* Line 1792 of yacc.c  */
-#line 85 "mini_l.y"
+#line 89 "mini_l.y"
     {printf("compare -> LTE\n");}
     break;
 
   case 40:
 /* Line 1792 of yacc.c  */
-#line 86 "mini_l.y"
+#line 90 "mini_l.y"
     {printf("compare -> GTE\n");}
     break;
 
   case 41:
 /* Line 1792 of yacc.c  */
-#line 87 "mini_l.y"
+#line 91 "mini_l.y"
     {printf("expression -> Empty expression\n");}
     break;
 
   case 42:
 /* Line 1792 of yacc.c  */
-#line 88 "mini_l.y"
+#line 92 "mini_l.y"
     {printf("expression -> ADD multiplicative_expr more_expression\n");}
     break;
 
   case 43:
 /* Line 1792 of yacc.c  */
-#line 89 "mini_l.y"
+#line 93 "mini_l.y"
     {printf("expression -> SUB multiplicative_expr more_expression\n");}
     break;
 
   case 44:
 /* Line 1792 of yacc.c  */
-#line 91 "mini_l.y"
+#line 95 "mini_l.y"
     {printf("multiplicative_expr -> term more_multiplicative_expr\n");}
     break;
 
   case 45:
 /* Line 1792 of yacc.c  */
-#line 93 "mini_l.y"
+#line 97 "mini_l.y"
     {printf("multiplicative_expr -> Empty multiplicative_expr\n");}
     break;
 
   case 46:
 /* Line 1792 of yacc.c  */
-#line 94 "mini_l.y"
+#line 98 "mini_l.y"
     {printf("multiplicative_expr -> TIMES term more_multiplicative_expr\n");}
     break;
 
   case 47:
 /* Line 1792 of yacc.c  */
-#line 95 "mini_l.y"
+#line 99 "mini_l.y"
     {printf("multiplicative_expr -> DIV term more_multiplicative_expr\n");}
     break;
 
   case 48:
 /* Line 1792 of yacc.c  */
-#line 96 "mini_l.y"
+#line 100 "mini_l.y"
     {printf("multiplicative_expr -> MOD term more_multiplicative_expr\n");}
     break;
 
   case 49:
 /* Line 1792 of yacc.c  */
-#line 100 "mini_l.y"
-    {printf("term -> SUB var\n");}
+#line 104 "mini_l.y"
+    {printf("term -> SUB more_term\n");}
+    break;
+
+  case 50:
+/* Line 1792 of yacc.c  */
+#line 105 "mini_l.y"
+    {printf("term -> more_term\n");}
     break;
 
   case 51:
 /* Line 1792 of yacc.c  */
-#line 102 "mini_l.y"
-    {printf("term -> ID term_expr term_comma\n");}
+#line 106 "mini_l.y"
+    {printf("term -> ID  L_PARENT term_expr term_comma R_PARENT\n");}
     break;
 
   case 52:
 /* Line 1792 of yacc.c  */
-#line 104 "mini_l.y"
+#line 108 "mini_l.y"
     {printf("term -> var\n");}
     break;
 
   case 53:
 /* Line 1792 of yacc.c  */
-#line 105 "mini_l.y"
+#line 109 "mini_l.y"
     {printf("term -> NUMBER\n");}
     break;
 
   case 54:
 /* Line 1792 of yacc.c  */
-#line 106 "mini_l.y"
+#line 110 "mini_l.y"
     {printf("term -> L_PARENT expression R_PARENT\n");}
     break;
 
   case 55:
 /* Line 1792 of yacc.c  */
-#line 108 "mini_l.y"
+#line 113 "mini_l.y"
     {printf("term_expr -> Empty term_expr\n");}
     break;
 
   case 56:
 /* Line 1792 of yacc.c  */
-#line 109 "mini_l.y"
+#line 114 "mini_l.y"
     {printf("term_expr -> expression\n");}
     break;
 
   case 57:
 /* Line 1792 of yacc.c  */
-#line 111 "mini_l.y"
+#line 116 "mini_l.y"
     {printf("term_comma -> Empty term_comma\n");}
     break;
 
   case 58:
 /* Line 1792 of yacc.c  */
-#line 112 "mini_l.y"
+#line 117 "mini_l.y"
     {printf("term_comma -> COMMA expression term_comma\n");}
     break;
 
   case 59:
 /* Line 1792 of yacc.c  */
-#line 116 "mini_l.y"
+#line 121 "mini_l.y"
     {printf("else -> Empty else\n");}
     break;
 
   case 60:
 /* Line 1792 of yacc.c  */
-#line 117 "mini_l.y"
+#line 122 "mini_l.y"
     {printf("else -> ELSE statement SEMICOLON more_statement\n");}
     break;
 
   case 61:
 /* Line 1792 of yacc.c  */
-#line 121 "mini_l.y"
+#line 126 "mini_l.y"
     {printf("var -> ID more_var\n");}
     break;
 
   case 62:
 /* Line 1792 of yacc.c  */
-#line 123 "mini_l.y"
+#line 128 "mini_l.y"
     {printf("var -> Empty var\n");}
     break;
 
   case 63:
 /* Line 1792 of yacc.c  */
-#line 124 "mini_l.y"
+#line 129 "mini_l.y"
     {printf("var -> L_BRAC expression R_BRAC\n");}
     break;
 
   case 64:
 /* Line 1792 of yacc.c  */
-#line 126 "mini_l.y"
+#line 131 "mini_l.y"
     {printf("var_comma -> Empty var_comma\n");}
     break;
 
   case 65:
 /* Line 1792 of yacc.c  */
-#line 127 "mini_l.y"
+#line 132 "mini_l.y"
     {printf("var_comma -> COMMA var var_comma\n");}
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1893 "y.tab.c"
+#line 1899 "y.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2121,7 +2127,7 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 132 "mini_l.y"
+#line 137 "mini_l.y"
 
 
 
