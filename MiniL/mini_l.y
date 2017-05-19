@@ -1,7 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
-	void yyerr(const char * error_symbol);
+	void yyerror(const char * error_symbol);
 	extern int lineNum;
 	extern int colNum;
 	FILE *yyin;
@@ -126,9 +126,6 @@ var_comma:																					{printf("var_comma -> Empty var_comma\n");}
 
 
 %%
-void yyerr( const char* error_symbol) {
-			printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);
-}
 
 
 int main(int argc, char** argv){
@@ -140,4 +137,8 @@ int main(int argc, char** argv){
 		yyin = stdin;
   	yylex();
 		return 0;
+}
+
+void yyerror( const char* error_symbol) {
+			printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", lineNum, colNum, error_symbol);
 }
