@@ -29,7 +29,7 @@
 program: /* empty */
 	| function program
 	;
-function: FUNCTION ID SEMICOLON BEGIN_PARAMS declaration END_PARAMS BEGIN_LOCALS declaration END_LOCALS BEGIN_BODY statement END_BODY {printf("function -> FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement SEMICOLON END_BODY\n");}
+function: FUNCTION ID SEMICOLON BEGIN_PARAMS declaration END_PARAMS BEGIN_LOCALS declaration END_LOCALS BEGIN_BODY statement more_statement END_BODY {printf("function -> FUNCTION ID SEMICOLON BEGIN_PARAMS declaration SEMICOLON END_PARAMS BEGIN_LOCALS declaration SEMICOLON END_LOCALS BEGIN_BODY statement more_statement SEMICOLON END_BODY\n");}
 	;
 declaration: 																							{printf("declaration -> Empty declaration\n");}
 	| ID comma COLON array INTEGER SEMICOLON declaration 		{printf("declaration -> ID comma COLON array INTEGER SEMICOLON declaration\n");}
@@ -43,13 +43,14 @@ array:															{printf("array -> Empty array\n");}
 
 
 statement: 																																												{printf("statement -> Empty statement\n");}
-	|	var ASSIGN 																																										{printf("statement -> var ASSIGN\n");}
-	| IF L_PARENT bool_expr R_PARENT THEN statement SEMICOLON more_statement else ENDIF SEMICOLON		{printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
+	|	var ASSIGN 	expression																																				{printf("statement -> var ASSIGN\n");}
+	| IF L_PARENT bool_expr R_PARENT THEN statement SEMICOLON more_statement else ENDIF							{printf("statement -> IF bool_expr THEN statement SEMICOLON more_statement else ENDIF\n");}
 	| WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP 													{printf("statement -> WHILE bool_expr BEGINLOOP statement SEMICOLON more_statement ENDLOOP\n");}
 	| DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr												{printf("statement -> DO BEGINLOOP statement SEMICOLON more_statement ENDLOOP WHILE bool_expr\n");}
 	| READ var var_comma 																																						{printf("statement -> READ var var_comma\n");}
 	| CONTINUE 																																											{printf("statement -> CONTINUE\n");}
 	| RETURN expression																																							{printf("statement -> RETURN expression\n");}
+	| WRITE var var_comma																																						{printf("statement -> READ var var_comma\n");}
 	;
 more_statement: 												{printf("statement -> Empty statement\n");}
 	| statement SEMICOLON more_statement	{printf("statement -> statement SEMICOLON more_statement\n");}
@@ -96,11 +97,14 @@ more_multiplicative_expr:														{printf("multiplicative_expr -> Empty mul
 	;
 
 
-term: SUB var																				{printf("term -> SUB var\n");}
+term: SUB more_term																	{printf("term -> SUB var\n");}
+	|	more_term
+	| ID  L_PARENT term_expr term_comma 	R_PARENT		{printf("term -> ID term_expr term_comma\n");}
+	;
+more_term: var																			{printf("term -> var\n");}
 	| NUMBER																					{printf("term -> NUMBER\n");}
 	| L_PARENT expression R_PARENT										{printf("term -> L_PARENT expression R_PARENT\n");}
-	| ID L_PARENT term_expr term_comma R_PARENT				{printf("term -> ID L_PARENT term_expr term_comma R_PARENT\n");}
-	;
+
 term_expr:																					{printf("term_expr -> Empty term_expr\n");}
 	| expression																			{printf("term_expr -> expression\n");}
 	;
