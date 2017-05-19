@@ -1,7 +1,7 @@
 %{
 	#include<stdio.h>
 	#include<string.h>
-	void yyerr(char *);
+	void yyerr(char * error_symbol);
 	extern int lineNum;
 	extern int colNum;
 	FILE *yyin;
