@@ -1,7 +1,3 @@
-cat primes.min | lexer
-flex mini_l.lex 
-gcc -o lexer lex.yy.c -lfl
-cat primes.min | lexer
 flex mini_l.lex 
 gcc -o lexer lex.yy.c -lfl
 cat primes.min | lexer
@@ -96,5 +92,9 @@ git push
 exit
 git add --all
 git commit -m "tiny addition"
+git push
+exit
+git add --all 
+git commit -m "added some grammar" 
 git push
 exit
