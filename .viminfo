@@ -22,14 +22,44 @@
 # Registers:
 
 # File marks:
-'0  65  1  ~/MiniL/mini_l.y
-'1  23  0  ~/MiniL/fibonacci.min
-'2  331  0  ~/MiniL/y.tab.c
-'3  5  8  ~/CS152/calculator.lex
+'0  31  8  ~/MiniL/mini_l.y
+'1  65  1  ~/MiniL/mini_l.y
+'2  23  0  ~/MiniL/fibonacci.min
+'3  331  0  ~/MiniL/y.tab.c
+'4  5  8  ~/CS152/calculator.lex
 
 # Jumplist (newest first):
--'  65  1  ~/MiniL/mini_l.y
+-'  31  8  ~/MiniL/mini_l.y
+-'  65  0  ~/MiniL/mini_l.y
 -'  1  0  ~/MiniL/mini_l.y
+-'  23  0  ~/MiniL/fibonacci.min
+-'  1  0  ~/MiniL/fibonacci.min
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  23  0  ~/MiniL/fibonacci.min
+-'  1  0  ~/MiniL/fibonacci.min
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  331  0  ~/MiniL/y.tab.c
+-'  1  0  ~/MiniL/y.tab.c
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
+-'  5  8  ~/CS152/calculator.lex
+-'  1  0  ~/CS152/calculator.lex
 -'  23  0  ~/MiniL/fibonacci.min
 -'  1  0  ~/MiniL/fibonacci.min
 -'  331  0  ~/MiniL/y.tab.c
@@ -62,7 +92,8 @@
 # History of marks within files (newest to oldest):
 
 > ~/MiniL/mini_l.y
-	"	65	1
+	"	31	8
+	^	31	9
 
 > ~/MiniL/fibonacci.min
 	"	23	0

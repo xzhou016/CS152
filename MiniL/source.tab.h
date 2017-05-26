@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
+#ifndef YY_YY_SOURCE_TAB_H_INCLUDED
+# define YY_YY_SOURCE_TAB_H_INCLUDED
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -46,54 +46,45 @@ extern int yydebug;
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBER = 258,
-     ID = 259,
-     L_PARENT = 260,
-     R_PARENT = 261,
-     L_BRAC = 262,
-     R_BRAC = 263,
-     SUB = 264,
-     SEMICOLON = 265,
-     COLON = 266,
-     COMMA = 267,
-     TIMES = 268,
-     DIV = 269,
-     MOD = 270,
-     ADD = 271,
-     LT = 272,
-     LTE = 273,
-     GT = 274,
-     GTE = 275,
-     EQ = 276,
-     NEQ = 277,
-     NOT = 278,
-     AND = 279,
-     OR = 280,
-     ASSIGN = 281,
-     FUNCTION = 282,
-     BEGIN_PARAMS = 283,
-     END_PARAMS = 284,
-     BEGIN_LOCALS = 285,
-     END_LOCALS = 286,
-     BEGIN_BODY = 287,
-     END_BODY = 288,
-     INTEGER = 289,
-     ARRAY = 290,
-     OF = 291,
-     IF = 292,
-     THEN = 293,
-     ENDIF = 294,
-     ELSE = 295,
-     TRUE = 296,
-     FALSE = 297,
-     WHILE = 298,
-     DO = 299,
-     BEGINLOOP = 300,
-     ENDLOOP = 301,
-     CONTINUE = 302,
-     READ = 303,
-     WRITE = 304,
-     RETURN = 305
+     LO = 258,
+     INTEGER = 259,
+     ARRAY = 260,
+     FUNCTION = 261,
+     BEGINPARAMS = 262,
+     ENDPARAMS = 263,
+     BEGINLOCALS = 264,
+     ENDLOCALS = 265,
+     BEGINBODY = 266,
+     ENDBODY = 267,
+     BEGINLOOP = 268,
+     ENDLOOP = 269,
+     IF = 270,
+     THEN = 271,
+     ELSE = 272,
+     ENDIF = 273,
+     DO = 274,
+     WHILE = 275,
+     READ = 276,
+     WRITE = 277,
+     CONTINUE = 278,
+     RETURN = 279,
+     TRUE = 280,
+     FALSE = 281,
+     ASSGN = 282,
+     OF = 283,
+     OR = 284,
+     AND = 285,
+     NOT = 286,
+     NE = 287,
+     EQ = 288,
+     GE = 289,
+     GT = 290,
+     LE = 291,
+     LT = 292,
+     UMINUS = 293,
+     HI = 294,
+     ID = 295,
+     NUMBER = 296
    };
 #endif
 
@@ -102,14 +93,39 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
-#line 10 "mini_l.y"
+#line 12 "source.y"
 
-	int	int_val;
-	char *	str_val;
 
+   // Here we define the types and names of the components of the
+   // union type YYSTYPE, which is the type of yylval and of the
+   // semantic portion of the parse-stack entries.
+
+   // declarations of union members for lexical values of tokens
+   int 		   junk;    	    // values for single-lexeme tokens
+   int		   int_val;	    // values of integer literals
+   string*	   str_val;	    // values of string literals
+   string*	   ident;	    // points to identifiers' actual lexemes
+
+   // declarations of union members for lexical values of non-terminals
+   // that are pointers to translation records.
+   Program*              program;
+   list<Function*>*      functions;	// for the non-terminal "Functions"
+   list<Declaration*>*   declarations;  // for the non-terminal "Declarations"
+   list<Statement*>*     statements;   
+   list<Var*>*           vars;
+   list<Expression*>*    expressions;
+   list<Expression*>*    nonemptyexpressionlist;
+   list<string*>*        ids;
+   Function*             function;   
+   Declaration*          declaration;      
+   Statement*            statement;
+   BoolExpr*             boolexpr;
+   Expression*           expression;
+   Var*                  var;
+ 
 
 /* Line 2058 of yacc.c  */
-#line 113 "y.tab.h"
+#line 129 "source.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -132,4 +148,4 @@ int yyparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_YY_SOURCE_TAB_H_INCLUDED  */

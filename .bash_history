@@ -1,21 +1,3 @@
-gcc -o parser y.tab.c lex.yy.c -lfl
-git pull
-bison -v -d --file-prefix=y mini_l.y
-flex mini_l.lex
-gcc -o parser y.tab.c lex.yy.c -lfl
-git pull
-cat fibonacci.min | parser
-ls
-vi fibonacci.min 
-./parser fibonacci.min 
-./lexer primes.min 
-./parser fibonacci.min 
-git pull
-bison -v -d --file-prefix=y mini_l.y
-flex mini_l.lex
-gcc -o parser y.tab.c lex.yy.c -lfl
-cat fibonacci.min | parser
-git pull
 bison -v -d --file-prefix=y mini_l.y
 flex mini_l.lex
 gcc -o parser y.tab.c lex.yy.c -lfl
@@ -98,3 +80,21 @@ git tag
 git tag phase2
 git push origin --tags
 exit
+ls
+cd MiniL/
+ls
+cat fibonacci.min | parser
+ls
+make
+cat fibonacci.min | parser
+make
+cat fibonacci.min | parser
+make
+cat fibonacci.min | parser
+make
+cat fibonacci.min | parser
+git add --all 
+git add -all
+git add --all :/
+git commit -m "added functionality for phase 3" 
+git push

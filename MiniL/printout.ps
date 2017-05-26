@@ -1,0 +1,2292 @@
+%!PS-Adobe-3.0
+%%Title: , Makefile, heading.H, lex.src, main.cc, source.y, nodes.h, 
+%%For: Tom Payne
+%%Creator: a2ps version 4.14
+%%CreationDate: Fri May 26 06:19:07 2017
+%%BoundingBox: 24 24 588 768
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 8
+%%PageOrder: Ascend
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      % <vector> <key> <val>
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def % -
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Get the underline position and thickness if they're defined.
+    % Use 1 if they are not defined.
+    currentdict /FontInfo 2 copy known
+    { get
+      /UnderlinePosition 2 copy % <FontInfo> /UP <FontInfo> /UP
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+
+      /UnderlineThickness 2 copy % <FontInfo> /UT <FontInfo> /UT
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+      pop % -
+    }{ pop pop
+    } ifelse
+
+    currentdict
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed string
+% Version 1.2 1/31/1990
+% Orignal Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 612 def
+/sw 792 def
+/llx 24 def
+/urx 768 def
+/ury 588 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 7.060185 def
+/cw 4.236111 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 86.400000 mul
+def
+/ph
+   520.335631 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 5 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (# Makefile) c n
+(2) # () N
+(3) # () S
+(OBJS) l
+(      =  yac.o  lex.o  main.o  ) p n
+(4) # () S
+(#nodes.o) c n
+(5) # () S
+(SFLS) l
+(      =  yac.c  lex.c  main.cc ) p n
+(6) # () S
+(#nodes.cc) c n
+(7) # () N
+(8) # () S
+(CC) l
+(        =  g++ ) p n
+(9) # () S
+(#CC        =  gcc) c n
+(10) # () S
+(CXXFLAGS) l
+(  =  -std=c++11 -w ) p n
+(11) # () S
+(CFLAGS) l
+(    =  -std=c++11 -w ) p n
+(12) # () N
+(13) # () S
+(# CFLAGS    =  -g -I/usr/local/include/sgi-stl -Wall -DYYDEBUG=1) c n
+(14) # (# CFLAGS    =  -g -Wall -DYYDEBUG=1) N
+(15) # (# CXXFLAGS  =  -g -I/usr/local/include/sgi-stl -pedantic # -Wall -W -Werror) N
+(16) # (# CXXFLAGS  =  -g -pedantic # -Wall -W -Werror) N
+(17) # (# CXXFLAGS  =  -std=c++11 -w -v) N
+(18) # (# CFLAGS    =  -std=c++11 -w -v) N
+(19) # () N
+(20) # () N
+(21) # () S
+(compile) L
+(:) p 16 T ($\(OBJS\)) N
+(22) # () S 8 T () S 16 T ($\(CC\) $\(CFLAGS\) $\(OBJS\)  -o compile ) N
+(23) # () S
+(#) c 8 T () S 16 T ($\(CC\) $\(CFLAGS\) $\(OBJS\)  -o compile -lfl ) N
+(24) # () N
+(25) # () S
+(lex.o yac.o main.o /*nodes.o*/) p 32 T (: heading.H ) N
+(26) # (lex.o main.o /*nodes.o*/) S 32 T (: tok.h) N
+(27) # () S
+(# yac.o main.o lex.o nodes.o : nodes.cc ) c n
+(28) # () N
+(29) # () S
+(lex.c) L
+(:) p 8 T () S 16 T (lex.src ) N
+(30) # () S 8 T () S 16 T (flex lex.src) N
+(31) # () S 8 T () S 16 T (-cmp -s lex.yy.c lex.c || cp lex.yy.c lex.c) N
+(32) # () N
+(33) # () S
+(yac.c) L
+(:) p 8 T () S 16 T (source.y) N
+(34) # () S 8 T () S 16 T (bison -d -v source.y) N
+(35) # () S 8 T () S 16 T (-cmp -s source.tab.c yac.c || cp source.tab.c yac.c) N
+(36) # () S 8 T ( ) S 16 T (-cmp -s source.tab.h tok.h || cp source.tab.h tok.h) N
+(37) # () N
+(38) # () S
+(clean) L
+(:) p n
+(39) # () S 8 T () S 16 T (rm *.o lex.c lex.yy.c yac.c source.tab.c\\) N
+(40) # () S 8 T () S 16 T (source.output source.tab.h tok.h printout.ps core) N
+(41) # () N
+(42) # () S
+(print) L
+(:) p 8 T () S 16 T () N
+(43) # () S 8 T () S 16 T (a2ps --line-numbers=1 -M letter /*README*/ Makefile heading.H\\) N
+(44) # (                lex.src main.cc source.y nodes.h /*nodes.cc*/ -o printout.ps) N
+(45) # () N
+(46) # () S
+(size) L
+(:) p 8 T () S 16 T () N
+(47) # () S 8 T () S 16 T (cat lex.src source.y nodes.h /*nodes.cc*/ main.cc heading.H | wc) N
+(48) # () N
+(49) # () S
+(# checkin:) c n
+(50) # (# ) S 8 T () S 16 T (ci README Makefile lex.src source.y nodes.h nodes.cc main.cc\\) N
+(51) # (# ) S 8 T () S 16 T (heading.H lib.h) N
+(52) # () N
+(53) # (# checkout:) N
+(54) # (# ) S 8 T () S 16 T (co -l  README Makefile lex.src source.y nodes.h nodes.cc\\) N
+(55) # (# ) S 8 T () S 16 T (main.cc heading.H lib.h) N
+(56) # () N
+(57) # () S
+(test) K
+(:) p 8 T () S 16 T () N
+(58) # () S 8 T () S 16 T (./testscript) N
+(59) # () N
+(Makefile) (Page 1/1) (May 25, 17 21:38) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(Makefile) (1/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (// -*- c++ -*- ) p n
+(2) # (// heading.H) N
+(3) # () N
+(4) # (using namespace std;) N
+(5) # () N
+(6) # (// The following line suppresses an unused-function warning.) N
+(7) # (#define YY_NO_UNPUT) N
+(8) # () N
+(9) # (#include <iostream>) N
+(10) # (#include <set>) N
+(11) # (#include <string>) N
+(12) # (#include <map>) N
+(13) # (#include <list>) N
+(14) # (#include <vector>) N
+(15) # (#include <sstream>) N
+(16) # (#include <cassert>) N
+(17) # (#include <cctype>) N
+(18) # (#include <cstring>) N
+(19) # (#include <stack>) N
+(20) # () N
+(21) # (inline std::string itoa\( int x \) {  // converts an integer to a string.) N
+(22) # (  ostringstream s;) N
+(23) # (  s << x;) N
+(24) # (  return s.str\(\);) N
+(25) # (}) N
+(26) # () N
+(27) # () N
+(28) # () N
+(29) # () N
+(heading.H) (Page 1/1) (May 25, 17 18:31) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(heading.H) (2/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1-2) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (/* -*- c++ -*- */) p n
+(2) # (/* lex.src for Mini-L */) N
+(3) # (/* Updated 1:40 PM 5/22/17 */) N
+(4) # () N
+(5) # (/* Everything between "%{" and "%}" gets copied verbatim to top of lex.c. */) N
+(6) # () N
+(7) # () N
+(8) # (%{) N
+(9) # (#include "heading.H") N
+(10) # (#include "nodes.h") N
+(11) # (#include "tok.h") N
+(12) # (int yyerror\( char* s \);) N
+(13) # (extern int yylineno;) N
+(14) # (%}) N
+(15) # () N
+(16) # (%option noyywrap) N
+(17) # () N
+(18) # (/* special states */) N
+(19) # (%x                    inComment   ) N
+(20) # () N
+(21) # (letter                [a-zA-Z]) N
+(22) # (digit                 [0-9]) N
+(23) # (number                {digit}+) N
+(24) # (identifier            {letter}\([_]*{letter}|[_]*{digit}\)*   ) N
+(25) # () N
+(26) # () N
+(27) # (/* Lexical patterns with their actions */) N
+(28) # (%%) N
+(29) # () N
+(30) # (function) S 16 T () S 24 T (return yylval.junk = FUNCTION;) N
+(31) # (beginparams) S 16 T () S 24 T (return yylval.junk = BEGINPARAMS;) N
+(32) # (endparams) S 16 T () S 24 T (return yylval.junk = ENDPARAMS;) N
+(33) # (beginlocals) S 16 T () S 24 T (return yylval.junk = BEGINLOCALS;) N
+(34) # (endlocals) S 16 T () S 24 T (return yylval.junk = ENDLOCALS;) N
+(35) # (beginbody) S 16 T () S 24 T (return yylval.junk = BEGINBODY;) N
+(36) # (endbody) S 8 T () S 16 T () S 24 T (return yylval.junk = ENDBODY;) N
+(37) # (beginloop) S 16 T () S 24 T (return yylval.junk = BEGINLOOP;) N
+(38) # (endloop) S 8 T () S 16 T () S 24 T (return yylval.junk = ENDLOOP;) N
+(39) # (if) S 8 T () S 16 T () S 24 T (return yylval.junk = IF;) N
+(40) # (then) S 8 T () S 16 T () S 24 T (return yylval.junk = THEN;) N
+(41) # (else) S 8 T () S 16 T () S 24 T (return yylval.junk = ELSE;) N
+(42) # (endif) S 8 T () S 16 T () S 24 T (return yylval.junk = ENDIF;) N
+(43) # (do) S 8 T () S 16 T () S 24 T (return yylval.junk = DO;) N
+(44) # (while) S 8 T () S 16 T () S 24 T (return yylval.junk = WHILE;) N
+(45) # (read) S 8 T () S 16 T () S 24 T (return yylval.junk = READ;) N
+(46) # (write) S 8 T () S 16 T () S 24 T (return yylval.junk = WRITE;) N
+(47) # (continue) S 16 T () S 24 T (return yylval.junk = CONTINUE;) N
+(48) # (return) S 8 T () S 16 T () S 24 T (return yylval.junk = RETURN;) N
+(49) # (true) S 8 T () S 16 T () S 24 T (return yylval.junk = TRUE;) N
+(50) # (false) S 8 T () S 16 T () S 24 T (return yylval.junk = FALSE;) N
+(51) # (and) S 8 T () S 16 T () S 24 T (return yylval.junk = AND;) N
+(52) # (or) S 8 T () S 16 T () S 24 T (return yylval.junk = OR;) N
+(53) # (not) S 8 T () S 16 T () S 24 T (return yylval.junk = NOT;) N
+(54) # (integer                 return yylval.junk = INTEGER;) N
+(55) # (of                      return yylval.junk = OF;) N
+(56) # () N
+(57) # (":=") S 8 T () S 16 T () S 24 T (return yylval.junk = ASSGN;) N
+(58) # ("==") S 8 T () S 16 T () S 24 T (return yylval.junk = EQ;) N
+(59) # ("<>") S 8 T () S 16 T () S 24 T (return yylval.junk = NE;) N
+(60) # ("<") S 8 T () S 16 T () S 24 T (return yylval.junk = '<';) N
+(61) # (">") S 8 T () S 16 T () S 24 T (return yylval.junk = '>';) N
+(62) # ("<=") S 8 T () S 16 T () S 24 T (return yylval.junk = LE;) N
+(63) # (">=") S 8 T () S 16 T () S 24 T (return yylval.junk = GE;) N
+(64) # ("+") S 8 T () S 16 T () S 24 T (return yylval.junk = '+';) N
+(65) # ("-") S 8 T () S 16 T () S 24 T (return yylval.junk = '-';) N
+(66) # ("*") S 8 T () S 16 T () S 24 T (return yylval.junk = '*';) N
+(67) # ("/") S 8 T () S 16 T () S 24 T (return yylval.junk = '/';) N
+(68) # ("%") S 8 T () S 16 T () S 24 T (return yylval.junk = '%';) N
+(69) # ("[") S 8 T () S 16 T () S 24 T (return yylval.junk = '[';) N
+(70) # ("]") S 8 T () S 16 T () S 24 T (return yylval.junk = ']';) N
+(71) # ("\(") S 8 T () S 16 T () S 24 T (return yylval.junk = '\(';) N
+(72) # ("\)") S 8 T () S 16 T () S 24 T (return yylval.junk = '\)';) N
+(73) # (":") S 8 T () S 16 T () S 24 T (return yylval.junk = ':';) N
+(lex.src) (Page 1/2) (May 25, 17 19:38) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(74) # (",") p 8 T () S 16 T () S 24 T (return yylval.junk = ',';) N
+(75) # (";") S 8 T () S 16 T () S 24 T (return yylval.junk = ';';) N
+(76) # () N
+(77) # ({number}            { yylval.int_val = atoi\( yytext \); return NUMBER; }) N
+(78) # ({identifier}        { yylval.ident   = new std::string\( yytext \); return ID; }) N
+(79) # ([ \\t]*              ;) N
+(80) # ([\\n]                ++yylineno;) N
+(81) # ("##"[^\\n]*          ;) N
+(82) # () N
+(83) # (.                   { std::cerr << "LEXICAL "; yyerror\( "" \); }) N
+(lex.src) (Page 2/2) (May 25, 17 19:38) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(lex.src) (3/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1-2) 4
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (// -*- c++ -*- ) c n
+(2) # (// main.cc) N
+(3) # () N
+(4) # () S
+(#include) K
+( ") p
+(heading.H) str
+(") p n
+(5) # () S
+(#include) K
+( ") p
+(nodes.h) str
+(") p n
+(6) # () N
+(7) # () S
+(// Globals) c n
+(8) # (// int yylineno = 1;) N
+(9) # () S
+(extern) K
+( ) p
+(int) k
+( yydebug;) p n
+(10) # (Program* root;     ) S
+(// pointer to root gets set by Program's constructor) c n
+(11) # () S
+(ostringstream decs;     ) p
+(// holds gen\(\)-emitted target-code declarations) c n
+(12) # () S
+(ostringstream init;   ) p
+(// holds gen\(\)-emitted intialization instructions) c n
+(13) # () S
+(ostringstream code;     ) p
+(// holds gen\(\)-emitted target-code instructions) c n
+(14) # () S
+(string compilerName; ) p
+(// initialized by main\(\) for use in error messages) c n
+(15) # () S
+(int) k
+( yyparse\(\);          ) p
+(// prototype of bison-generated parser function) c n
+(16) # () N
+(17) # () S
+(string preamble =) p n
+(18) # (   ") S
+(// beginning of preamble  ================================\\n\\) str n
+(19) # (    using namespace std;                                      \\n\\) N
+(20) # (    #include<string>            // Write out the preamble     \\n\\) N
+(21) # (    #include<iostream>                                        \\n\\) N
+(22) # (    // end of preamble and beginning of main declarations ====\\n) S
+(";) p n
+(23) # () N
+(24) # (string midamble =) N
+(25) # (   ") S
+(// end of declarations and beginning of midamble  ========\\n\\) str n
+(26) # (    main\(\) {                    // main\(\) of target code      \\n) S
+(";) p n
+(27) # () N
+(28) # (string postamble =) N
+(29) # (   ") S
+(// end of main code and beginning of postamble ===========\\n\\) str n
+(30) # (    HALT:;                      // to stop                    \\n\\) N
+(31) # (    } // end of main            // end of postamble           \\n) S
+(";) p n
+(32) # () N
+(33) # () N
+(34) # () N
+(35) # () S
+(int) k
+( main\( ) p
+(int) k
+( argc, ) p
+(char) k
+(* argv[] \) {  ) p n
+(36) # (  ) S
+(// yydebug = 1;          // uncomment to enable parser debugging) c n
+(37) # () S
+(  ) p
+(// Allow for command-line specification of MiniJava source file) c n
+(38) # () S
+(  ) p
+(if) K
+( \( argc > 1  &&  freopen\( argv[1], ") p
+(r) str
+(", stdin\) == ) p
+(NULL) K
+( \) {) p n
+(39) # (    cerr << argv[0] << ") S
+(: file ) str
+(" << argv[1]; ) p n
+(40) # (    cerr << ") S
+( cannot be opened.\\n) str
+(";) p n
+(41) # (    exit\( 1 \); ) N
+(42) # (  }) N
+(43) # () N
+(44) # (  compilerName = argv[0];           ) S
+(// For use in error messages) c n
+(45) # () S
+(  yyparse\(\);                                ) p
+(// build syntax tree) c n
+(46) # () N
+(47) # () S
+(}) p n
+(48) # () N
+(49) # () S
+(// These should create a name and install it into the appropriate table.) c n
+(50) # (// It's attributes can be filled in later.) N
+(51) # () N
+(52) # () S
+(string newVar\(\)   {) p n
+(53) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(54) # (  ) S
+(return) K
+( ") p
+(Var) str
+(" + itoa\(counter++\);) p n
+(55) # (}) N
+(56) # () N
+(57) # (string newArry\(\)  {) N
+(58) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(59) # (  ) S
+(return) K
+( ") p
+(Arry) str
+(" + itoa\(counter++\);) p n
+(60) # (}) N
+(61) # () N
+(62) # (string newParam\(\) {) N
+(63) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(64) # (  ) S
+(return) K
+( ") p
+(Param) str
+(" + itoa\(counter++\);) p n
+(65) # (}) N
+(66) # () N
+(67) # (string newFunct\(\) {) N
+(68) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(69) # (  ) S
+(return) K
+( ") p
+(Funct) str
+(" + itoa\(counter++\);) p n
+(70) # (}) N
+(71) # () N
+(72) # (string newTemp\(\)  {) N
+(73) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(main.cc) (Page 1/2) (May 25, 17 19:07) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(74) # (  ) p
+(return) K
+( ") p
+(Temp) str
+(" + itoa\(counter++\);) p n
+(75) # (}) N
+(76) # () N
+(77) # (string newLabel\(\) {) N
+(78) # (  ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(79) # (  ) S
+(return) K
+( ") p
+(Label) str
+(" + itoa\(counter++\);) p n
+(80) # (}) N
+(81) # () N
+(82) # () N
+(83) # (  ) S
+(// The rest is left over from my MiniJava compiler  THP) c n
+(84) # () S
+(  ) p
+(// root->install\(\);            // installation pass through Decls) c n
+(85) # () S
+(  ) p
+(// root->analyze\(\);                              // analysis pass) c n
+(86) # () S
+(  ) p
+(// root->gen\(\);                           // code generation pass) c n
+(87) # () S
+(  ) p
+(// cout << preamble;) c n
+(88) # () S
+(  ) p
+(// cout << decs.str\(\);            // Write out the dec\(laration\)s) c n
+(89) # () S
+(  ) p
+(// cout << midamble;) c n
+(90) # () S
+(  ) p
+(// cout << init.str\(\);    // Write out code to initialize vtables) c n
+(91) # () S
+(  ) p
+(// cout << code.str\(\);                      // Write out the code) c n
+(92) # () S
+(  ) p
+(// cout << postamble;) c n
+(93) # () N
+(94) # () N
+(main.cc) (Page 2/2) (May 25, 17 19:07) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(main.cc) (4/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1-2) 5
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (// -*- c++ -*-) c n
+(2) # (// source.y for Mini-L) N
+(3) # (// Updated 9:00 AM 5/20/17) N
+(4) # () N
+(5) # () S
+(%{ ) p
+(// Everything from here to "%}" is copied verbatim to the top of source.y) c n
+(6) # () S
+(#include) K
+( ") p
+(heading.H) str
+(") p n
+(7) # () S
+(#include) K
+( ") p
+(nodes.h) str
+(") p n
+(8) # () S
+(int) k
+( yyerror\( ) p
+(char) k
+(* s \);) p n
+(9) # () S
+(int) k
+( yylex\( ) p
+(void) k
+( \);) p n
+(10) # (%}) N
+(11) # () N
+(12) # () S
+(%union) K
+({) p n
+(13) # () N
+(14) # (   ) S
+(// Here we define the types and names of the components of the) c n
+(15) # () S
+(   ) p
+(// union type YYSTYPE, which is the type of yylval and of the) c n
+(16) # () S
+(   ) p
+(// semantic portion of the parse-stack entries.) c n
+(17) # () N
+(18) # () S
+(   ) p
+(// declarations of union members for lexical values of tokens) c n
+(19) # () S
+(   ) p
+(int) k
+( ) p 8 T () S 16 T (   junk;    ) S 32 T (    ) S
+(// values for single-lexeme tokens) c n
+(20) # () S
+(   ) p
+(int) k
+() p 8 T () S 16 T (   int_val;) S 32 T (    ) S
+(// values of integer literals) c n
+(21) # () S
+(   string*) p 16 T (   str_val;) S 32 T (    ) S
+(// values of string literals) c n
+(22) # () S
+(   string*) p 16 T (   ident;) S 32 T (    ) S
+(// points to identifiers' actual lexemes) c n
+(23) # () N
+(24) # () S
+(   ) p
+(// declarations of union members for lexical values of non-terminals) c n
+(25) # () S
+(   ) p
+(// that are pointers to translation records.) c n
+(26) # () S
+(   Program*              program;) p n
+(27) # (   list<Function*>*      functions;) S 40 T () S
+(// for the non-terminal "Functions") c n
+(28) # () S
+(   list<Declaration*>*   declarations;  ) p
+(// for the non-terminal "Declarations") c n
+(29) # () S
+(   list<Statement*>*     statements;   ) p n
+(30) # (   list<Var*>*           vars;) N
+(31) # (   list<Expression*>*    expressions;) N
+(32) # (   list<Expression*>*    nonemptyexpressionlist;) N
+(33) # (   list<string*>*        ids;) N
+(34) # (   Function*             function;   ) N
+(35) # (   Declaration*          declaration;      ) N
+(36) # (   Statement*            statement;) N
+(37) # (   BoolExpr*             boolexpr;) N
+(38) # (   Expression*           expression;) N
+(39) # (   Var*                  var;) N
+(40) # ( }) N
+(41) # () N
+(42) # () S
+(// Here is the  start symbol of the grammar.) c n
+(43) # () N
+(44) # () S
+(%start) K
+(               Program) p n
+(45) # ( ) N
+(46) # () S
+(// Here we specify the nonterminal symbols and which components of the) c n
+(47) # (// union YYSTYPE their translation records will occupy.  By ourconvention,) N
+(48) # (// the union member for the semantic record for a given non-terminal has) N
+(49) # (// the same name as that symbol, but not capitalized., and its type is a) N
+(50) # (// pointer to an object of a class that haas the same name as that symbol,) N
+(51) # (// including capitalization.) N
+(52) # () N
+(53) # (//           member       non-termimnal) N
+(54) # () S
+(%type) K
+(       <program>       Program) p n
+(55) # () S
+(%type) K
+(       <declarations>  Declarations) p n
+(56) # () S
+(%type) K
+(       <declaration>   Declaration) p n
+(57) # () S
+(%type) K
+(       <statements>    Statements) p n
+(58) # () S
+(%type) K
+(       <statement>     Statement) p n
+(59) # () S
+(%type) K
+(       <functions>     Functions) p n
+(60) # () S
+(%type) K
+(       <function>      Function) p n
+(61) # () S
+(%type) K
+(       <ids>           IDs) p n
+(62) # () S
+(%type) K
+(       <vars>          Vars) p n
+(63) # () S
+(%type) K
+(       <var>           Var) p n
+(64) # () S
+(%type) K
+(       <expressions>   Expressions) p n
+(65) # () S
+(%type) K
+(       <expression>    Expression) p n
+(66) # () S
+(%type) K
+(       <nonemptyexpressionlist> NonemptyExpressionList) p n
+(67) # () S
+(%type) K
+(       <boolexpr>      BoolExpr) p n
+(68) # () N
+(69) # () N
+(70) # () S
+(// Here, in order of increasing precedence, are the names of the tokens,) c n
+(71) # (// their associativity, and which components of the union YYSTYPE) N
+(72) # (// their lexical values will occupy.  This information is from:) N
+(73) # (// www.cs.ucr.edu/~gupta/teaching/152-17/Project-Phase-II/mini_l.html) N
+(source.y) (Page 1/4) (May 25, 17 20:01) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(74) # () p n
+(75) # () S
+(// assoc      member        token) c n
+(76) # () S
+(%nonassoc) K
+(   <junk>          LO) p n
+(77) # () S
+(%nonassoc) K
+(   <junk>          INTEGER) p n
+(78) # () S
+(%nonassoc) K
+(   <junk>          ARRAY) p n
+(79) # () S
+(%nonassoc) K
+(   <junk>          FUNCTION) p n
+(80) # () S
+(%nonassoc) K
+(   <junk>          BEGINPARAMS) p n
+(81) # () S
+(%nonassoc) K
+(   <junk>          ENDPARAMS) p n
+(82) # () S
+(%nonassoc) K
+(   <junk>          BEGINLOCALS) p n
+(83) # () S
+(%nonassoc) K
+(   <junk>          ENDLOCALS) p n
+(84) # () S
+(%nonassoc) K
+(   <junk>          BEGINBODY) p n
+(85) # () S
+(%nonassoc) K
+(   <junk>          ENDBODY) p n
+(86) # () S
+(%nonassoc) K
+(   <junk>          BEGINLOOP) p n
+(87) # () S
+(%nonassoc) K
+(   <junk>          ENDLOOP) p n
+(88) # () S
+(%token) K
+(      <junk>          IF) p n
+(89) # () S
+(%token) K
+(      <junk>          THEN) p n
+(90) # () S
+(%token) K
+(      <junk>          ELSE) p n
+(91) # () S
+(%token) K
+(      <junk>          ENDIF) p n
+(92) # () S
+(%token) K
+(      <junk>          DO) p n
+(93) # () S
+(%token) K
+(      <junk>          WHILE) p n
+(94) # () S
+(%token) K
+(      <junk>          READ) p n
+(95) # () S
+(%token) K
+(      <junk>          WRITE) p n
+(96) # () S
+(%token) K
+(      <junk>          CONTINUE) p n
+(97) # () S
+(%token) K
+(      <junk>          RETURN) p n
+(98) # () S
+(%token) K
+(      <junk>          TRUE) p n
+(99) # () S
+(%token) K
+(      <junk>          FALSE) p n
+(100) # () S
+(%right) K
+(      <junk>          ASSGN   ) p
+(/* ":=" */) c n
+(101) # () S
+(%token) K
+(      <junk>          OF) p n
+(102) # () S
+(%left) K
+(       <junk>          OR) p n
+(103) # () S
+(%left) K
+(       <junk>          AND) p n
+(104) # () S
+(%right) K
+(      <junk>          NOT) p n
+(105) # () S
+(%left) K
+(       <junk>          NE) p n
+(106) # () S
+(%left) K
+(       <junk>          EQ) p n
+(107) # () S
+(%left) K
+(       <junk>          GE) p n
+(108) # () S
+(%left) K
+(       <junk>          GT) p n
+(109) # () S
+(%left) K
+(       <junk>          LE) p n
+(110) # () S
+(%left) K
+(       <junk>          LT) p n
+(111) # () S
+(%left) K
+(       <junk>          ') p
+(-) str
+('    ) p
+(/* binary */) c n
+(112) # () S
+(%left) K
+(       <junk>          ') p
+(+) str
+(') p n
+(113) # () S
+(%left) K
+(       <junk>          ') p
+(%) str
+(') p n
+(114) # () S
+(%left) K
+(       <junk>          ') p
+(/) str
+(') p n
+(115) # () S
+(%left) K
+(       <junk>          ') p
+(*) str
+(') p n
+(116) # () S
+(%right) K
+(      <junk>          UMINUS) p n
+(117) # () S
+(%left) K
+(       <junk>          ') p
+([) str
+(') p n
+(118) # () S
+(%left) K
+(       <junk>          ') p
+(]) str
+(') p n
+(119) # () S
+(%left) K
+(       <junk>          ') p
+(\() str
+(') p n
+(120) # () S
+(%left) K
+(       <junk>          ') p
+(\)) str
+(') p n
+(121) # () S
+(%right) K
+(      <junk>          ') p
+(,) str
+(') p n
+(122) # () S
+(%right) K
+(      <junk>          ') p
+(;) str
+(') p n
+(123) # () S
+(%nonassoc) K
+(   <junk>          ') p
+(:) str
+(') p n
+(124) # () S
+(%nonassoc) K
+(   <junk>          HI) p n
+(125) # () S
+(%token) K
+(      <ident>         ID) p n
+(126) # () S
+(%token) K
+(      <int_val>       NUMBER) p n
+(127) # () N
+(128) # () N
+(129) # (%%  ) S
+(// end of symbol specifications) c n
+(130) # () N
+(131) # (// Here are the grammar rules and their associated semantic actions.) N
+(132) # () N
+(133) # () S
+(Functions) L
+(    : ) p
+(/* empty */) c
+(                         { $$ = new list<Function*>; }) p n
+(134) # (             | Functions Function                    { \($$=$1\)->push_back\($2\); }) N
+(135) # (             ;                    ) S
+(/* any possibly empty sequence of Functions */) c n
+(136) # () N
+(137) # () S
+(Declarations) L
+( : ) p
+(/* empty */) c
+(                      { $$ = new list<Declaration*>; }) p n
+(138) # (             | Declarations Declaration              { \($$=$1\)->push_back\($2\); }) N
+(139) # (             ;) S
+(/* any possibly empty semicolon-terminated Declaration sequence */) c n
+(140) # () N
+(141) # () S
+(Statements) L
+(   : Statement ') p
+(;) str
+('     { \($$ = new list<Statement*>\)->push_back\($1\); }) p n
+(142) # (             | Statements Statement ') S
+(;) str
+('              { \($$=$1\)->push_back\($2\); }) p n
+(143) # (             ;    ) S
+(/* any nonempty sequence of semicolon-terminated Statements */) c n
+(144) # () N
+(145) # () S
+(IDs) L
+(          : ID                   { \($$ = new list<string*>\)->push_back\($1\); }) p n
+(146) # (             | IDs ') S
+(,) str
+(' ID                            { \($$=$1\)->push_back\($3\); }) p n
+(source.y) (Page 2/4) (May 25, 17 20:01) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(source.y) (5/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 6
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(147) # (             ;                    ) p
+(/* any nonempty comma-separated list of IDs */) c n
+(148) # () N
+(149) # () S
+(Vars) L
+(         : Var                     { \($$ = new list<Var*>\)->push_back\($1\); }) p n
+(150) # (             | Vars ') S
+(,) str
+(' Var                          { \($$=$1\)->push_back\($3\); }) p n
+(151) # (             ;                   ) S
+(/* any nonempty comma-separated list of Vars */) c n
+(152) # () N
+(153) # () S
+(Expressions) L
+(  : ) p
+(/* empty */) c
+(                       { $$ = new list<Expression*>; }) p n
+(154) # (             | NonemptyExpressionList                               { $$ = $1; }) N
+(155) # (             ;      ) S
+(/* any possibly empty comma-separated list of Expressions */) c n
+(156) # () N
+(157) # () S
+(NonemptyExpressionList) p n
+(158) # (             : Expression                        { $$ = new list<Expression*>; }) N
+(159) # (             | NonemptyExpressionList ') S
+(,) str
+(' Expression { \($$=$1\)->push_back\($3\); }) p n
+(160) # (             ;            ) S
+(/* any nonempty comma-separated list of Expressions */) c n
+(161) # () N
+(162) # () S
+(Program) L
+(      : Functions                              { $$ = new Program\($1\); }) p n
+(163) # () N
+(164) # () S
+(Function) L
+(     : FUNCTION ID ') p
+(;) str
+('                   ) p n
+(165) # (               BEGINPARAMS Declarations ENDPARAMS) N
+(166) # (               BEGINLOCALS Declarations ENDLOCALS                            ) N
+(167) # ( ) S 8 T (       BEGINBODY   Statements   ENDBODY                         ) N
+(168) # (                 { $$ = new Function\($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12\); }) N
+(169) # () N
+(170) # (             ;) N
+(171) # () N
+(172) # () S
+(Declaration) L
+(  : IDs ') p
+(:) str
+(' INTEGER               { $$ = new Declaration\($1,$2,$3\); }) p n
+(173) # (             | IDs ') S
+(:) str
+(' ARRAY ') p
+([) str
+(' NUMBER ') p
+(]) str
+(' OF INTEGER   ) p n
+(174) # (                              { $$ = new Declaration\($1,$2,$3,$4,$5,$6,$7,$8\); }) N
+(175) # () S 8 T (     ;) N
+(176) # () N
+(177) # () S
+(Statement) L
+(    : Var ASSGN Expression       { $$ = new AssignmentStmt\($1,$2,$3\); }) p n
+(178) # (             | IF BoolExpr THEN Statements ENDIF  ) N
+(179) # (                                        { $$ = new IfThenStmt\($1,$2,$3,$4,$5\); }) N
+(180) # () S 8 T (     | IF BoolExpr THEN Statements ELSE Statements ENDIF         ) N
+(181) # (                              { $$ = new IfThenElseStmt\($1,$2,$3,$4,$5,$6,$7\); }) N
+(182) # () S 8 T (     | WHILE BoolExpr BEGINLOOP Statements ENDLOOP       ) N
+(183) # (                                         { $$ = new WhileStmt\($1,$2,$3,$4,$5\); }) N
+(184) # () S 8 T (     | DO BEGINLOOP Statements ENDLOOP WHILE BoolExpr) N
+(185) # (                                    { $$ = new DoWhileStmt\($1,$2,$3,$4,$5,$6\); }) N
+(186) # (             | READ Vars                           { $$ = new ReadStmt\($1,$2\); }) N
+(187) # () S 8 T (     | WRITE Vars                         { $$ = new WriteStmt\($1,$2\); }) N
+(188) # () S 8 T (     | CONTINUE                           { $$ = new ContinueStmt\($1\); }) N
+(189) # (             | RETURN Expression                 { $$ = new ReturnStmt\($1,$2\); }) N
+(190) # (             ;) N
+(191) # () N
+(192) # ( BoolExpr    : Expression EQ Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(193) # (             | Expression NE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(194) # (             | Expression LT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(195) # (             | Expression GT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(196) # (             | Expression LE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(197) # (             | Expression GE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(198) # () S 8 T (     | BoolExpr AND BoolExpr            { $$ = new BoolExpr\($1,$2,$3\); }) N
+(199) # () S 8 T (     | BoolExpr OR BoolExpr             { $$ = new BoolExpr\($1,$2,$3\); }) N
+(200) # (             | NOT BoolExpr                     { $$ = new BoolExpr\(00,$1,$2\); }) N
+(201) # (             | TRUE                             { $$ = new BoolExpr\(00,1,00\); }) N
+(202) # (             | FALSE                            { $$ = new BoolExpr\(00,0,00\); }) N
+(203) # (             | ') S
+(\() str
+(' BoolExpr ') p
+(\)) str
+('                                     { $$ = $2; }) p n
+(204) # () S 8 T (     ;) N
+(205) # () N
+(206) # () S
+(Expression) L
+(   : Var                                  { $$ = new Expression\($1\); }) p n
+(207) # () S 8 T (     | NUMBER                               { $$ = new Expression\($1\); }) N
+(208) # (             | ') S
+(\() str
+(' Expression ') p
+(\)) str
+('                                   { $$ = $2; }) p n
+(209) # (             | ID ') S
+(\() str
+(' Expressions ') p
+(\)) str
+('      { $$ = new Expression\($1,$2,$3,$4\); }) p n
+(210) # (             | Expression ') S
+(+) str
+(' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
+(211) # (             | Expression ') S
+(-) str
+(' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
+(212) # (             | Expression ') S
+(*) str
+(' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
+(213) # (             | Expression ') S
+(/) str
+(' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
+(214) # (             | Expression ') S
+(%) str
+(' Expression      { $$ = new Expression\($1,$2,$3\); ) p n
+0 T (}) N
+(215) # (             | ') S
+(-) str
+(' Expression  %prec UMINUS   { $$ = new Expression\(00,$1,$2\); }) p n
+(216) # (             ;) N
+(217) # () N
+(218) # ( Var) S 8 T (     : ID                                 { $$ = new Var\($1, 0, 0, 0\); }) N
+(source.y) (Page 3/4) (May 25, 17 20:01) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(219) # (             | ID ') p
+([) str
+(' Expression ') p
+(]) str
+('              { $$ = new Var\($1,$2,$3,$4\); }) p n
+(220) # (             ;) N
+(221) # () N
+(222) # () N
+(223) # () N
+(224) # (%%  ) S
+(// end of rules) c n
+(225) # () N
+(226) # (// Here are the definitions of yyerror, the function that reports ) N
+(227) # (// lexical and parse errors.  It's overloaded so that error messages) N
+(228) # (// can be either C strings or C++ strings.) N
+(229) # () N
+(230) # () S
+(int) k
+( yyerror\( string s \) {) p n
+(231) # (  ) S
+(extern) K
+( ) p
+(int) k
+( yylineno;) p n
+(232) # (  ) S
+(extern) K
+( ) p
+(char) k
+(* yytext;) p n
+(233) # (  cerr << ") S
+(ERROR ) str
+(" + s + ") p
+( at symbol ) str
+(" + yytext + ") p
+( on line) str
+(" ;) p n
+(234) # (  exit\( 1 \);) N
+(235) # (}) N
+(236) # () N
+(237) # () S
+(int) k
+( yyerror\( ) p
+(char) k
+(* s \) { ) p
+(return) K
+( yyerror\( string\(s\) \); }) p n
+(238) # () N
+(239) # () N
+(240) # () N
+(241) # () N
+(242) # () N
+(243) # () N
+(source.y) (Page 4/4) (May 25, 17 20:01) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(source.y) (6/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1-2) 7
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(1) # (// -*- c++ -*-) c n
+(2) # (// nodes.h) N
+(3) # () N
+(4) # (// #include "heading.H"  // for tesing only.  Else comment this out) N
+(5) # () N
+(6) # (// Definitions of node classes, i.e., translation records.) N
+(7) # (// A work in progress) N
+(8) # () N
+(9) # () N
+(10) # (// External global variables) N
+(11) # () S
+(extern) K
+( ostringstream code;                            ) p
+(// Where target code goes) c n
+(12) # () S
+(extern) K
+( ostringstream init;             ) p
+(// Where target initialization code goes) c n
+(13) # () S
+(extern) K
+( ostringstream decs;                      ) p
+(// Where target declarations go) c n
+(14) # () S
+(extern) K
+( ) p
+(int) k
+( yylineno;                           ) p
+(// defined & maintained in lex.c) c n
+(15) # () S
+(extern) K
+( ) p
+(char) k
+(* yytext;                           ) p
+(// defined & maintained in lex.c) c n
+(16) # () S
+(extern) K
+( map< ) p
+(int) k
+(, string > decode;              ) p
+(// MiniJava-to-C op-decode table) c n
+(17) # () S
+(extern) K
+( string compilerName;               ) p
+(// initialized from argv[0] in main\(\)) c n
+(18) # () N
+(19) # (// Obsolete stuff:) N
+(20) # (// extern SemanticType* theIntType;    // global entity for MiniJava's Int type) N
+(21) # (// extern SemanticType* theIntArrayType;       // ... for MiniJava's Int[] type) N
+(22) # (// extern SemanticType* theBooleanType;      // ... for MiniJava's Boolean type) N
+(23) # (// extern SemanticType* theVoidPtrType;        ) N
+(24) # (// extern SemanticType* theWordPtrType;        ) N
+(25) # (// extern Program* root;                      // pointer to root of syntax tree) N
+(26) # () N
+(27) # () S
+(class BoolExpr;) p n
+(28) # () N
+(29) # (class Function;) N
+(30) # () S
+(typedef) K
+( list<Function*>     Functions;) p n
+(31) # () N
+(32) # (class Declaration;) N
+(33) # () S
+(typedef) K
+( list<Declaration*>  Declarations; ) p n
+(34) # () N
+(35) # (class Statement;) N
+(36) # () S
+(typedef) K
+( list<Statement*>    Statements;) p n
+(37) # () N
+(38) # (class Var;) N
+(39) # () S
+(typedef) K
+( list<Var*>          Vars;) p n
+(40) # () N
+(41) # (class Expression;) N
+(42) # () S
+(typedef) K
+( list<Expression*>   Expressions;) p n
+(43) # () N
+(44) # () S
+(struct) k
+( Node {) p n
+(45) # (public:) N
+(46) # (  Node\(\) : lineNo\(yylineno\), nextTok\(yytext\) {}) N
+(47) # (  virtual ~Node\(\) {};) N
+(48) # (  string pos\(\) {      ) S
+(// for reporting errors, which we do only from nodes) c n
+(49) # () S
+(    ) p
+(return) K
+( ") p
+(At symbol \\") str
+(" + nextTok + ") p
+(\\" on line ) str
+(" + itoa\(lineNo\) +") p
+(,\\n) str
+(";) p n
+(50) # (  }  ) N
+(51) # () N
+(52) # (  ) S
+(// Declare code and place here.) c n
+(53) # () N
+(54) # () S
+(private:) p n
+(55) # (  ) S
+(int) k
+( lineNo;             ) p
+(// lineNo at Node's construction is used in pos\(\)) c n
+(56) # () S
+(  string nextTok;        ) p
+(// nextTok at Node's construction is used in pos\(\)) c n
+(57) # () S
+(};  ) p n
+(58) # () N
+(59) # (class Statement : public Node {) N
+(60) # (public:) N
+(61) # (  virtual ~Statement\(\){};) N
+(62) # (};) N
+(63) # () N
+(64) # (class AssignmentStmt : public Statement {) N
+(65) # (public:   ) N
+(66) # (  AssignmentStmt\( Var* c1, ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(67) # (};) N
+(68) # () N
+(69) # (class IfThenStmt : public Statement {) N
+(70) # (public:   ) N
+(71) # (public:   ) N
+(72) # (  IfThenStmt\( ) S
+(int) k
+( c1, BoolExpr* c2, ) p
+(int) k
+( c3, Statements* c4, ) p
+(int) k
+( c5 \) {}) p n
+(73) # (};) N
+(nodes.h) (Page 1/3) (May 26, 17 6:18) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(74) # () p n
+(75) # (class IfThenElseStmt : public Statement {) N
+(76) # (public:    ) N
+(77) # (  IfThenElseStmt\( ) S
+(int) k
+( c1, BoolExpr* c2, ) p
+(int) k
+( c3, Statements* c4, ) p
+(int) k
+( c5,) p n
+(78) # () S 8 T () S 16 T (  Statements* c6, ) S
+(int) k
+( c7 \) {}) p n
+(79) # (};) N
+(80) # () N
+(81) # (class WhileStmt : public Statement {) N
+(82) # (public:   ) N
+(83) # (  WhileStmt\( ) S
+(int) k
+( c1, BoolExpr* c2, ) p
+(int) k
+( c3, Statements* c4, ) p
+(int) k
+( c5\) {}) p n
+(84) # (};) N
+(85) # () N
+(86) # (class DoWhileStmt : public Statement {) N
+(87) # (public:   ) N
+(88) # (  DoWhileStmt\( ) S
+(int) k
+( c1, ) p
+(int) k
+( c2, Statements* c3, ) p
+(int) k
+( c4, ) p
+(int) k
+( c5,) p n
+(89) # () S 8 T (       BoolExpr* c6 \){}) N
+(90) # (};) N
+(91) # () N
+(92) # (class ReadStmt : public Statement {) N
+(93) # (public:   ) N
+(94) # (  ReadStmt\( ) S
+(int) k
+( c1, Vars* c2 \) {}) p n
+(95) # (};) N
+(96) # () N
+(97) # (class WriteStmt : public Statement {) N
+(98) # (public:   ) N
+(99) # (  WriteStmt\( ) S
+(int) k
+( c1, Vars* c2 \) {}) p n
+(100) # (};) N
+(101) # () N
+(102) # (class ContinueStmt : public Statement {) N
+(103) # (public:) N
+(104) # (  ContinueStmt\( ) S
+(int) k
+( c1 \) {}) p n
+(105) # (};) N
+(106) # () N
+(107) # (class ReturnStmt : public Statement {) N
+(108) # (public:   ) N
+(109) # (  ReturnStmt\( ) S
+(int) k
+( c1, Expression* c2 \) {}) p n
+(110) # (};) N
+(111) # () N
+(112) # (class BoolExpr    : public Node {) N
+(113) # (public:   ) N
+(114) # (  BoolExpr\( Expression* c1, ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(115) # (  BoolExpr\( BoolExpr* c1,   ) S
+(int) k
+( c2, BoolExpr* c3 \) {}) p n
+(116) # (  BoolExpr\( ) S
+(int) k
+( c1, BoolExpr* c2 \) {}) p n
+(117) # (  BoolExpr\( ) S
+(int) k
+( c1 \) {}) p n
+(118) # (  BoolExpr\( ) S
+(int) k
+( c1, BoolExpr* c2, ) p
+(int) k
+( c3 \) {}) p n
+(119) # (  BoolExpr\( ) S
+(int) k
+( c1, ) p
+(int) k
+( c2, ) p
+(int) k
+( c3 \) {}) p n
+(120) # (};) N
+(121) # () N
+(122) # (class Expression  : public Node {) N
+(123) # (public:   ) N
+(124) # (  Expression\( Var* c1 \) {}  ) S
+(// Var) c n
+(125) # () S
+(  Expression\( ) p
+(int) k
+( c1 \) {}  ) p
+(// NUMBER ) c n
+(126) # () S
+(  Expression\( ) p
+(int) k
+( c1, Expression* c2, ) p
+(int) k
+( c3 \) {} ) p
+(// '\(" Expression '\)') c n
+(127) # () S
+(  Expression\( string* c1, ) p
+(int) k
+( c2, Expressions* c3, ) p
+(int) k
+( c4 \) {} ) p n
+(128) # (  Expression\( Expression* c1, ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(129) # (  Expression\( ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(130) # (};) N
+(131) # () N
+(132) # (class Var         : public Node {) N
+(133) # (public:) N
+(134) # (  Var\( string* c1 \) {}) N
+(135) # (  Var\( string* c1, ) S
+(int) k
+( c2, Expression* c3, ) p
+(int) k
+( c4 \) {} ) p n
+(136) # (};) N
+(137) # () N
+(138) # () N
+(139) # () N
+(140) # (class Declaration : public Node {) N
+(141) # (public:) N
+(142) # (  Declaration\( list<string*>* c1, ) S
+(int) k
+( c2, ) p
+(int) k
+( c3 \) ) p n
+(143) # (  {};  ) N
+(144) # (  Declaration\( list<string*>* c1, ) S
+(int) k
+( c2, ) p
+(int) k
+( c3, ) p
+(int) k
+( c4, ) p
+(int) k
+( c5, ) p
+(int) k
+( c6,) p n
+(145) # () S 8 T (       ) S
+(int) k
+( c7, ) p
+(int) k
+( c8 \)) p n
+(146) # (  { }) N
+(nodes.h) (Page 2/3) (May 26, 17 6:18) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(nodes.h) (7/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3) 8
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(147) # (};) p n
+(148) # () N
+(149) # () N
+(150) # (class Function    : public Node {) N
+(151) # (public:) N
+(152) # (  Function\() S
+(int) k
+( c1, string* c2, ) p
+(int) k
+( c3, ) p
+(int) k
+( c4, Declarations* c5, ) p
+(int) k
+( c6,) p n
+(153) # (      ) S
+(int) k
+( c7, Declarations* c8, ) p
+(int) k
+( c9, ) p
+(int) k
+( c10, Statements* c11, ) p
+(int) k
+( c12\)) p n
+(154) # (  {) N
+(155) # (    ) S
+(// emit MIL-code function declaration for c2) c n
+(156) # () S
+(    ) p
+(for) K
+(\( ) p
+(auto) K
+( it : *c5  \) { ) p
+(/* process it */) c
+( };   ) p n
+(157) # (    ) S
+(for) K
+(\( ) p
+(auto) K
+( it : *c8  \) { ) p
+(/* process it */) c
+( };   ) p n
+(158) # (    ) S
+(for) K
+(\( ) p
+(auto) K
+( it : *c11 \) { ) p
+(/* process it */) c
+( };   ) p n
+(159) # (  }) N
+(160) # (};) N
+(161) # () N
+(162) # (class Program     : public Node {    ) N
+(163) # (public:) N
+(164) # (  Program\(Functions *c1\) ) N
+(165) # (  { ) S
+(for) K
+(\( ) p
+(auto) K
+( it : *c1 \) { ) p
+(/* process it */) c
+( } }  ) p n
+(166) # (};) N
+(167) # () N
+(168) # () N
+(169) # ( ) N
+(nodes.h) (Page 3/3) (May 26, 17 6:18) title
+border
+grestore
+(Printed by Tom Payne) rhead
+(nodes.h) (8/8) (Friday May 26, 2017) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF

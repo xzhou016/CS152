@@ -1,0 +1,1665 @@
+Terminals unused in grammar
+
+   LO
+   HI
+
+
+Rules useless in parser due to conflicts
+
+   26 Statement: READ Vars
+   29          | WRITE Vars
+
+
+State 0 conflicts: 1 reduce/reduce
+State 21 conflicts: 8 shift/reduce
+State 45 conflicts: 8 shift/reduce
+State 47 conflicts: 1 shift/reduce
+State 49 conflicts: 1 shift/reduce
+State 63 conflicts: 8 shift/reduce
+State 78 conflicts: 8 shift/reduce
+State 114 conflicts: 8 shift/reduce
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: /* empty */
+    2        | Functions
+
+    3 Functions: /* empty */
+    4          | Functions Function
+
+    5 Declarations: /* empty */
+    6             | Declarations Declaration
+
+    7 Statements: /* empty */
+    8           | Statement SEMICOLON
+    9           | Statements Statement SEMICOLON
+
+   10 IDs: /* empty */
+   11    | IDs SEMICOLON ID
+
+   12 Vars: Var
+   13     | Vars SEMICOLON Var
+
+   14 Expressions: /* empty */
+   15            | NonemptyExpressionList
+
+   16 NonemptyExpressionList: Expression
+   17                       | NonemptyExpressionList COMMA Expression
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+   19 Declaration: IDs COLON
+   20            | IDs COLON ARRAY L_BRAC NUMBER R_BRAC OF INTEGER
+
+   21 Statement: Var ASSIGN Expression
+   22          | IF BoolExpr THEN Statements ENDIF
+   23          | IF BoolExpr THEN Statements ENDIF ELSE Statements ENDIF
+   24          | WHILE BoolExpr BEGINLOOP Statements ENDLOOP
+   25          | DO BEGINLOOP Statements ENDLOOP WHILE BoolExpr
+   26          | READ Vars
+   27          | CONTINUE
+   28          | RETURN Expression
+   29          | WRITE Vars
+
+   30 BoolExpr: Expression EQ Expression
+   31         | Expression NE Expression
+   32         | Expression LT Expression
+   33         | Expression GT Expression
+   34         | Expression LE Expression
+   35         | Expression GE Expression
+   36         | BoolExpr AND BoolExpr
+   37         | BoolExpr OR BoolExpr
+   38         | NOT BoolExpr
+   39         | TRUE
+   40         | FALSE
+   41         | L_PARENT BoolExpr R_PARENT
+
+   42 Expression: Var
+   43           | NUMBER
+   44           | L_PARENT Expression R_PARENT
+   45           | ID L_PARENT Expressions R_PARENT
+   46           | Expression ADD Expression
+   47           | Expression SUB Expression
+   48           | Expression TIMES Expression
+   49           | Expression DIV Expression
+   50           | Expression MOD Expression
+   51           | SUB Expression
+
+   52 Var: ID
+   53    | ID L_BRAC Expression R_BRAC
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+LO (258)
+INTEGER (259) 20
+ARRAY (260) 20
+FUNCTION (261) 18
+BEGIN_PARAMS (262) 18
+END_PARAMS (263) 18
+BEGIN_LOCALS (264) 18
+END_LOCALS (265) 18
+BEGIN_BODY (266) 18
+END_BODY (267) 18
+BEGINLOOP (268) 24 25
+ENDLOOP (269) 24 25
+IF (270) 22 23
+THEN (271) 22 23
+ELSE (272) 23
+ENDIF (273) 22 23
+DO (274) 25
+WHILE (275) 24 25
+READ (276) 26
+WRITE (277) 29
+CONTINUE (278) 27
+RETURN (279) 28
+TRUE (280) 39
+FALSE (281) 40
+ASSIGN (282) 21
+OF (283) 20
+OR (284) 37
+AND (285) 36
+NOT (286) 38
+NE (287) 31
+EQ (288) 30
+GE (289) 35
+GT (290) 33
+LE (291) 34
+LT (292) 32
+SUB (293) 47 51
+ADD (294) 46
+MOD (295) 50
+DIV (296) 49
+TIMES (297) 48
+UMINUS (298)
+L_BRAC (299) 20 53
+R_BRAC (300) 20 53
+L_PARENT (301) 41 44 45
+R_PARENT (302) 41 44 45
+COMMA (303) 17
+SEMICOLON (304) 8 9 11 13 18
+COLON (305) 19 20
+HI (306)
+ID (307) 11 18 45 52 53
+NUMBER (308) 20 43
+
+
+Nonterminals, with rules where they appear
+
+$accept (54)
+    on left: 0
+Program (55)
+    on left: 1 2, on right: 0
+Functions (56)
+    on left: 3 4, on right: 2 4
+Declarations (57)
+    on left: 5 6, on right: 6 18
+Statements (58)
+    on left: 7 8 9, on right: 9 18 22 23 24 25
+IDs (59)
+    on left: 10 11, on right: 11 19 20
+Vars (60)
+    on left: 12 13, on right: 13 26 29
+Expressions (61)
+    on left: 14 15, on right: 45
+NonemptyExpressionList (62)
+    on left: 16 17, on right: 15 17
+Function (63)
+    on left: 18, on right: 4
+Declaration (64)
+    on left: 19 20, on right: 6
+Statement (65)
+    on left: 21 22 23 24 25 26 27 28 29, on right: 8 9
+BoolExpr (66)
+    on left: 30 31 32 33 34 35 36 37 38 39 40 41, on right: 22 23 24
+    25 36 37 38 41
+Expression (67)
+    on left: 42 43 44 45 46 47 48 49 50 51, on right: 16 17 21 28 30
+    31 32 33 34 35 44 46 47 48 49 50 51 53
+Var (68)
+    on left: 52 53, on right: 12 13 21 42
+
+
+State 0
+
+    0 $accept: . Program $end
+
+    $end      reduce using rule 1 (Program)
+    $end      [reduce using rule 3 (Functions)]
+    FUNCTION  reduce using rule 3 (Functions)
+    $default  reduce using rule 1 (Program)
+
+    Program    go to state 1
+    Functions  go to state 2
+
+
+State 1
+
+    0 $accept: Program . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    2 Program: Functions .
+    4 Functions: Functions . Function
+
+    FUNCTION  shift, and go to state 4
+
+    $default  reduce using rule 2 (Program)
+
+    Function  go to state 5
+
+
+State 3
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+State 4
+
+   18 Function: FUNCTION . ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    ID  shift, and go to state 6
+
+
+State 5
+
+    4 Functions: Functions Function .
+
+    $default  reduce using rule 4 (Functions)
+
+
+State 6
+
+   18 Function: FUNCTION ID . SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    SEMICOLON  shift, and go to state 7
+
+
+State 7
+
+   18 Function: FUNCTION ID SEMICOLON . BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    BEGIN_PARAMS  shift, and go to state 8
+
+
+State 8
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS . Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    $default  reduce using rule 5 (Declarations)
+
+    Declarations  go to state 9
+
+
+State 9
+
+    6 Declarations: Declarations . Declaration
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations . END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    END_PARAMS  shift, and go to state 10
+
+    $default  reduce using rule 10 (IDs)
+
+    IDs          go to state 11
+    Declaration  go to state 12
+
+
+State 10
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS . BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    BEGIN_LOCALS  shift, and go to state 13
+
+
+State 11
+
+   11 IDs: IDs . SEMICOLON ID
+   19 Declaration: IDs . COLON
+   20            | IDs . COLON ARRAY L_BRAC NUMBER R_BRAC OF INTEGER
+
+    SEMICOLON  shift, and go to state 14
+    COLON      shift, and go to state 15
+
+
+State 12
+
+    6 Declarations: Declarations Declaration .
+
+    $default  reduce using rule 6 (Declarations)
+
+
+State 13
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS . Declarations END_LOCALS BEGIN_BODY Statements END_BODY
+
+    $default  reduce using rule 5 (Declarations)
+
+    Declarations  go to state 16
+
+
+State 14
+
+   11 IDs: IDs SEMICOLON . ID
+
+    ID  shift, and go to state 17
+
+
+State 15
+
+   19 Declaration: IDs COLON .
+   20            | IDs COLON . ARRAY L_BRAC NUMBER R_BRAC OF INTEGER
+
+    ARRAY  shift, and go to state 18
+
+    $default  reduce using rule 19 (Declaration)
+
+
+State 16
+
+    6 Declarations: Declarations . Declaration
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations . END_LOCALS BEGIN_BODY Statements END_BODY
+
+    END_LOCALS  shift, and go to state 19
+
+    $default  reduce using rule 10 (IDs)
+
+    IDs          go to state 11
+    Declaration  go to state 12
+
+
+State 17
+
+   11 IDs: IDs SEMICOLON ID .
+
+    $default  reduce using rule 11 (IDs)
+
+
+State 18
+
+   20 Declaration: IDs COLON ARRAY . L_BRAC NUMBER R_BRAC OF INTEGER
+
+    L_BRAC  shift, and go to state 20
+
+
+State 19
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS . BEGIN_BODY Statements END_BODY
+
+    BEGIN_BODY  shift, and go to state 21
+
+
+State 20
+
+   20 Declaration: IDs COLON ARRAY L_BRAC . NUMBER R_BRAC OF INTEGER
+
+    NUMBER  shift, and go to state 22
+
+
+State 21
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY . Statements END_BODY
+
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    IF        [reduce using rule 7 (Statements)]
+    DO        [reduce using rule 7 (Statements)]
+    WHILE     [reduce using rule 7 (Statements)]
+    READ      [reduce using rule 7 (Statements)]
+    WRITE     [reduce using rule 7 (Statements)]
+    CONTINUE  [reduce using rule 7 (Statements)]
+    RETURN    [reduce using rule 7 (Statements)]
+    ID        [reduce using rule 7 (Statements)]
+    $default  reduce using rule 7 (Statements)
+
+    Statements  go to state 31
+    Statement   go to state 32
+    Var         go to state 33
+
+
+State 22
+
+   20 Declaration: IDs COLON ARRAY L_BRAC NUMBER . R_BRAC OF INTEGER
+
+    R_BRAC  shift, and go to state 34
+
+
+State 23
+
+   22 Statement: IF . BoolExpr THEN Statements ENDIF
+   23          | IF . BoolExpr THEN Statements ENDIF ELSE Statements ENDIF
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 42
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 24
+
+   25 Statement: DO . BEGINLOOP Statements ENDLOOP WHILE BoolExpr
+
+    BEGINLOOP  shift, and go to state 45
+
+
+State 25
+
+   24 Statement: WHILE . BoolExpr BEGINLOOP Statements ENDLOOP
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 46
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 26
+
+   26 Statement: READ . Vars
+
+    ID  shift, and go to state 30
+
+    Vars  go to state 47
+    Var   go to state 48
+
+
+State 27
+
+   29 Statement: WRITE . Vars
+
+    ID  shift, and go to state 30
+
+    Vars  go to state 49
+    Var   go to state 48
+
+
+State 28
+
+   27 Statement: CONTINUE .
+
+    $default  reduce using rule 27 (Statement)
+
+
+State 29
+
+   28 Statement: RETURN . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 51
+    Var         go to state 44
+
+
+State 30
+
+   52 Var: ID .
+   53    | ID . L_BRAC Expression R_BRAC
+
+    L_BRAC  shift, and go to state 52
+
+    $default  reduce using rule 52 (Var)
+
+
+State 31
+
+    9 Statements: Statements . Statement SEMICOLON
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements . END_BODY
+
+    END_BODY  shift, and go to state 53
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    Statement  go to state 54
+    Var        go to state 33
+
+
+State 32
+
+    8 Statements: Statement . SEMICOLON
+
+    SEMICOLON  shift, and go to state 55
+
+
+State 33
+
+   21 Statement: Var . ASSIGN Expression
+
+    ASSIGN  shift, and go to state 56
+
+
+State 34
+
+   20 Declaration: IDs COLON ARRAY L_BRAC NUMBER R_BRAC . OF INTEGER
+
+    OF  shift, and go to state 57
+
+
+State 35
+
+   39 BoolExpr: TRUE .
+
+    $default  reduce using rule 39 (BoolExpr)
+
+
+State 36
+
+   40 BoolExpr: FALSE .
+
+    $default  reduce using rule 40 (BoolExpr)
+
+
+State 37
+
+   38 BoolExpr: NOT . BoolExpr
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 58
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 38
+
+   51 Expression: SUB . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 59
+    Var         go to state 44
+
+
+State 39
+
+   41 BoolExpr: L_PARENT . BoolExpr R_PARENT
+   44 Expression: L_PARENT . Expression R_PARENT
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 60
+    Expression  go to state 61
+    Var         go to state 44
+
+
+State 40
+
+   45 Expression: ID . L_PARENT Expressions R_PARENT
+   52 Var: ID .
+   53    | ID . L_BRAC Expression R_BRAC
+
+    L_BRAC    shift, and go to state 52
+    L_PARENT  shift, and go to state 62
+
+    $default  reduce using rule 52 (Var)
+
+
+State 41
+
+   43 Expression: NUMBER .
+
+    $default  reduce using rule 43 (Expression)
+
+
+State 42
+
+   22 Statement: IF BoolExpr . THEN Statements ENDIF
+   23          | IF BoolExpr . THEN Statements ENDIF ELSE Statements ENDIF
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+
+    THEN  shift, and go to state 63
+    OR    shift, and go to state 64
+    AND   shift, and go to state 65
+
+
+State 43
+
+   30 BoolExpr: Expression . EQ Expression
+   31         | Expression . NE Expression
+   32         | Expression . LT Expression
+   33         | Expression . GT Expression
+   34         | Expression . LE Expression
+   35         | Expression . GE Expression
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    NE     shift, and go to state 66
+    EQ     shift, and go to state 67
+    GE     shift, and go to state 68
+    GT     shift, and go to state 69
+    LE     shift, and go to state 70
+    LT     shift, and go to state 71
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+
+State 44
+
+   42 Expression: Var .
+
+    $default  reduce using rule 42 (Expression)
+
+
+State 45
+
+   25 Statement: DO BEGINLOOP . Statements ENDLOOP WHILE BoolExpr
+
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    IF        [reduce using rule 7 (Statements)]
+    DO        [reduce using rule 7 (Statements)]
+    WHILE     [reduce using rule 7 (Statements)]
+    READ      [reduce using rule 7 (Statements)]
+    WRITE     [reduce using rule 7 (Statements)]
+    CONTINUE  [reduce using rule 7 (Statements)]
+    RETURN    [reduce using rule 7 (Statements)]
+    ID        [reduce using rule 7 (Statements)]
+    $default  reduce using rule 7 (Statements)
+
+    Statements  go to state 77
+    Statement   go to state 32
+    Var         go to state 33
+
+
+State 46
+
+   24 Statement: WHILE BoolExpr . BEGINLOOP Statements ENDLOOP
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+
+    BEGINLOOP  shift, and go to state 78
+    OR         shift, and go to state 64
+    AND        shift, and go to state 65
+
+
+State 47
+
+   13 Vars: Vars . SEMICOLON Var
+   26 Statement: READ Vars .
+
+    SEMICOLON  shift, and go to state 79
+
+    SEMICOLON  [reduce using rule 26 (Statement)]
+
+
+State 48
+
+   12 Vars: Var .
+
+    $default  reduce using rule 12 (Vars)
+
+
+State 49
+
+   13 Vars: Vars . SEMICOLON Var
+   29 Statement: WRITE Vars .
+
+    SEMICOLON  shift, and go to state 79
+
+    SEMICOLON  [reduce using rule 29 (Statement)]
+
+
+State 50
+
+   44 Expression: L_PARENT . Expression R_PARENT
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 80
+    Var         go to state 44
+
+
+State 51
+
+   28 Statement: RETURN Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 28 (Statement)
+
+
+State 52
+
+   53 Var: ID L_BRAC . Expression R_BRAC
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 81
+    Var         go to state 44
+
+
+State 53
+
+   18 Function: FUNCTION ID SEMICOLON BEGIN_PARAMS Declarations END_PARAMS BEGIN_LOCALS Declarations END_LOCALS BEGIN_BODY Statements END_BODY .
+
+    $default  reduce using rule 18 (Function)
+
+
+State 54
+
+    9 Statements: Statements Statement . SEMICOLON
+
+    SEMICOLON  shift, and go to state 82
+
+
+State 55
+
+    8 Statements: Statement SEMICOLON .
+
+    $default  reduce using rule 8 (Statements)
+
+
+State 56
+
+   21 Statement: Var ASSIGN . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 83
+    Var         go to state 44
+
+
+State 57
+
+   20 Declaration: IDs COLON ARRAY L_BRAC NUMBER R_BRAC OF . INTEGER
+
+    INTEGER  shift, and go to state 84
+
+
+State 58
+
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+   38         | NOT BoolExpr .
+
+    $default  reduce using rule 38 (BoolExpr)
+
+
+State 59
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+   51           | SUB Expression .
+
+    $default  reduce using rule 51 (Expression)
+
+
+State 60
+
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+   41         | L_PARENT BoolExpr . R_PARENT
+
+    OR        shift, and go to state 64
+    AND       shift, and go to state 65
+    R_PARENT  shift, and go to state 85
+
+
+State 61
+
+   30 BoolExpr: Expression . EQ Expression
+   31         | Expression . NE Expression
+   32         | Expression . LT Expression
+   33         | Expression . GT Expression
+   34         | Expression . LE Expression
+   35         | Expression . GE Expression
+   44 Expression: L_PARENT Expression . R_PARENT
+   46           | Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    NE        shift, and go to state 66
+    EQ        shift, and go to state 67
+    GE        shift, and go to state 68
+    GT        shift, and go to state 69
+    LE        shift, and go to state 70
+    LT        shift, and go to state 71
+    SUB       shift, and go to state 72
+    ADD       shift, and go to state 73
+    MOD       shift, and go to state 74
+    DIV       shift, and go to state 75
+    TIMES     shift, and go to state 76
+    R_PARENT  shift, and go to state 86
+
+
+State 62
+
+   45 Expression: ID L_PARENT . Expressions R_PARENT
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    $default  reduce using rule 14 (Expressions)
+
+    Expressions             go to state 87
+    NonemptyExpressionList  go to state 88
+    Expression              go to state 89
+    Var                     go to state 44
+
+
+State 63
+
+   22 Statement: IF BoolExpr THEN . Statements ENDIF
+   23          | IF BoolExpr THEN . Statements ENDIF ELSE Statements ENDIF
+
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    IF        [reduce using rule 7 (Statements)]
+    DO        [reduce using rule 7 (Statements)]
+    WHILE     [reduce using rule 7 (Statements)]
+    READ      [reduce using rule 7 (Statements)]
+    WRITE     [reduce using rule 7 (Statements)]
+    CONTINUE  [reduce using rule 7 (Statements)]
+    RETURN    [reduce using rule 7 (Statements)]
+    ID        [reduce using rule 7 (Statements)]
+    $default  reduce using rule 7 (Statements)
+
+    Statements  go to state 90
+    Statement   go to state 32
+    Var         go to state 33
+
+
+State 64
+
+   37 BoolExpr: BoolExpr OR . BoolExpr
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 91
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 65
+
+   36 BoolExpr: BoolExpr AND . BoolExpr
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 92
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 66
+
+   31 BoolExpr: Expression NE . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 93
+    Var         go to state 44
+
+
+State 67
+
+   30 BoolExpr: Expression EQ . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 94
+    Var         go to state 44
+
+
+State 68
+
+   35 BoolExpr: Expression GE . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 95
+    Var         go to state 44
+
+
+State 69
+
+   33 BoolExpr: Expression GT . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 96
+    Var         go to state 44
+
+
+State 70
+
+   34 BoolExpr: Expression LE . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 97
+    Var         go to state 44
+
+
+State 71
+
+   32 BoolExpr: Expression LT . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 98
+    Var         go to state 44
+
+
+State 72
+
+   47 Expression: Expression SUB . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 99
+    Var         go to state 44
+
+
+State 73
+
+   46 Expression: Expression ADD . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 100
+    Var         go to state 44
+
+
+State 74
+
+   50 Expression: Expression MOD . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 101
+    Var         go to state 44
+
+
+State 75
+
+   49 Expression: Expression DIV . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 102
+    Var         go to state 44
+
+
+State 76
+
+   48 Expression: Expression TIMES . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 103
+    Var         go to state 44
+
+
+State 77
+
+    9 Statements: Statements . Statement SEMICOLON
+   25 Statement: DO BEGINLOOP Statements . ENDLOOP WHILE BoolExpr
+
+    ENDLOOP   shift, and go to state 104
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    Statement  go to state 54
+    Var        go to state 33
+
+
+State 78
+
+   24 Statement: WHILE BoolExpr BEGINLOOP . Statements ENDLOOP
+
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    IF        [reduce using rule 7 (Statements)]
+    DO        [reduce using rule 7 (Statements)]
+    WHILE     [reduce using rule 7 (Statements)]
+    READ      [reduce using rule 7 (Statements)]
+    WRITE     [reduce using rule 7 (Statements)]
+    CONTINUE  [reduce using rule 7 (Statements)]
+    RETURN    [reduce using rule 7 (Statements)]
+    ID        [reduce using rule 7 (Statements)]
+    $default  reduce using rule 7 (Statements)
+
+    Statements  go to state 105
+    Statement   go to state 32
+    Var         go to state 33
+
+
+State 79
+
+   13 Vars: Vars SEMICOLON . Var
+
+    ID  shift, and go to state 30
+
+    Var  go to state 106
+
+
+State 80
+
+   44 Expression: L_PARENT Expression . R_PARENT
+   46           | Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB       shift, and go to state 72
+    ADD       shift, and go to state 73
+    MOD       shift, and go to state 74
+    DIV       shift, and go to state 75
+    TIMES     shift, and go to state 76
+    R_PARENT  shift, and go to state 86
+
+
+State 81
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+   53 Var: ID L_BRAC Expression . R_BRAC
+
+    SUB     shift, and go to state 72
+    ADD     shift, and go to state 73
+    MOD     shift, and go to state 74
+    DIV     shift, and go to state 75
+    TIMES   shift, and go to state 76
+    R_BRAC  shift, and go to state 107
+
+
+State 82
+
+    9 Statements: Statements Statement SEMICOLON .
+
+    $default  reduce using rule 9 (Statements)
+
+
+State 83
+
+   21 Statement: Var ASSIGN Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 21 (Statement)
+
+
+State 84
+
+   20 Declaration: IDs COLON ARRAY L_BRAC NUMBER R_BRAC OF INTEGER .
+
+    $default  reduce using rule 20 (Declaration)
+
+
+State 85
+
+   41 BoolExpr: L_PARENT BoolExpr R_PARENT .
+
+    $default  reduce using rule 41 (BoolExpr)
+
+
+State 86
+
+   44 Expression: L_PARENT Expression R_PARENT .
+
+    $default  reduce using rule 44 (Expression)
+
+
+State 87
+
+   45 Expression: ID L_PARENT Expressions . R_PARENT
+
+    R_PARENT  shift, and go to state 108
+
+
+State 88
+
+   15 Expressions: NonemptyExpressionList .
+   17 NonemptyExpressionList: NonemptyExpressionList . COMMA Expression
+
+    COMMA  shift, and go to state 109
+
+    $default  reduce using rule 15 (Expressions)
+
+
+State 89
+
+   16 NonemptyExpressionList: Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 16 (NonemptyExpressionList)
+
+
+State 90
+
+    9 Statements: Statements . Statement SEMICOLON
+   22 Statement: IF BoolExpr THEN Statements . ENDIF
+   23          | IF BoolExpr THEN Statements . ENDIF ELSE Statements ENDIF
+
+    IF        shift, and go to state 23
+    ENDIF     shift, and go to state 110
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    Statement  go to state 54
+    Var        go to state 33
+
+
+State 91
+
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+   37         | BoolExpr OR BoolExpr .
+
+    AND  shift, and go to state 65
+
+    $default  reduce using rule 37 (BoolExpr)
+
+
+State 92
+
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   36         | BoolExpr AND BoolExpr .
+   37         | BoolExpr . OR BoolExpr
+
+    $default  reduce using rule 36 (BoolExpr)
+
+
+State 93
+
+   31 BoolExpr: Expression NE Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 31 (BoolExpr)
+
+
+State 94
+
+   30 BoolExpr: Expression EQ Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 30 (BoolExpr)
+
+
+State 95
+
+   35 BoolExpr: Expression GE Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 35 (BoolExpr)
+
+
+State 96
+
+   33 BoolExpr: Expression GT Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 33 (BoolExpr)
+
+
+State 97
+
+   34 BoolExpr: Expression LE Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 34 (BoolExpr)
+
+
+State 98
+
+   32 BoolExpr: Expression LT Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 32 (BoolExpr)
+
+
+State 99
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   47           | Expression SUB Expression .
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 47 (Expression)
+
+
+State 100
+
+   46 Expression: Expression . ADD Expression
+   46           | Expression ADD Expression .
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 46 (Expression)
+
+
+State 101
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+   50           | Expression MOD Expression .
+
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 50 (Expression)
+
+
+State 102
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   49           | Expression DIV Expression .
+   50           | Expression . MOD Expression
+
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 49 (Expression)
+
+
+State 103
+
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   48           | Expression TIMES Expression .
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    $default  reduce using rule 48 (Expression)
+
+
+State 104
+
+   25 Statement: DO BEGINLOOP Statements ENDLOOP . WHILE BoolExpr
+
+    WHILE  shift, and go to state 111
+
+
+State 105
+
+    9 Statements: Statements . Statement SEMICOLON
+   24 Statement: WHILE BoolExpr BEGINLOOP Statements . ENDLOOP
+
+    ENDLOOP   shift, and go to state 112
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    Statement  go to state 54
+    Var        go to state 33
+
+
+State 106
+
+   13 Vars: Vars SEMICOLON Var .
+
+    $default  reduce using rule 13 (Vars)
+
+
+State 107
+
+   53 Var: ID L_BRAC Expression R_BRAC .
+
+    $default  reduce using rule 53 (Var)
+
+
+State 108
+
+   45 Expression: ID L_PARENT Expressions R_PARENT .
+
+    $default  reduce using rule 45 (Expression)
+
+
+State 109
+
+   17 NonemptyExpressionList: NonemptyExpressionList COMMA . Expression
+
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 50
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    Expression  go to state 113
+    Var         go to state 44
+
+
+State 110
+
+   22 Statement: IF BoolExpr THEN Statements ENDIF .
+   23          | IF BoolExpr THEN Statements ENDIF . ELSE Statements ENDIF
+
+    ELSE  shift, and go to state 114
+
+    $default  reduce using rule 22 (Statement)
+
+
+State 111
+
+   25 Statement: DO BEGINLOOP Statements ENDLOOP WHILE . BoolExpr
+
+    TRUE      shift, and go to state 35
+    FALSE     shift, and go to state 36
+    NOT       shift, and go to state 37
+    SUB       shift, and go to state 38
+    L_PARENT  shift, and go to state 39
+    ID        shift, and go to state 40
+    NUMBER    shift, and go to state 41
+
+    BoolExpr    go to state 115
+    Expression  go to state 43
+    Var         go to state 44
+
+
+State 112
+
+   24 Statement: WHILE BoolExpr BEGINLOOP Statements ENDLOOP .
+
+    $default  reduce using rule 24 (Statement)
+
+
+State 113
+
+   17 NonemptyExpressionList: NonemptyExpressionList COMMA Expression .
+   46 Expression: Expression . ADD Expression
+   47           | Expression . SUB Expression
+   48           | Expression . TIMES Expression
+   49           | Expression . DIV Expression
+   50           | Expression . MOD Expression
+
+    SUB    shift, and go to state 72
+    ADD    shift, and go to state 73
+    MOD    shift, and go to state 74
+    DIV    shift, and go to state 75
+    TIMES  shift, and go to state 76
+
+    $default  reduce using rule 17 (NonemptyExpressionList)
+
+
+State 114
+
+   23 Statement: IF BoolExpr THEN Statements ENDIF ELSE . Statements ENDIF
+
+    IF        shift, and go to state 23
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    IF        [reduce using rule 7 (Statements)]
+    DO        [reduce using rule 7 (Statements)]
+    WHILE     [reduce using rule 7 (Statements)]
+    READ      [reduce using rule 7 (Statements)]
+    WRITE     [reduce using rule 7 (Statements)]
+    CONTINUE  [reduce using rule 7 (Statements)]
+    RETURN    [reduce using rule 7 (Statements)]
+    ID        [reduce using rule 7 (Statements)]
+    $default  reduce using rule 7 (Statements)
+
+    Statements  go to state 116
+    Statement   go to state 32
+    Var         go to state 33
+
+
+State 115
+
+   25 Statement: DO BEGINLOOP Statements ENDLOOP WHILE BoolExpr .
+   36 BoolExpr: BoolExpr . AND BoolExpr
+   37         | BoolExpr . OR BoolExpr
+
+    OR   shift, and go to state 64
+    AND  shift, and go to state 65
+
+    $default  reduce using rule 25 (Statement)
+
+
+State 116
+
+    9 Statements: Statements . Statement SEMICOLON
+   23 Statement: IF BoolExpr THEN Statements ENDIF ELSE Statements . ENDIF
+
+    IF        shift, and go to state 23
+    ENDIF     shift, and go to state 117
+    DO        shift, and go to state 24
+    WHILE     shift, and go to state 25
+    READ      shift, and go to state 26
+    WRITE     shift, and go to state 27
+    CONTINUE  shift, and go to state 28
+    RETURN    shift, and go to state 29
+    ID        shift, and go to state 30
+
+    Statement  go to state 54
+    Var        go to state 33
+
+
+State 117
+
+   23 Statement: IF BoolExpr THEN Statements ENDIF ELSE Statements ENDIF .
+
+    $default  reduce using rule 23 (Statement)
