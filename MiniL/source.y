@@ -9,6 +9,8 @@ int yyerror( const char* s );
 int yylex( void );
 %}
 
+%error-verbose
+
 %union{
 
    // Here we define the types and names of the components of the
@@ -39,7 +41,6 @@ int yylex( void );
    Var*                  var;
  }
 
-%error-verbose
 // Here is the  start symbol of the grammar.
 
 %start               Program
@@ -160,18 +161,19 @@ NonemptyExpressionList
              | NonemptyExpressionList ',' Expression { ($$=$1)->push_back($3); }
              ;            /* any nonempty comma-separated list of Expressions */
 
-Program      : Functions                              { $$ = new Program($1); }
+Program      : Functions                        { $$ = new Program($1); }
+             ;
 
 Function     : FUNCTION ID ';'                   
                BEGINPARAMS Declarations ENDPARAMS
                BEGINLOCALS Declarations ENDLOCALS                            
  	       BEGINBODY   Statements   ENDBODY                         
-                 { $$ = new Function($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12); }
+                  { $$ = new Function($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12); }
 
              ;
 
-Declaration  : IDs ':' INTEGER  ';'             { $$ = new Declaration($1,$2,$3); }
-             | IDs ':' ARRAY '[' NUMBER ']' OF INTEGER   ';'
+Declaration  : IDs ':' INTEGER ';'           { $$ = new Declaration($1,$2,$3); }
+             | IDs ':' ARRAY '[' NUMBER ']' OF INTEGER ';'  
                               { $$ = new Declaration($1,$2,$3,$4,$5,$6,$7,$8); }
 	     ;
 
@@ -216,7 +218,7 @@ Expression   : Var                                  { $$ = new Expression($1); }
              | '-' Expression  %prec UMINUS   { $$ = new Expression(00,$1,$2); }
              ;
 
- Var	     : ID                                 { $$ = new Var($1, 0, 0, 0); }
+Var	     : ID                                          { $$ = vartab[*$1]; }
              | ID '[' Expression ']'              { $$ = new Var($1,$2,$3,$4); }
              ;
 
@@ -231,7 +233,7 @@ Expression   : Var                                  { $$ = new Expression($1); }
 int yyerror( string s ) {
   extern int yylineno;
   extern char* yytext;
-  cerr << "ERROR " + s + " at symbol " + yytext + " on line" + (char)yylineno;
+  cerr << "ERROR " + s + " at symbol " + yytext + " on line" << yylineno << endl;
   exit( 1 );
 }
 

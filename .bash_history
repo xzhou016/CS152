@@ -1,20 +1,3 @@
-bison -v -d --file-prefix=y mini_l.y
-flex mini_l.lex
-gcc -o parser y.tab.c lex.yy.c -lfl
-cat fibonacci.min | parser
-git pull
-bison -v -d --file-prefix=y mini_l.y
-git pull
-bison -v -d --file-prefix=y mini_l.y
-flex mini_l.lex
-cat fibonacci.min | parser
-gcc -o parser y.tab.c lex.yy.c -lfl
-cat fibonacci.min | parser
-git pull
-bison -v -d --file-prefix=y mini_l.y
-cat fibonacci.min | parser
-flex mini_l.lex
-gcc -o parser y.tab.c lex.yy.c -lfl
 cat fibonacci.min | parser
 git pull
 bison -v -d --file-prefix=y mini_
@@ -98,3 +81,20 @@ git add -all
 git add --all :/
 git commit -m "added functionality for phase 3" 
 git push
+ls
+git pull
+ls
+cd MiniL/
+ls
+make
+ls
+vim mini_l.y 
+ls
+make
+clear
+maek
+make
+git add --all :/
+git commit -m "phase 3 requires replace entire code base, did it. Begin implementation"
+git push
+make

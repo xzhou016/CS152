@@ -154,7 +154,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 387 of yacc.c  */
-#line 12 "source.y"
+#line 14 "source.y"
 
 
    // Here we define the types and names of the components of the
@@ -528,12 +528,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   134,   134,   135,   138,   139,   142,   143,   146,   147,
-     150,   151,   154,   155,   159,   160,   163,   165,   173,   174,
-     178,   179,   181,   183,   185,   187,   188,   189,   190,   193,
-     194,   195,   196,   197,   198,   199,   200,   201,   202,   203,
-     204,   207,   208,   209,   210,   211,   212,   213,   214,   215,
-     216,   219,   220
+       0,   135,   135,   136,   139,   140,   143,   144,   147,   148,
+     151,   152,   155,   156,   160,   161,   164,   167,   175,   176,
+     180,   181,   183,   185,   187,   189,   190,   191,   192,   195,
+     196,   197,   198,   199,   200,   201,   202,   203,   204,   205,
+     206,   209,   210,   211,   212,   213,   214,   215,   216,   217,
+     218,   221,   222
 };
 #endif
 
@@ -1525,307 +1525,307 @@ yyreduce:
     {
         case 2:
 /* Line 1792 of yacc.c  */
-#line 134 "source.y"
+#line 135 "source.y"
     { (yyval.functions) = new list<Function*>; }
     break;
 
   case 3:
 /* Line 1792 of yacc.c  */
-#line 135 "source.y"
+#line 136 "source.y"
     { ((yyval.functions)=(yyvsp[(1) - (2)].functions))->push_back((yyvsp[(2) - (2)].function)); }
     break;
 
   case 4:
 /* Line 1792 of yacc.c  */
-#line 138 "source.y"
+#line 139 "source.y"
     { (yyval.declarations) = new list<Declaration*>; }
     break;
 
   case 5:
 /* Line 1792 of yacc.c  */
-#line 139 "source.y"
+#line 140 "source.y"
     { ((yyval.declarations)=(yyvsp[(1) - (2)].declarations))->push_back((yyvsp[(2) - (2)].declaration)); }
     break;
 
   case 6:
 /* Line 1792 of yacc.c  */
-#line 142 "source.y"
+#line 143 "source.y"
     { ((yyval.statements) = new list<Statement*>)->push_back((yyvsp[(1) - (2)].statement)); }
     break;
 
   case 7:
 /* Line 1792 of yacc.c  */
-#line 143 "source.y"
+#line 144 "source.y"
     { ((yyval.statements)=(yyvsp[(1) - (3)].statements))->push_back((yyvsp[(2) - (3)].statement)); }
     break;
 
   case 8:
 /* Line 1792 of yacc.c  */
-#line 146 "source.y"
+#line 147 "source.y"
     { ((yyval.ids) = new list<string*>)->push_back((yyvsp[(1) - (1)].ident)); }
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 147 "source.y"
+#line 148 "source.y"
     { ((yyval.ids)=(yyvsp[(1) - (3)].ids))->push_back((yyvsp[(3) - (3)].ident)); }
     break;
 
   case 10:
 /* Line 1792 of yacc.c  */
-#line 150 "source.y"
+#line 151 "source.y"
     { ((yyval.vars) = new list<Var*>)->push_back((yyvsp[(1) - (1)].var)); }
     break;
 
   case 11:
 /* Line 1792 of yacc.c  */
-#line 151 "source.y"
+#line 152 "source.y"
     { ((yyval.vars)=(yyvsp[(1) - (3)].vars))->push_back((yyvsp[(3) - (3)].var)); }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 154 "source.y"
+#line 155 "source.y"
     { (yyval.expressions) = new list<Expression*>; }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 155 "source.y"
+#line 156 "source.y"
     { (yyval.expressions) = (yyvsp[(1) - (1)].nonemptyexpressionlist); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 159 "source.y"
+#line 160 "source.y"
     { (yyval.nonemptyexpressionlist) = new list<Expression*>; }
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 160 "source.y"
+#line 161 "source.y"
     { ((yyval.nonemptyexpressionlist)=(yyvsp[(1) - (3)].nonemptyexpressionlist))->push_back((yyvsp[(3) - (3)].expression)); }
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 163 "source.y"
+#line 164 "source.y"
     { (yyval.program) = new Program((yyvsp[(1) - (1)].functions)); }
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 169 "source.y"
+#line 171 "source.y"
     { (yyval.function) = new Function((yyvsp[(1) - (12)].junk),(yyvsp[(2) - (12)].ident),(yyvsp[(3) - (12)].junk),(yyvsp[(4) - (12)].junk),(yyvsp[(5) - (12)].declarations),(yyvsp[(6) - (12)].junk),(yyvsp[(7) - (12)].junk),(yyvsp[(8) - (12)].declarations),(yyvsp[(9) - (12)].junk),(yyvsp[(10) - (12)].junk),(yyvsp[(11) - (12)].statements),(yyvsp[(12) - (12)].junk)); }
     break;
 
   case 18:
 /* Line 1792 of yacc.c  */
-#line 173 "source.y"
+#line 175 "source.y"
     { (yyval.declaration) = new Declaration((yyvsp[(1) - (4)].ids),(yyvsp[(2) - (4)].junk),(yyvsp[(3) - (4)].junk)); }
     break;
 
   case 19:
 /* Line 1792 of yacc.c  */
-#line 175 "source.y"
+#line 177 "source.y"
     { (yyval.declaration) = new Declaration((yyvsp[(1) - (9)].ids),(yyvsp[(2) - (9)].junk),(yyvsp[(3) - (9)].junk),(yyvsp[(4) - (9)].junk),(yyvsp[(5) - (9)].int_val),(yyvsp[(6) - (9)].junk),(yyvsp[(7) - (9)].junk),(yyvsp[(8) - (9)].junk)); }
     break;
 
   case 20:
 /* Line 1792 of yacc.c  */
-#line 178 "source.y"
+#line 180 "source.y"
     { (yyval.statement) = new AssignmentStmt((yyvsp[(1) - (3)].var),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 21:
 /* Line 1792 of yacc.c  */
-#line 180 "source.y"
+#line 182 "source.y"
     { (yyval.statement) = new IfThenStmt((yyvsp[(1) - (5)].junk),(yyvsp[(2) - (5)].boolexpr),(yyvsp[(3) - (5)].junk),(yyvsp[(4) - (5)].statements),(yyvsp[(5) - (5)].junk)); }
     break;
 
   case 22:
 /* Line 1792 of yacc.c  */
-#line 182 "source.y"
+#line 184 "source.y"
     { (yyval.statement) = new IfThenElseStmt((yyvsp[(1) - (7)].junk),(yyvsp[(2) - (7)].boolexpr),(yyvsp[(3) - (7)].junk),(yyvsp[(4) - (7)].statements),(yyvsp[(5) - (7)].junk),(yyvsp[(6) - (7)].statements),(yyvsp[(7) - (7)].junk)); }
     break;
 
   case 23:
 /* Line 1792 of yacc.c  */
-#line 184 "source.y"
+#line 186 "source.y"
     { (yyval.statement) = new WhileStmt((yyvsp[(1) - (5)].junk),(yyvsp[(2) - (5)].boolexpr),(yyvsp[(3) - (5)].junk),(yyvsp[(4) - (5)].statements),(yyvsp[(5) - (5)].junk)); }
     break;
 
   case 24:
 /* Line 1792 of yacc.c  */
-#line 186 "source.y"
+#line 188 "source.y"
     { (yyval.statement) = new DoWhileStmt((yyvsp[(1) - (6)].junk),(yyvsp[(2) - (6)].junk),(yyvsp[(3) - (6)].statements),(yyvsp[(4) - (6)].junk),(yyvsp[(5) - (6)].junk),(yyvsp[(6) - (6)].boolexpr)); }
     break;
 
   case 25:
 /* Line 1792 of yacc.c  */
-#line 187 "source.y"
+#line 189 "source.y"
     { (yyval.statement) = new ReadStmt((yyvsp[(1) - (2)].junk),(yyvsp[(2) - (2)].vars)); }
     break;
 
   case 26:
 /* Line 1792 of yacc.c  */
-#line 188 "source.y"
+#line 190 "source.y"
     { (yyval.statement) = new WriteStmt((yyvsp[(1) - (2)].junk),(yyvsp[(2) - (2)].vars)); }
     break;
 
   case 27:
 /* Line 1792 of yacc.c  */
-#line 189 "source.y"
+#line 191 "source.y"
     { (yyval.statement) = new ContinueStmt((yyvsp[(1) - (1)].junk)); }
     break;
 
   case 28:
 /* Line 1792 of yacc.c  */
-#line 190 "source.y"
+#line 192 "source.y"
     { (yyval.statement) = new ReturnStmt((yyvsp[(1) - (2)].junk),(yyvsp[(2) - (2)].expression)); }
     break;
 
   case 29:
 /* Line 1792 of yacc.c  */
-#line 193 "source.y"
+#line 195 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 30:
 /* Line 1792 of yacc.c  */
-#line 194 "source.y"
+#line 196 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 31:
 /* Line 1792 of yacc.c  */
-#line 195 "source.y"
+#line 197 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 32:
 /* Line 1792 of yacc.c  */
-#line 196 "source.y"
+#line 198 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 33:
 /* Line 1792 of yacc.c  */
-#line 197 "source.y"
+#line 199 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 34:
 /* Line 1792 of yacc.c  */
-#line 198 "source.y"
+#line 200 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 35:
 /* Line 1792 of yacc.c  */
-#line 199 "source.y"
+#line 201 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].boolexpr),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].boolexpr)); }
     break;
 
   case 36:
 /* Line 1792 of yacc.c  */
-#line 200 "source.y"
+#line 202 "source.y"
     { (yyval.boolexpr) = new BoolExpr((yyvsp[(1) - (3)].boolexpr),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].boolexpr)); }
     break;
 
   case 37:
 /* Line 1792 of yacc.c  */
-#line 201 "source.y"
+#line 203 "source.y"
     { (yyval.boolexpr) = new BoolExpr(00,(yyvsp[(1) - (2)].junk),(yyvsp[(2) - (2)].boolexpr)); }
     break;
 
   case 38:
 /* Line 1792 of yacc.c  */
-#line 202 "source.y"
+#line 204 "source.y"
     { (yyval.boolexpr) = new BoolExpr(00,1,00); }
     break;
 
   case 39:
 /* Line 1792 of yacc.c  */
-#line 203 "source.y"
+#line 205 "source.y"
     { (yyval.boolexpr) = new BoolExpr(00,0,00); }
     break;
 
   case 40:
 /* Line 1792 of yacc.c  */
-#line 204 "source.y"
+#line 206 "source.y"
     { (yyval.boolexpr) = (yyvsp[(2) - (3)].boolexpr); }
     break;
 
   case 41:
 /* Line 1792 of yacc.c  */
-#line 207 "source.y"
+#line 209 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (1)].var)); }
     break;
 
   case 42:
 /* Line 1792 of yacc.c  */
-#line 208 "source.y"
+#line 210 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (1)].int_val)); }
     break;
 
   case 43:
 /* Line 1792 of yacc.c  */
-#line 209 "source.y"
+#line 211 "source.y"
     { (yyval.expression) = (yyvsp[(2) - (3)].expression); }
     break;
 
   case 44:
 /* Line 1792 of yacc.c  */
-#line 210 "source.y"
+#line 212 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (4)].ident),(yyvsp[(2) - (4)].junk),(yyvsp[(3) - (4)].expressions),(yyvsp[(4) - (4)].junk)); }
     break;
 
   case 45:
 /* Line 1792 of yacc.c  */
-#line 211 "source.y"
+#line 213 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 46:
 /* Line 1792 of yacc.c  */
-#line 212 "source.y"
+#line 214 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 47:
 /* Line 1792 of yacc.c  */
-#line 213 "source.y"
+#line 215 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 48:
 /* Line 1792 of yacc.c  */
-#line 214 "source.y"
+#line 216 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 49:
 /* Line 1792 of yacc.c  */
-#line 215 "source.y"
+#line 217 "source.y"
     { (yyval.expression) = new Expression((yyvsp[(1) - (3)].expression),(yyvsp[(2) - (3)].junk),(yyvsp[(3) - (3)].expression)); }
     break;
 
   case 50:
 /* Line 1792 of yacc.c  */
-#line 216 "source.y"
+#line 218 "source.y"
     { (yyval.expression) = new Expression(00,(yyvsp[(1) - (2)].junk),(yyvsp[(2) - (2)].expression)); }
     break;
 
   case 51:
 /* Line 1792 of yacc.c  */
-#line 219 "source.y"
-    { (yyval.var) = new Var((yyvsp[(1) - (1)].ident), 0, 0, 0); }
+#line 221 "source.y"
+    { (yyval.var) = vartab[*(yyvsp[(1) - (1)].ident)]; }
     break;
 
   case 52:
 /* Line 1792 of yacc.c  */
-#line 220 "source.y"
+#line 222 "source.y"
     { (yyval.var) = new Var((yyvsp[(1) - (4)].ident),(yyvsp[(2) - (4)].junk),(yyvsp[(3) - (4)].expression),(yyvsp[(4) - (4)].junk)); }
     break;
 
@@ -2063,7 +2063,7 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 225 "source.y"
+#line 227 "source.y"
   // end of rules
 
 // Here are the definitions of yyerror, the function that reports 
@@ -2073,7 +2073,7 @@ yyreturn:
 int yyerror( string s ) {
   extern int yylineno;
   extern char* yytext;
-  cerr << "ERROR " + s + " at symbol " + yytext + " on line" + (char)yylineno;
+  cerr << "ERROR " + s + " at symbol " + yytext + " on line" << yylineno << endl;
   exit( 1 );
 }
 

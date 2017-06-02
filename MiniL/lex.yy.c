@@ -988,133 +988,133 @@ return yylval.junk = ARRAY;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 58 "lex.src"
+#line 59 "lex.src"
 return yylval.junk = ASSGN;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 59 "lex.src"
+#line 60 "lex.src"
 return yylval.junk = EQ;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 60 "lex.src"
+#line 61 "lex.src"
 return yylval.junk = NE;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 61 "lex.src"
-return yylval.junk = LT;
+#line 62 "lex.src"
+return yylval.junk = '<';
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 62 "lex.src"
-return yylval.junk = GT;
+#line 63 "lex.src"
+return yylval.junk = '>';
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 63 "lex.src"
+#line 64 "lex.src"
 return yylval.junk = LE;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 64 "lex.src"
+#line 65 "lex.src"
 return yylval.junk = GE;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 65 "lex.src"
+#line 66 "lex.src"
 return yylval.junk = '+';
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 66 "lex.src"
+#line 67 "lex.src"
 return yylval.junk = '-';
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 67 "lex.src"
+#line 68 "lex.src"
 return yylval.junk = '*';
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 68 "lex.src"
+#line 69 "lex.src"
 return yylval.junk = '/';
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 69 "lex.src"
+#line 70 "lex.src"
 return yylval.junk = '%';
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 70 "lex.src"
+#line 71 "lex.src"
 return yylval.junk = '[';
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 71 "lex.src"
+#line 72 "lex.src"
 return yylval.junk = ']';
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 72 "lex.src"
+#line 73 "lex.src"
 return yylval.junk = '(';
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 73 "lex.src"
+#line 74 "lex.src"
 return yylval.junk = ')';
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 74 "lex.src"
+#line 75 "lex.src"
 return yylval.junk = ':';
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 75 "lex.src"
+#line 76 "lex.src"
 return yylval.junk = ',';
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 76 "lex.src"
+#line 77 "lex.src"
 return yylval.junk = ';';
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 78 "lex.src"
+#line 79 "lex.src"
 { yylval.int_val = atoi( yytext ); return NUMBER; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 79 "lex.src"
+#line 80 "lex.src"
 { yylval.ident   = new std::string( yytext ); return ID; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 80 "lex.src"
+#line 81 "lex.src"
 ;
 	YY_BREAK
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 81 "lex.src"
+#line 82 "lex.src"
 ++yylineno;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 82 "lex.src"
+#line 83 "lex.src"
 ;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 84 "lex.src"
+#line 85 "lex.src"
 { std::cerr << "LEXICAL "; yyerror( "" ); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 85 "lex.src"
+#line 86 "lex.src"
 ECHO;
 	YY_BREAK
 #line 1121 "lex.yy.c"
@@ -2112,4 +2112,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 85 "lex.src"
+#line 86 "lex.src"

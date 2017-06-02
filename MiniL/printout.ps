@@ -2,7 +2,7 @@
 %%Title: , Makefile, heading.H, lex.src, main.cc, source.y, nodes.h, 
 %%For: Tom Payne
 %%Creator: a2ps version 4.14
-%%CreationDate: Fri May 26 06:19:07 2017
+%%CreationDate: Thu Jun  1 05:13:36 2017
 %%BoundingBox: 24 24 588 768
 %%DocumentData: Clean7Bit
 %%Orientation: Landscape
@@ -852,7 +852,7 @@ x0 y0 moveto
 border
 grestore
 (Printed by Tom Payne) rhead
-(Makefile) (1/8) (Friday May 26, 2017) footer
+(Makefile) (1/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -901,7 +901,7 @@ x0 y0 moveto
 border
 grestore
 (Printed by Tom Payne) rhead
-(heading.H) (2/8) (Friday May 26, 2017) footer
+(heading.H) (2/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -928,7 +928,7 @@ x0 y0 moveto
 (9) # (#include "heading.H") N
 (10) # (#include "nodes.h") N
 (11) # (#include "tok.h") N
-(12) # (int yyerror\( char* s \);) N
+(12) # (int yyerror\( const char* s \);) N
 (13) # (extern int yylineno;) N
 (14) # (%}) N
 (15) # () N
@@ -972,49 +972,51 @@ x0 y0 moveto
 (53) # (not) S 8 T () S 16 T () S 24 T (return yylval.junk = NOT;) N
 (54) # (integer                 return yylval.junk = INTEGER;) N
 (55) # (of                      return yylval.junk = OF;) N
-(56) # () N
-(57) # (":=") S 8 T () S 16 T () S 24 T (return yylval.junk = ASSGN;) N
-(58) # ("==") S 8 T () S 16 T () S 24 T (return yylval.junk = EQ;) N
-(59) # ("<>") S 8 T () S 16 T () S 24 T (return yylval.junk = NE;) N
-(60) # ("<") S 8 T () S 16 T () S 24 T (return yylval.junk = '<';) N
-(61) # (">") S 8 T () S 16 T () S 24 T (return yylval.junk = '>';) N
-(62) # ("<=") S 8 T () S 16 T () S 24 T (return yylval.junk = LE;) N
-(63) # (">=") S 8 T () S 16 T () S 24 T (return yylval.junk = GE;) N
-(64) # ("+") S 8 T () S 16 T () S 24 T (return yylval.junk = '+';) N
-(65) # ("-") S 8 T () S 16 T () S 24 T (return yylval.junk = '-';) N
-(66) # ("*") S 8 T () S 16 T () S 24 T (return yylval.junk = '*';) N
-(67) # ("/") S 8 T () S 16 T () S 24 T (return yylval.junk = '/';) N
-(68) # ("%") S 8 T () S 16 T () S 24 T (return yylval.junk = '%';) N
-(69) # ("[") S 8 T () S 16 T () S 24 T (return yylval.junk = '[';) N
-(70) # ("]") S 8 T () S 16 T () S 24 T (return yylval.junk = ']';) N
-(71) # ("\(") S 8 T () S 16 T () S 24 T (return yylval.junk = '\(';) N
-(72) # ("\)") S 8 T () S 16 T () S 24 T (return yylval.junk = '\)';) N
-(73) # (":") S 8 T () S 16 T () S 24 T (return yylval.junk = ':';) N
-(lex.src) (Page 1/2) (May 25, 17 19:38) title
+(56) # (array                   return yylval.junk = ARRAY;) N
+(57) # () N
+(58) # () N
+(59) # (":=") S 8 T () S 16 T () S 24 T (return yylval.junk = ASSGN;) N
+(60) # ("==") S 8 T () S 16 T () S 24 T (return yylval.junk = EQ;) N
+(61) # ("<>") S 8 T () S 16 T () S 24 T (return yylval.junk = NE;) N
+(62) # ("<") S 8 T () S 16 T () S 24 T (return yylval.junk = '<';) N
+(63) # (">") S 8 T () S 16 T () S 24 T (return yylval.junk = '>';) N
+(64) # ("<=") S 8 T () S 16 T () S 24 T (return yylval.junk = LE;) N
+(65) # (">=") S 8 T () S 16 T () S 24 T (return yylval.junk = GE;) N
+(66) # ("+") S 8 T () S 16 T () S 24 T (return yylval.junk = '+';) N
+(67) # ("-") S 8 T () S 16 T () S 24 T (return yylval.junk = '-';) N
+(68) # ("*") S 8 T () S 16 T () S 24 T (return yylval.junk = '*';) N
+(69) # ("/") S 8 T () S 16 T () S 24 T (return yylval.junk = '/';) N
+(70) # ("%") S 8 T () S 16 T () S 24 T (return yylval.junk = '%';) N
+(71) # ("[") S 8 T () S 16 T () S 24 T (return yylval.junk = '[';) N
+(72) # ("]") S 8 T () S 16 T () S 24 T (return yylval.junk = ']';) N
+(73) # ("\(") S 8 T () S 16 T () S 24 T (return yylval.junk = '\(';) N
+(lex.src) (Page 1/2) (May 26, 17 14:47) title
 border
 /v 1 store
 /x0 x v get 2.965278 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(74) # (",") p 8 T () S 16 T () S 24 T (return yylval.junk = ',';) N
-(75) # (";") S 8 T () S 16 T () S 24 T (return yylval.junk = ';';) N
-(76) # () N
-(77) # ({number}            { yylval.int_val = atoi\( yytext \); return NUMBER; }) N
-(78) # ({identifier}        { yylval.ident   = new std::string\( yytext \); return ID; }) N
-(79) # ([ \\t]*              ;) N
-(80) # ([\\n]                ++yylineno;) N
-(81) # ("##"[^\\n]*          ;) N
-(82) # () N
-(83) # (.                   { std::cerr << "LEXICAL "; yyerror\( "" \); }) N
-(lex.src) (Page 2/2) (May 25, 17 19:38) title
+(74) # ("\)") p 8 T () S 16 T () S 24 T (return yylval.junk = '\)';) N
+(75) # (":") S 8 T () S 16 T () S 24 T (return yylval.junk = ':';) N
+(76) # (",") S 8 T () S 16 T () S 24 T (return yylval.junk = ',';) N
+(77) # (";") S 8 T () S 16 T () S 24 T (return yylval.junk = ';';) N
+(78) # () N
+(79) # ({number}            { yylval.int_val = atoi\( yytext \); return NUMBER; }) N
+(80) # ({identifier}        { yylval.ident   = new std::string\( yytext \); return ID; }) N
+(81) # ([ \\t]*              ;) N
+(82) # ([\\n]                ++yylineno;) N
+(83) # ("##"[^\\n]*          ;) N
+(84) # () N
+(85) # (.                   { std::cerr << "LEXICAL "; yyerror\( "" \); }) N
+(lex.src) (Page 2/2) (May 26, 17 14:47) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(lex.src) (3/8) (Friday May 26, 2017) footer
+(lex.src) (3/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
-%%Page: (1-2) 4
+%%Page: (1) 4
 %%BeginPageSetup
 /pagesave save def
 sh 0 translate 90 rotate
@@ -1029,82 +1031,38 @@ x0 y0 moveto
 (1) # (// -*- c++ -*- ) c n
 (2) # (// main.cc) N
 (3) # () N
-(4) # () S
+(4) # () N
+(5) # () S
 (#include) K
 ( ") p
 (heading.H) str
 (") p n
-(5) # () S
+(6) # () S
 (#include) K
 ( ") p
 (nodes.h) str
 (") p n
-(6) # () N
-(7) # () S
-(// Globals) c n
-(8) # (// int yylineno = 1;) N
-(9) # () S
-(extern) K
-( ) p
-(int) k
-( yydebug;) p n
-(10) # (Program* root;     ) S
-(// pointer to root gets set by Program's constructor) c n
-(11) # () S
-(ostringstream decs;     ) p
-(// holds gen\(\)-emitted target-code declarations) c n
-(12) # () S
-(ostringstream init;   ) p
-(// holds gen\(\)-emitted intialization instructions) c n
-(13) # () S
-(ostringstream code;     ) p
-(// holds gen\(\)-emitted target-code instructions) c n
-(14) # () S
-(string compilerName; ) p
+(7) # () N
+(8) # (string compilerName; ) S
 (// initialized by main\(\) for use in error messages) c n
-(15) # () S
+(9) # () S
 (int) k
 ( yyparse\(\);          ) p
 (// prototype of bison-generated parser function) c n
-(16) # () N
-(17) # () S
-(string preamble =) p n
-(18) # (   ") S
-(// beginning of preamble  ================================\\n\\) str n
-(19) # (    using namespace std;                                      \\n\\) N
-(20) # (    #include<string>            // Write out the preamble     \\n\\) N
-(21) # (    #include<iostream>                                        \\n\\) N
-(22) # (    // end of preamble and beginning of main declarations ====\\n) S
-(";) p n
-(23) # () N
-(24) # (string midamble =) N
-(25) # (   ") S
-(// end of declarations and beginning of midamble  ========\\n\\) str n
-(26) # (    main\(\) {                    // main\(\) of target code      \\n) S
-(";) p n
-(27) # () N
-(28) # (string postamble =) N
-(29) # (   ") S
-(// end of main code and beginning of postamble ===========\\n\\) str n
-(30) # (    HALT:;                      // to stop                    \\n\\) N
-(31) # (    } // end of main            // end of postamble           \\n) S
-(";) p n
-(32) # () N
-(33) # () N
-(34) # () N
-(35) # () S
+(10) # () N
+(11) # () S
 (int) k
 ( main\( ) p
 (int) k
 ( argc, ) p
 (char) k
 (* argv[] \) {  ) p n
-(36) # (  ) S
+(12) # (  ) S
 (// yydebug = 1;          // uncomment to enable parser debugging) c n
-(37) # () S
+(13) # () S
 (  ) p
 (// Allow for command-line specification of MiniJava source file) c n
-(38) # () S
+(14) # () S
 (  ) p
 (if) K
 ( \( argc > 1  &&  freopen\( argv[1], ") p
@@ -1112,150 +1070,32 @@ x0 y0 moveto
 (", stdin\) == ) p
 (NULL) K
 ( \) {) p n
-(39) # (    cerr << argv[0] << ") S
+(15) # (    cerr << argv[0] << ") S
 (: file ) str
 (" << argv[1]; ) p n
-(40) # (    cerr << ") S
+(16) # (    cerr << ") S
 ( cannot be opened.\\n) str
 (";) p n
-(41) # (    exit\( 1 \); ) N
-(42) # (  }) N
-(43) # () N
-(44) # (  compilerName = argv[0];           ) S
+(17) # (    exit\( 1 \); ) N
+(18) # (  }) N
+(19) # (  compilerName = argv[0];           ) S
 (// For use in error messages) c n
-(45) # () S
+(20) # () S
 (  yyparse\(\);                                ) p
 (// build syntax tree) c n
-(46) # () N
-(47) # () S
+(21) # () S
 (}) p n
-(48) # () N
-(49) # () S
-(// These should create a name and install it into the appropriate table.) c n
-(50) # (// It's attributes can be filled in later.) N
-(51) # () N
-(52) # () S
-(string newVar\(\)   {) p n
-(53) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(54) # (  ) S
-(return) K
-( ") p
-(Var) str
-(" + itoa\(counter++\);) p n
-(55) # (}) N
-(56) # () N
-(57) # (string newArry\(\)  {) N
-(58) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(59) # (  ) S
-(return) K
-( ") p
-(Arry) str
-(" + itoa\(counter++\);) p n
-(60) # (}) N
-(61) # () N
-(62) # (string newParam\(\) {) N
-(63) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(64) # (  ) S
-(return) K
-( ") p
-(Param) str
-(" + itoa\(counter++\);) p n
-(65) # (}) N
-(66) # () N
-(67) # (string newFunct\(\) {) N
-(68) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(69) # (  ) S
-(return) K
-( ") p
-(Funct) str
-(" + itoa\(counter++\);) p n
-(70) # (}) N
-(71) # () N
-(72) # (string newTemp\(\)  {) N
-(73) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(main.cc) (Page 1/2) (May 25, 17 19:07) title
-border
-/v 1 store
-/x0 x v get 2.965278 add sx cw mul add store
-/y0 y v get bfs th add sub store
-x0 y0 moveto
-(74) # (  ) p
-(return) K
-( ") p
-(Temp) str
-(" + itoa\(counter++\);) p n
-(75) # (}) N
-(76) # () N
-(77) # (string newLabel\(\) {) N
-(78) # (  ) S
-(static) K
-( ) p
-(int) k
-( counter = 0;) p n
-(79) # (  ) S
-(return) K
-( ") p
-(Label) str
-(" + itoa\(counter++\);) p n
-(80) # (}) N
-(81) # () N
-(82) # () N
-(83) # (  ) S
-(// The rest is left over from my MiniJava compiler  THP) c n
-(84) # () S
-(  ) p
-(// root->install\(\);            // installation pass through Decls) c n
-(85) # () S
-(  ) p
-(// root->analyze\(\);                              // analysis pass) c n
-(86) # () S
-(  ) p
-(// root->gen\(\);                           // code generation pass) c n
-(87) # () S
-(  ) p
-(// cout << preamble;) c n
-(88) # () S
-(  ) p
-(// cout << decs.str\(\);            // Write out the dec\(laration\)s) c n
-(89) # () S
-(  ) p
-(// cout << midamble;) c n
-(90) # () S
-(  ) p
-(// cout << init.str\(\);    // Write out code to initialize vtables) c n
-(91) # () S
-(  ) p
-(// cout << code.str\(\);                      // Write out the code) c n
-(92) # () S
-(  ) p
-(// cout << postamble;) c n
-(93) # () N
-(94) # () N
-(main.cc) (Page 2/2) (May 25, 17 19:07) title
+(22) # () N
+(23) # () N
+(24) # () N
+(25) # () N
+(26) # () N
+(27) # () N
+(main.cc) (Page 1/1) (Jun 01, 17 5:12) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(main.cc) (4/8) (Friday May 26, 2017) footer
+(main.cc) (4/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -1291,6 +1131,8 @@ x0 y0 moveto
 (8) # () S
 (int) k
 ( yyerror\( ) p
+(const) K
+( ) p
 (char) k
 (* s \);) p n
 (9) # () S
@@ -1300,366 +1142,361 @@ x0 y0 moveto
 ( \);) p n
 (10) # (%}) N
 (11) # () N
-(12) # () S
+(12) # (%error-verbose) N
+(13) # () N
+(14) # () S
 (%union) K
 ({) p n
-(13) # () N
-(14) # (   ) S
+(15) # () N
+(16) # (   ) S
 (// Here we define the types and names of the components of the) c n
-(15) # () S
+(17) # () S
 (   ) p
 (// union type YYSTYPE, which is the type of yylval and of the) c n
-(16) # () S
-(   ) p
-(// semantic portion of the parse-stack entries.) c n
-(17) # () N
 (18) # () S
 (   ) p
+(// semantic portion of the parse-stack entries.) c n
+(19) # () N
+(20) # () S
+(   ) p
 (// declarations of union members for lexical values of tokens) c n
-(19) # () S
+(21) # () S
 (   ) p
 (int) k
 ( ) p 8 T () S 16 T (   junk;    ) S 32 T (    ) S
 (// values for single-lexeme tokens) c n
-(20) # () S
+(22) # () S
 (   ) p
 (int) k
 () p 8 T () S 16 T (   int_val;) S 32 T (    ) S
 (// values of integer literals) c n
-(21) # () S
+(23) # () S
 (   string*) p 16 T (   str_val;) S 32 T (    ) S
 (// values of string literals) c n
-(22) # () S
+(24) # () S
 (   string*) p 16 T (   ident;) S 32 T (    ) S
 (// points to identifiers' actual lexemes) c n
-(23) # () N
-(24) # () S
+(25) # () N
+(26) # () S
 (   ) p
 (// declarations of union members for lexical values of non-terminals) c n
-(25) # () S
+(27) # () S
 (   ) p
 (// that are pointers to translation records.) c n
-(26) # () S
-(   Program*              program;) p n
-(27) # (   list<Function*>*      functions;) S 40 T () S
-(// for the non-terminal "Functions") c n
 (28) # () S
+(   Program*              program;) p n
+(29) # (   list<Function*>*      functions;) S 40 T () S
+(// for the non-terminal "Functions") c n
+(30) # () S
 (   list<Declaration*>*   declarations;  ) p
 (// for the non-terminal "Declarations") c n
-(29) # () S
+(31) # () S
 (   list<Statement*>*     statements;   ) p n
-(30) # (   list<Var*>*           vars;) N
-(31) # (   list<Expression*>*    expressions;) N
-(32) # (   list<Expression*>*    nonemptyexpressionlist;) N
-(33) # (   list<string*>*        ids;) N
-(34) # (   Function*             function;   ) N
-(35) # (   Declaration*          declaration;      ) N
-(36) # (   Statement*            statement;) N
-(37) # (   BoolExpr*             boolexpr;) N
-(38) # (   Expression*           expression;) N
-(39) # (   Var*                  var;) N
-(40) # ( }) N
-(41) # () N
-(42) # () S
-(// Here is the  start symbol of the grammar.) c n
+(32) # (   list<Var*>*           vars;) N
+(33) # (   list<Expression*>*    expressions;) N
+(34) # (   list<Expression*>*    nonemptyexpressionlist;) N
+(35) # (   list<string*>*        ids;) N
+(36) # (   Function*             function;   ) N
+(37) # (   Declaration*          declaration;      ) N
+(38) # (   Statement*            statement;) N
+(39) # (   BoolExpr*             boolexpr;) N
+(40) # (   Expression*           expression;) N
+(41) # (   Var*                  var;) N
+(42) # ( }) N
 (43) # () N
 (44) # () S
+(// Here is the  start symbol of the grammar.) c n
+(45) # () N
+(46) # () S
 (%start) K
 (               Program) p n
-(45) # ( ) N
-(46) # () S
+(47) # ( ) N
+(48) # () S
 (// Here we specify the nonterminal symbols and which components of the) c n
-(47) # (// union YYSTYPE their translation records will occupy.  By ourconvention,) N
-(48) # (// the union member for the semantic record for a given non-terminal has) N
-(49) # (// the same name as that symbol, but not capitalized., and its type is a) N
-(50) # (// pointer to an object of a class that haas the same name as that symbol,) N
-(51) # (// including capitalization.) N
-(52) # () N
-(53) # (//           member       non-termimnal) N
-(54) # () S
-(%type) K
-(       <program>       Program) p n
-(55) # () S
-(%type) K
-(       <declarations>  Declarations) p n
+(49) # (// union YYSTYPE their translation records will occupy.  By ourconvention,) N
+(50) # (// the union member for the semantic record for a given non-terminal has) N
+(51) # (// the same name as that symbol, but not capitalized., and its type is a) N
+(52) # (// pointer to an object of a class that haas the same name as that symbol,) N
+(53) # (// including capitalization.) N
+(54) # () N
+(55) # (//           member       non-termimnal) N
 (56) # () S
 (%type) K
-(       <declaration>   Declaration) p n
+(       <program>       Program) p n
 (57) # () S
 (%type) K
-(       <statements>    Statements) p n
+(       <declarations>  Declarations) p n
 (58) # () S
 (%type) K
-(       <statement>     Statement) p n
+(       <declaration>   Declaration) p n
 (59) # () S
 (%type) K
-(       <functions>     Functions) p n
+(       <statements>    Statements) p n
 (60) # () S
 (%type) K
-(       <function>      Function) p n
+(       <statement>     Statement) p n
 (61) # () S
 (%type) K
-(       <ids>           IDs) p n
+(       <functions>     Functions) p n
 (62) # () S
 (%type) K
-(       <vars>          Vars) p n
+(       <function>      Function) p n
 (63) # () S
 (%type) K
-(       <var>           Var) p n
+(       <ids>           IDs) p n
 (64) # () S
 (%type) K
-(       <expressions>   Expressions) p n
+(       <vars>          Vars) p n
 (65) # () S
 (%type) K
-(       <expression>    Expression) p n
+(       <var>           Var) p n
 (66) # () S
 (%type) K
-(       <nonemptyexpressionlist> NonemptyExpressionList) p n
+(       <expressions>   Expressions) p n
 (67) # () S
 (%type) K
+(       <expression>    Expression) p n
+(68) # () S
+(%type) K
+(       <nonemptyexpressionlist> NonemptyExpressionList) p n
+(69) # () S
+(%type) K
 (       <boolexpr>      BoolExpr) p n
-(68) # () N
-(69) # () N
-(70) # () S
+(70) # () N
+(71) # () N
+(72) # () S
 (// Here, in order of increasing precedence, are the names of the tokens,) c n
-(71) # (// their associativity, and which components of the union YYSTYPE) N
-(72) # (// their lexical values will occupy.  This information is from:) N
-(73) # (// www.cs.ucr.edu/~gupta/teaching/152-17/Project-Phase-II/mini_l.html) N
-(source.y) (Page 1/4) (May 25, 17 20:01) title
+(73) # (// their associativity, and which components of the union YYSTYPE) N
+(source.y) (Page 1/4) (May 31, 17 1:16) title
 border
 /v 1 store
 /x0 x v get 2.965278 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(74) # () p n
-(75) # () S
-(// assoc      member        token) c n
-(76) # () S
-(%nonassoc) K
-(   <junk>          LO) p n
-(77) # () S
-(%nonassoc) K
-(   <junk>          INTEGER) p n
+(74) # (// their lexical values will occupy.  This information is from:) c n
+(75) # (// www.cs.ucr.edu/~gupta/teaching/152-17/Project-Phase-II/mini_l.html) N
+(76) # () N
+(77) # (// assoc      member        token) N
 (78) # () S
 (%nonassoc) K
-(   <junk>          ARRAY) p n
+(   <junk>          LO) p n
 (79) # () S
 (%nonassoc) K
-(   <junk>          FUNCTION) p n
+(   <junk>          INTEGER) p n
 (80) # () S
 (%nonassoc) K
-(   <junk>          BEGINPARAMS) p n
+(   <junk>          ARRAY) p n
 (81) # () S
 (%nonassoc) K
-(   <junk>          ENDPARAMS) p n
+(   <junk>          FUNCTION) p n
 (82) # () S
 (%nonassoc) K
-(   <junk>          BEGINLOCALS) p n
+(   <junk>          BEGINPARAMS) p n
 (83) # () S
 (%nonassoc) K
-(   <junk>          ENDLOCALS) p n
+(   <junk>          ENDPARAMS) p n
 (84) # () S
 (%nonassoc) K
-(   <junk>          BEGINBODY) p n
+(   <junk>          BEGINLOCALS) p n
 (85) # () S
 (%nonassoc) K
-(   <junk>          ENDBODY) p n
+(   <junk>          ENDLOCALS) p n
 (86) # () S
 (%nonassoc) K
-(   <junk>          BEGINLOOP) p n
+(   <junk>          BEGINBODY) p n
 (87) # () S
 (%nonassoc) K
-(   <junk>          ENDLOOP) p n
+(   <junk>          ENDBODY) p n
 (88) # () S
-(%token) K
-(      <junk>          IF) p n
+(%nonassoc) K
+(   <junk>          BEGINLOOP) p n
 (89) # () S
-(%token) K
-(      <junk>          THEN) p n
+(%nonassoc) K
+(   <junk>          ENDLOOP) p n
 (90) # () S
 (%token) K
-(      <junk>          ELSE) p n
+(      <junk>          IF) p n
 (91) # () S
 (%token) K
-(      <junk>          ENDIF) p n
+(      <junk>          THEN) p n
 (92) # () S
 (%token) K
-(      <junk>          DO) p n
+(      <junk>          ELSE) p n
 (93) # () S
 (%token) K
-(      <junk>          WHILE) p n
+(      <junk>          ENDIF) p n
 (94) # () S
 (%token) K
-(      <junk>          READ) p n
+(      <junk>          DO) p n
 (95) # () S
 (%token) K
-(      <junk>          WRITE) p n
+(      <junk>          WHILE) p n
 (96) # () S
 (%token) K
-(      <junk>          CONTINUE) p n
+(      <junk>          READ) p n
 (97) # () S
 (%token) K
-(      <junk>          RETURN) p n
+(      <junk>          WRITE) p n
 (98) # () S
 (%token) K
-(      <junk>          TRUE) p n
+(      <junk>          CONTINUE) p n
 (99) # () S
 (%token) K
-(      <junk>          FALSE) p n
+(      <junk>          RETURN) p n
 (100) # () S
+(%token) K
+(      <junk>          TRUE) p n
+(101) # () S
+(%token) K
+(      <junk>          FALSE) p n
+(102) # () S
 (%right) K
 (      <junk>          ASSGN   ) p
 (/* ":=" */) c n
-(101) # () S
+(103) # () S
 (%token) K
 (      <junk>          OF) p n
-(102) # () S
+(104) # () S
 (%left) K
 (       <junk>          OR) p n
-(103) # () S
-(%left) K
-(       <junk>          AND) p n
-(104) # () S
-(%right) K
-(      <junk>          NOT) p n
 (105) # () S
 (%left) K
-(       <junk>          NE) p n
+(       <junk>          AND) p n
 (106) # () S
-(%left) K
-(       <junk>          EQ) p n
+(%right) K
+(      <junk>          NOT) p n
 (107) # () S
 (%left) K
-(       <junk>          GE) p n
+(       <junk>          NE) p n
 (108) # () S
 (%left) K
-(       <junk>          GT) p n
+(       <junk>          EQ) p n
 (109) # () S
 (%left) K
-(       <junk>          LE) p n
+(       <junk>          GE) p n
 (110) # () S
 (%left) K
-(       <junk>          LT) p n
+(       <junk>          GT) p n
 (111) # () S
+(%left) K
+(       <junk>          LE) p n
+(112) # () S
+(%left) K
+(       <junk>          LT) p n
+(113) # () S
 (%left) K
 (       <junk>          ') p
 (-) str
 ('    ) p
 (/* binary */) c n
-(112) # () S
+(114) # () S
 (%left) K
 (       <junk>          ') p
 (+) str
 (') p n
-(113) # () S
+(115) # () S
 (%left) K
 (       <junk>          ') p
 (%) str
 (') p n
-(114) # () S
+(116) # () S
 (%left) K
 (       <junk>          ') p
 (/) str
 (') p n
-(115) # () S
+(117) # () S
 (%left) K
 (       <junk>          ') p
 (*) str
 (') p n
-(116) # () S
+(118) # () S
 (%right) K
 (      <junk>          UMINUS) p n
-(117) # () S
+(119) # () S
 (%left) K
 (       <junk>          ') p
 ([) str
 (') p n
-(118) # () S
+(120) # () S
 (%left) K
 (       <junk>          ') p
 (]) str
 (') p n
-(119) # () S
+(121) # () S
 (%left) K
 (       <junk>          ') p
 (\() str
 (') p n
-(120) # () S
+(122) # () S
 (%left) K
 (       <junk>          ') p
 (\)) str
 (') p n
-(121) # () S
+(123) # () S
 (%right) K
 (      <junk>          ') p
 (,) str
 (') p n
-(122) # () S
+(124) # () S
 (%right) K
 (      <junk>          ') p
 (;) str
 (') p n
-(123) # () S
+(125) # () S
 (%nonassoc) K
 (   <junk>          ') p
 (:) str
 (') p n
-(124) # () S
+(126) # () S
 (%nonassoc) K
 (   <junk>          HI) p n
-(125) # () S
+(127) # () S
 (%token) K
 (      <ident>         ID) p n
-(126) # () S
+(128) # () S
 (%token) K
 (      <int_val>       NUMBER) p n
-(127) # () N
-(128) # () N
-(129) # (%%  ) S
-(// end of symbol specifications) c n
+(129) # () N
 (130) # () N
-(131) # (// Here are the grammar rules and their associated semantic actions.) N
+(131) # (%%  ) S
+(// end of symbol specifications) c n
 (132) # () N
-(133) # () S
+(133) # (// Here are the grammar rules and their associated semantic actions.) N
+(134) # () N
+(135) # () S
 (Functions) L
 (    : ) p
 (/* empty */) c
 (                         { $$ = new list<Function*>; }) p n
-(134) # (             | Functions Function                    { \($$=$1\)->push_back\($2\); }) N
-(135) # (             ;                    ) S
+(136) # (             | Functions Function                    { \($$=$1\)->push_back\($2\); }) N
+(137) # (             ;                    ) S
 (/* any possibly empty sequence of Functions */) c n
-(136) # () N
-(137) # () S
+(138) # () N
+(139) # () S
 (Declarations) L
 ( : ) p
 (/* empty */) c
 (                      { $$ = new list<Declaration*>; }) p n
-(138) # (             | Declarations Declaration              { \($$=$1\)->push_back\($2\); }) N
-(139) # (             ;) S
+(140) # (             | Declarations Declaration              { \($$=$1\)->push_back\($2\); }) N
+(141) # (             ;) S
 (/* any possibly empty semicolon-terminated Declaration sequence */) c n
-(140) # () N
-(141) # () S
+(142) # () N
+(143) # () S
 (Statements) L
 (   : Statement ') p
 (;) str
 ('     { \($$ = new list<Statement*>\)->push_back\($1\); }) p n
-(142) # (             | Statements Statement ') S
+(144) # (             | Statements Statement ') S
 (;) str
 ('              { \($$=$1\)->push_back\($2\); }) p n
-(143) # (             ;    ) S
+(145) # (             ;    ) S
 (/* any nonempty sequence of semicolon-terminated Statements */) c n
-(144) # () N
-(145) # () S
-(IDs) L
-(          : ID                   { \($$ = new list<string*>\)->push_back\($1\); }) p n
-(146) # (             | IDs ') S
-(,) str
-(' ID                            { \($$=$1\)->push_back\($3\); }) p n
-(source.y) (Page 2/4) (May 25, 17 20:01) title
+(146) # () N
+(source.y) (Page 2/4) (May 31, 17 1:16) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(source.y) (5/8) (Friday May 26, 2017) footer
+(source.y) (5/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -1675,201 +1512,212 @@ llx lly 12 add translate
 /x0 x v get 2.965278 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(147) # (             ;                    ) p
+(147) # (IDs) L
+(          : ID                   { \($$ = new list<string*>\)->push_back\($1\); }) p n
+(148) # (             | IDs ') S
+(,) str
+(' ID                            { \($$=$1\)->push_back\($3\); }) p n
+(149) # (             ;                    ) S
 (/* any nonempty comma-separated list of IDs */) c n
-(148) # () N
-(149) # () S
+(150) # () N
+(151) # () S
 (Vars) L
 (         : Var                     { \($$ = new list<Var*>\)->push_back\($1\); }) p n
-(150) # (             | Vars ') S
+(152) # (             | Vars ') S
 (,) str
 (' Var                          { \($$=$1\)->push_back\($3\); }) p n
-(151) # (             ;                   ) S
+(153) # (             ;                   ) S
 (/* any nonempty comma-separated list of Vars */) c n
-(152) # () N
-(153) # () S
+(154) # () N
+(155) # () S
 (Expressions) L
 (  : ) p
 (/* empty */) c
 (                       { $$ = new list<Expression*>; }) p n
-(154) # (             | NonemptyExpressionList                               { $$ = $1; }) N
-(155) # (             ;      ) S
+(156) # (             | NonemptyExpressionList                               { $$ = $1; }) N
+(157) # (             ;      ) S
 (/* any possibly empty comma-separated list of Expressions */) c n
-(156) # () N
-(157) # () S
+(158) # () N
+(159) # () S
 (NonemptyExpressionList) p n
-(158) # (             : Expression                        { $$ = new list<Expression*>; }) N
-(159) # (             | NonemptyExpressionList ') S
+(160) # (             : Expression                        { $$ = new list<Expression*>; }) N
+(161) # (             | NonemptyExpressionList ') S
 (,) str
 (' Expression { \($$=$1\)->push_back\($3\); }) p n
-(160) # (             ;            ) S
+(162) # (             ;            ) S
 (/* any nonempty comma-separated list of Expressions */) c n
-(161) # () N
-(162) # () S
-(Program) L
-(      : Functions                              { $$ = new Program\($1\); }) p n
 (163) # () N
 (164) # () S
+(Program) L
+(      : Functions                        { $$ = new Program\($1\); }) p n
+(165) # () N
+(166) # () S
 (Function) L
 (     : FUNCTION ID ') p
 (;) str
 ('                   ) p n
-(165) # (               BEGINPARAMS Declarations ENDPARAMS) N
-(166) # (               BEGINLOCALS Declarations ENDLOCALS                            ) N
-(167) # ( ) S 8 T (       BEGINBODY   Statements   ENDBODY                         ) N
-(168) # (                 { $$ = new Function\($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12\); }) N
-(169) # () N
-(170) # (             ;) N
+(167) # (               BEGINPARAMS Declarations ENDPARAMS) N
+(168) # (               BEGINLOCALS Declarations ENDLOCALS                            ) N
+(169) # ( ) S 8 T (       BEGINBODY   Statements   ENDBODY                         ) N
+(170) # (                  { $$ = new Function\($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12\); }) N
 (171) # () N
-(172) # () S
+(172) # (             ;) N
+(173) # () N
+(174) # () S
 (Declaration) L
 (  : IDs ') p
 (:) str
-(' INTEGER               { $$ = new Declaration\($1,$2,$3\); }) p n
-(173) # (             | IDs ') S
+(' INTEGER ') p
+(;) str
+('           { $$ = new Declaration\($1,$2,$3\); }) p n
+(175) # (             | IDs ') S
 (:) str
 (' ARRAY ') p
 ([) str
 (' NUMBER ') p
 (]) str
-(' OF INTEGER   ) p n
-(174) # (                              { $$ = new Declaration\($1,$2,$3,$4,$5,$6,$7,$8\); }) N
-(175) # () S 8 T (     ;) N
-(176) # () N
-(177) # () S
+(' OF INTEGER ') p
+(;) str
+('  ) p n
+(176) # (                              { $$ = new Declaration\($1,$2,$3,$4,$5,$6,$7,$8\); }) N
+(177) # () S 8 T (     ;) N
+(178) # () N
+(179) # () S
 (Statement) L
 (    : Var ASSGN Expression       { $$ = new AssignmentStmt\($1,$2,$3\); }) p n
-(178) # (             | IF BoolExpr THEN Statements ENDIF  ) N
-(179) # (                                        { $$ = new IfThenStmt\($1,$2,$3,$4,$5\); }) N
-(180) # () S 8 T (     | IF BoolExpr THEN Statements ELSE Statements ENDIF         ) N
-(181) # (                              { $$ = new IfThenElseStmt\($1,$2,$3,$4,$5,$6,$7\); }) N
-(182) # () S 8 T (     | WHILE BoolExpr BEGINLOOP Statements ENDLOOP       ) N
-(183) # (                                         { $$ = new WhileStmt\($1,$2,$3,$4,$5\); }) N
-(184) # () S 8 T (     | DO BEGINLOOP Statements ENDLOOP WHILE BoolExpr) N
-(185) # (                                    { $$ = new DoWhileStmt\($1,$2,$3,$4,$5,$6\); }) N
-(186) # (             | READ Vars                           { $$ = new ReadStmt\($1,$2\); }) N
-(187) # () S 8 T (     | WRITE Vars                         { $$ = new WriteStmt\($1,$2\); }) N
-(188) # () S 8 T (     | CONTINUE                           { $$ = new ContinueStmt\($1\); }) N
-(189) # (             | RETURN Expression                 { $$ = new ReturnStmt\($1,$2\); }) N
-(190) # (             ;) N
-(191) # () N
-(192) # ( BoolExpr    : Expression EQ Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(193) # (             | Expression NE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(194) # (             | Expression LT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(195) # (             | Expression GT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(196) # (             | Expression LE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(197) # (             | Expression GE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
-(198) # () S 8 T (     | BoolExpr AND BoolExpr            { $$ = new BoolExpr\($1,$2,$3\); }) N
-(199) # () S 8 T (     | BoolExpr OR BoolExpr             { $$ = new BoolExpr\($1,$2,$3\); }) N
-(200) # (             | NOT BoolExpr                     { $$ = new BoolExpr\(00,$1,$2\); }) N
-(201) # (             | TRUE                             { $$ = new BoolExpr\(00,1,00\); }) N
-(202) # (             | FALSE                            { $$ = new BoolExpr\(00,0,00\); }) N
-(203) # (             | ') S
+(180) # (             | IF BoolExpr THEN Statements ENDIF  ) N
+(181) # (                                        { $$ = new IfThenStmt\($1,$2,$3,$4,$5\); }) N
+(182) # () S 8 T (     | IF BoolExpr THEN Statements ELSE Statements ENDIF         ) N
+(183) # (                              { $$ = new IfThenElseStmt\($1,$2,$3,$4,$5,$6,$7\); }) N
+(184) # () S 8 T (     | WHILE BoolExpr BEGINLOOP Statements ENDLOOP       ) N
+(185) # (                                         { $$ = new WhileStmt\($1,$2,$3,$4,$5\); }) N
+(186) # () S 8 T (     | DO BEGINLOOP Statements ENDLOOP WHILE BoolExpr) N
+(187) # (                                    { $$ = new DoWhileStmt\($1,$2,$3,$4,$5,$6\); }) N
+(188) # (             | READ Vars                           { $$ = new ReadStmt\($1,$2\); }) N
+(189) # () S 8 T (     | WRITE Vars                         { $$ = new WriteStmt\($1,$2\); }) N
+(190) # () S 8 T (     | CONTINUE                           { $$ = new ContinueStmt\($1\); }) N
+(191) # (             | RETURN Expression                 { $$ = new ReturnStmt\($1,$2\); }) N
+(192) # (             ;) N
+(193) # () N
+(194) # ( BoolExpr    : Expression EQ Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(195) # (             | Expression NE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(196) # (             | Expression LT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(197) # (             | Expression GT Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(198) # (             | Expression LE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(199) # (             | Expression GE Expression         { $$ = new BoolExpr\($1,$2,$3\); }) N
+(200) # () S 8 T (     | BoolExpr AND BoolExpr            { $$ = new BoolExpr\($1,$2,$3\); }) N
+(201) # () S 8 T (     | BoolExpr OR BoolExpr             { $$ = new BoolExpr\($1,$2,$3\); }) N
+(202) # (             | NOT BoolExpr                     { $$ = new BoolExpr\(00,$1,$2\); }) N
+(203) # (             | TRUE                             { $$ = new BoolExpr\(00,1,00\); }) N
+(204) # (             | FALSE                            { $$ = new BoolExpr\(00,0,00\); }) N
+(205) # (             | ') S
 (\() str
 (' BoolExpr ') p
 (\)) str
 ('                                     { $$ = $2; }) p n
-(204) # () S 8 T (     ;) N
-(205) # () N
-(206) # () S
+(206) # () S 8 T (     ;) N
+(207) # () N
+(208) # () S
 (Expression) L
 (   : Var                                  { $$ = new Expression\($1\); }) p n
-(207) # () S 8 T (     | NUMBER                               { $$ = new Expression\($1\); }) N
-(208) # (             | ') S
+(209) # () S 8 T (     | NUMBER                               { $$ = new Expression\($1\); }) N
+(210) # (             | ') S
 (\() str
 (' Expression ') p
 (\)) str
 ('                                   { $$ = $2; }) p n
-(209) # (             | ID ') S
+(211) # (             | ID ') S
 (\() str
 (' Expressions ') p
 (\)) str
 ('      { $$ = new Expression\($1,$2,$3,$4\); }) p n
-(210) # (             | Expression ') S
+(212) # (             | Expression ') S
 (+) str
 (' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
-(211) # (             | Expression ') S
+(213) # (             | Expression ') S
 (-) str
 (' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
-(212) # (             | Expression ') S
+(214) # (             | Expression ') S
 (*) str
 (' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
-(213) # (             | Expression ') S
+(215) # (             | Expression ') S
 (/) str
 (' Expression      { $$ = new Expression\($1,$2,$3\); }) p n
-(214) # (             | Expression ') S
+(216) # (             | Expression ') S
 (%) str
 (' Expression      { $$ = new Expression\($1,$2,$3\); ) p n
 0 T (}) N
-(215) # (             | ') S
+(217) # (             | ') S
 (-) str
 (' Expression  %prec UMINUS   { $$ = new Expression\(00,$1,$2\); }) p n
-(216) # (             ;) N
-(217) # () N
-(218) # ( Var) S 8 T (     : ID                                 { $$ = new Var\($1, 0, 0, 0\); }) N
-(source.y) (Page 3/4) (May 25, 17 20:01) title
+(218) # (             ;) N
+(source.y) (Page 3/4) (May 31, 17 1:16) title
 border
 /v 1 store
 /x0 x v get 2.965278 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(219) # (             | ID ') p
+(219) # () p n
+(220) # ( Var) S 8 T (     : ID                                 { $$ = new Var\($1, 0, 0, 0\); }) N
+(221) # (             | ID ') S
 ([) str
 (' Expression ') p
 (]) str
 ('              { $$ = new Var\($1,$2,$3,$4\); }) p n
-(220) # (             ;) N
-(221) # () N
-(222) # () N
+(222) # (             ;) N
 (223) # () N
-(224) # (%%  ) S
-(// end of rules) c n
+(224) # () N
 (225) # () N
-(226) # (// Here are the definitions of yyerror, the function that reports ) N
-(227) # (// lexical and parse errors.  It's overloaded so that error messages) N
-(228) # (// can be either C strings or C++ strings.) N
-(229) # () N
-(230) # () S
+(226) # (%%  ) S
+(// end of rules) c n
+(227) # () N
+(228) # (// Here are the definitions of yyerror, the function that reports ) N
+(229) # (// lexical and parse errors.  It's overloaded so that error messages) N
+(230) # (// can be either C strings or C++ strings.) N
+(231) # () N
+(232) # () S
 (int) k
 ( yyerror\( string s \) {) p n
-(231) # (  ) S
+(233) # (  ) S
 (extern) K
 ( ) p
 (int) k
 ( yylineno;) p n
-(232) # (  ) S
+(234) # (  ) S
 (extern) K
 ( ) p
 (char) k
 (* yytext;) p n
-(233) # (  cerr << ") S
+(235) # (  cerr << ") S
 (ERROR ) str
 (" + s + ") p
 ( at symbol ) str
 (" + yytext + ") p
 ( on line) str
-(" ;) p n
-(234) # (  exit\( 1 \);) N
-(235) # (}) N
-(236) # () N
-(237) # () S
+(" << yylineno << endl;) p n
+(236) # (  exit\( 1 \);) N
+(237) # (}) N
+(238) # () N
+(239) # () S
 (int) k
 ( yyerror\( ) p
+(const) K
+( ) p
 (char) k
 (* s \) { ) p
 (return) K
 ( yyerror\( string\(s\) \); }) p n
-(238) # () N
-(239) # () N
 (240) # () N
 (241) # () N
 (242) # () N
 (243) # () N
-(source.y) (Page 4/4) (May 25, 17 20:01) title
+(244) # () N
+(245) # () N
+(source.y) (Page 4/4) (May 31, 17 1:16) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(source.y) (6/8) (Friday May 26, 2017) footer
+(source.y) (6/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -1972,9 +1820,14 @@ x0 y0 moveto
 (45) # (public:) N
 (46) # (  Node\(\) : lineNo\(yylineno\), nextTok\(yytext\) {}) N
 (47) # (  virtual ~Node\(\) {};) N
-(48) # (  string pos\(\) {      ) S
+(48) # () N
+(49) # (  string code, place, before, after;  ) S
+(// attributes for node classes here.) c n
+(50) # () N
+(51) # () S
+(  string pos\(\) {      ) p
 (// for reporting errors, which we do only from nodes) c n
-(49) # () S
+(52) # () S
 (    ) p
 (return) K
 ( ") p
@@ -1984,81 +1837,132 @@ x0 y0 moveto
 (" + itoa\(lineNo\) +") p
 (,\\n) str
 (";) p n
-(50) # (  }  ) N
-(51) # () N
-(52) # (  ) S
-(// Declare code and place here.) c n
-(53) # () N
-(54) # () S
-(private:) p n
-(55) # (  ) S
+(53) # (  }  ) N
+(54) # () N
+(55) # () S
+(// These should create a name and install it into the appropriate table.) c n
+(56) # (// It's attributes can be filled in later.) N
+(57) # () N
+(58) # () S
+(  bool newVar\( string name \) {) p n
+(59) # (    ) S
+(// install into symbol table and report collisions) c n
+(60) # () S
+(  }) p n
+(61) # () N
+(62) # (  bool newArry\(\)  {) N
+(63) # (    ) S
+(// install into symbol table and report collisions) c n
+(64) # () S
+(  }) p n
+(65) # () N
+(66) # (  bool newParam\(\) {) N
+(67) # (    ) S
+(// install into symbol table and report collisions) c n
+(68) # () S
+(  }) p n
+(69) # () N
+(70) # (  bool newFunct\(\) {) N
+(71) # (    ) S
+(// install into symbol table and report collisions) c n
+(72) # () S
+(  }) p n
+(73) # () N
+(nodes.h) (Page 1/3) (Jun 01, 17 5:07) title
+border
+/v 1 store
+/x0 x v get 2.965278 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(74) # (  string newTemp\(\)  {) p n
+(75) # (    ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(76) # (    ) S
+(return) K
+( ") p
+(Temp) str
+(" + itoa\(counter++\);) p n
+(77) # (  }) N
+(78) # () N
+(79) # (  string newLabel\(\) {) N
+(80) # (    ) S
+(static) K
+( ) p
+(int) k
+( counter = 0;) p n
+(81) # (    ) S
+(return) K
+( ") p
+(Label) str
+(" + itoa\(counter++\);) p n
+(82) # (  }) N
+(83) # () N
+(84) # (private:) N
+(85) # (  ) S
 (int) k
 ( lineNo;             ) p
 (// lineNo at Node's construction is used in pos\(\)) c n
-(56) # () S
+(86) # () S
 (  string nextTok;        ) p
 (// nextTok at Node's construction is used in pos\(\)) c n
-(57) # () S
+(87) # () S
 (};  ) p n
-(58) # () N
-(59) # (class Statement : public Node {) N
-(60) # (public:) N
-(61) # (  virtual ~Statement\(\){};) N
-(62) # (};) N
-(63) # () N
-(64) # (class AssignmentStmt : public Statement {) N
-(65) # (public:   ) N
-(66) # (  AssignmentStmt\( Var* c1, ) S
+(88) # () N
+(89) # (class Statement : public Node {) N
+(90) # (public:) N
+(91) # (  virtual ~Statement\(\){};) N
+(92) # (};) N
+(93) # () N
+(94) # (class AssignmentStmt : public Statement {) N
+(95) # (public:   ) N
+(96) # (  AssignmentStmt\( Var* c1, ) S
 (int) k
 ( c2, Expression* c3 \) {}) p n
-(67) # (};) N
-(68) # () N
-(69) # (class IfThenStmt : public Statement {) N
-(70) # (public:   ) N
-(71) # (public:   ) N
-(72) # (  IfThenStmt\( ) S
+(97) # (};) N
+(98) # () N
+(99) # (class IfThenStmt : public Statement {) N
+(100) # (public:   ) N
+(101) # (public:   ) N
+(102) # (  IfThenStmt\( ) S
 (int) k
 ( c1, BoolExpr* c2, ) p
 (int) k
 ( c3, Statements* c4, ) p
 (int) k
 ( c5 \) {}) p n
-(73) # (};) N
-(nodes.h) (Page 1/3) (May 26, 17 6:18) title
-border
-/v 1 store
-/x0 x v get 2.965278 add sx cw mul add store
-/y0 y v get bfs th add sub store
-x0 y0 moveto
-(74) # () p n
-(75) # (class IfThenElseStmt : public Statement {) N
-(76) # (public:    ) N
-(77) # (  IfThenElseStmt\( ) S
+(103) # (};) N
+(104) # () N
+(105) # (class IfThenElseStmt : public Statement {) N
+(106) # (public:    ) N
+(107) # (  IfThenElseStmt\( ) S
 (int) k
 ( c1, BoolExpr* c2, ) p
 (int) k
 ( c3, Statements* c4, ) p
 (int) k
 ( c5,) p n
-(78) # () S 8 T () S 16 T (  Statements* c6, ) S
+(108) # () S 8 T () S 16 T (  Statements* c6, ) S
 (int) k
 ( c7 \) {}) p n
-(79) # (};) N
-(80) # () N
-(81) # (class WhileStmt : public Statement {) N
-(82) # (public:   ) N
-(83) # (  WhileStmt\( ) S
+(109) # (};) N
+(110) # () N
+(111) # (class WhileStmt : public Statement {) N
+(112) # (public:   ) N
+(113) # (  WhileStmt\( ) S
 (int) k
 ( c1, BoolExpr* c2, ) p
 (int) k
 ( c3, Statements* c4, ) p
 (int) k
 ( c5\) {}) p n
-(84) # (};) N
-(85) # () N
-(86) # (class DoWhileStmt : public Statement {) N
-(87) # (public:   ) N
-(88) # (  DoWhileStmt\( ) S
+(114) # (};) N
+(115) # () N
+(116) # (class DoWhileStmt : public Statement {) N
+(117) # (public:   ) N
+(118) # (  DoWhileStmt\( ) S
 (int) k
 ( c1, ) p
 (int) k
@@ -2067,137 +1971,53 @@ x0 y0 moveto
 ( c4, ) p
 (int) k
 ( c5,) p n
-(89) # () S 8 T (       BoolExpr* c6 \){}) N
-(90) # (};) N
-(91) # () N
-(92) # (class ReadStmt : public Statement {) N
-(93) # (public:   ) N
-(94) # (  ReadStmt\( ) S
-(int) k
-( c1, Vars* c2 \) {}) p n
-(95) # (};) N
-(96) # () N
-(97) # (class WriteStmt : public Statement {) N
-(98) # (public:   ) N
-(99) # (  WriteStmt\( ) S
-(int) k
-( c1, Vars* c2 \) {}) p n
-(100) # (};) N
-(101) # () N
-(102) # (class ContinueStmt : public Statement {) N
-(103) # (public:) N
-(104) # (  ContinueStmt\( ) S
-(int) k
-( c1 \) {}) p n
-(105) # (};) N
-(106) # () N
-(107) # (class ReturnStmt : public Statement {) N
-(108) # (public:   ) N
-(109) # (  ReturnStmt\( ) S
-(int) k
-( c1, Expression* c2 \) {}) p n
-(110) # (};) N
-(111) # () N
-(112) # (class BoolExpr    : public Node {) N
-(113) # (public:   ) N
-(114) # (  BoolExpr\( Expression* c1, ) S
-(int) k
-( c2, Expression* c3 \) {}) p n
-(115) # (  BoolExpr\( BoolExpr* c1,   ) S
-(int) k
-( c2, BoolExpr* c3 \) {}) p n
-(116) # (  BoolExpr\( ) S
-(int) k
-( c1, BoolExpr* c2 \) {}) p n
-(117) # (  BoolExpr\( ) S
-(int) k
-( c1 \) {}) p n
-(118) # (  BoolExpr\( ) S
-(int) k
-( c1, BoolExpr* c2, ) p
-(int) k
-( c3 \) {}) p n
-(119) # (  BoolExpr\( ) S
-(int) k
-( c1, ) p
-(int) k
-( c2, ) p
-(int) k
-( c3 \) {}) p n
+(119) # () S 8 T (       BoolExpr* c6 \){}) N
 (120) # (};) N
 (121) # () N
-(122) # (class Expression  : public Node {) N
+(122) # (class ReadStmt : public Statement {) N
 (123) # (public:   ) N
-(124) # (  Expression\( Var* c1 \) {}  ) S
-(// Var) c n
-(125) # () S
-(  Expression\( ) p
+(124) # (  ReadStmt\( ) S
 (int) k
-( c1 \) {}  ) p
-(// NUMBER ) c n
-(126) # () S
-(  Expression\( ) p
+( c1, Vars* c2 \) {}) p n
+(125) # (};) N
+(126) # () N
+(127) # (class WriteStmt : public Statement {) N
+(128) # (public:   ) N
+(129) # (  WriteStmt\( ) S
 (int) k
-( c1, Expression* c2, ) p
-(int) k
-( c3 \) {} ) p
-(// '\(" Expression '\)') c n
-(127) # () S
-(  Expression\( string* c1, ) p
-(int) k
-( c2, Expressions* c3, ) p
-(int) k
-( c4 \) {} ) p n
-(128) # (  Expression\( Expression* c1, ) S
-(int) k
-( c2, Expression* c3 \) {}) p n
-(129) # (  Expression\( ) S
-(int) k
-( c2, Expression* c3 \) {}) p n
+( c1, Vars* c2 \) {}) p n
 (130) # (};) N
 (131) # () N
-(132) # (class Var         : public Node {) N
+(132) # (class ContinueStmt : public Statement {) N
 (133) # (public:) N
-(134) # (  Var\( string* c1 \) {}) N
-(135) # (  Var\( string* c1, ) S
+(134) # (  ContinueStmt\( ) S
 (int) k
-( c2, Expression* c3, ) p
+( c1 \) {}) p n
+(135) # (};) N
+(136) # () N
+(137) # (class ReturnStmt : public Statement {) N
+(138) # (public:   ) N
+(139) # (  ReturnStmt\( ) S
 (int) k
-( c4 \) {} ) p n
-(136) # (};) N
-(137) # () N
-(138) # () N
-(139) # () N
-(140) # (class Declaration : public Node {) N
-(141) # (public:) N
-(142) # (  Declaration\( list<string*>* c1, ) S
+( c1, Expression* c2 \) {}) p n
+(140) # (};) N
+(141) # () N
+(142) # (class BoolExpr    : public Node {) N
+(143) # (public:   ) N
+(144) # (  BoolExpr\( Expression* c1, ) S
 (int) k
-( c2, ) p
+( c2, Expression* c3 \) {}) p n
+(145) # (  BoolExpr\( BoolExpr* c1,   ) S
 (int) k
-( c3 \) ) p n
-(143) # (  {};  ) N
-(144) # (  Declaration\( list<string*>* c1, ) S
+( c2, BoolExpr* c3 \) {}) p n
+(146) # (  BoolExpr\( ) S
 (int) k
-( c2, ) p
-(int) k
-( c3, ) p
-(int) k
-( c4, ) p
-(int) k
-( c5, ) p
-(int) k
-( c6,) p n
-(145) # () S 8 T (       ) S
-(int) k
-( c7, ) p
-(int) k
-( c8 \)) p n
-(146) # (  { }) N
-(nodes.h) (Page 2/3) (May 26, 17 6:18) title
+( c1, BoolExpr* c2 \) {}) p n
+(nodes.h) (Page 2/3) (Jun 01, 17 5:07) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(nodes.h) (7/8) (Friday May 26, 2017) footer
+(nodes.h) (7/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
@@ -2213,12 +2033,96 @@ llx lly 12 add translate
 /x0 x v get 2.965278 add sx cw mul add store
 /y0 y v get bfs th add sub store
 x0 y0 moveto
-(147) # (};) p n
-(148) # () N
-(149) # () N
-(150) # (class Function    : public Node {) N
-(151) # (public:) N
-(152) # (  Function\() S
+(147) # (  BoolExpr\( ) p
+(int) k
+( c1 \) {}) p n
+(148) # (  BoolExpr\( ) S
+(int) k
+( c1, BoolExpr* c2, ) p
+(int) k
+( c3 \) {}) p n
+(149) # (  BoolExpr\( ) S
+(int) k
+( c1, ) p
+(int) k
+( c2, ) p
+(int) k
+( c3 \) {}) p n
+(150) # (};) N
+(151) # () N
+(152) # (class Expression  : public Node {) N
+(153) # (public:   ) N
+(154) # (  Expression\( Var* c1 \) {}  ) S
+(// Var) c n
+(155) # () S
+(  Expression\( ) p
+(int) k
+( c1 \) {}  ) p
+(// NUMBER ) c n
+(156) # () S
+(  Expression\( ) p
+(int) k
+( c1, Expression* c2, ) p
+(int) k
+( c3 \) {} ) p
+(// '\(" Expression '\)') c n
+(157) # () S
+(  Expression\( string* c1, ) p
+(int) k
+( c2, Expressions* c3, ) p
+(int) k
+( c4 \) {} ) p n
+(158) # (  Expression\( Expression* c1, ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(159) # (  Expression\( ) S
+(int) k
+( c2, Expression* c3 \) {}) p n
+(160) # (};) N
+(161) # () N
+(162) # (class Var         : public Node {) N
+(163) # (public:) N
+(164) # (  Var\( string* c1 \) {}) N
+(165) # (  Var\( string* c1, ) S
+(int) k
+( c2, Expression* c3, ) p
+(int) k
+( c4 \) {} ) p n
+(166) # (};) N
+(167) # () N
+(168) # () N
+(169) # () N
+(170) # (class Declaration : public Node {) N
+(171) # (public:) N
+(172) # (  Declaration\( list<string*>* c1, ) S
+(int) k
+( c2, ) p
+(int) k
+( c3 \) ) p n
+(173) # (  {};  ) N
+(174) # (  Declaration\( list<string*>* c1, ) S
+(int) k
+( c2, ) p
+(int) k
+( c3, ) p
+(int) k
+( c4, ) p
+(int) k
+( c5, ) p
+(int) k
+( c6,) p n
+(175) # () S 8 T (       ) S
+(int) k
+( c7, ) p
+(int) k
+( c8 \)) p n
+(176) # (  { }) N
+(177) # (};) N
+(178) # () N
+(179) # () N
+(180) # (class Function    : public Node {) N
+(181) # (public:) N
+(182) # (  Function\() S
 (int) k
 ( c1, string* c2, ) p
 (int) k
@@ -2227,7 +2131,7 @@ x0 y0 moveto
 ( c4, Declarations* c5, ) p
 (int) k
 ( c6,) p n
-(153) # (      ) S
+(183) # (      ) S
 (int) k
 ( c7, Declarations* c8, ) p
 (int) k
@@ -2236,10 +2140,10 @@ x0 y0 moveto
 ( c10, Statements* c11, ) p
 (int) k
 ( c12\)) p n
-(154) # (  {) N
-(155) # (    ) S
+(184) # (  {) N
+(185) # (    ) S
 (// emit MIL-code function declaration for c2) c n
-(156) # () S
+(186) # () S
 (    ) p
 (for) K
 (\( ) p
@@ -2247,42 +2151,48 @@ x0 y0 moveto
 ( it : *c5  \) { ) p
 (/* process it */) c
 ( };   ) p n
-(157) # (    ) S
+(187) # (    ) S
 (for) K
 (\( ) p
 (auto) K
 ( it : *c8  \) { ) p
 (/* process it */) c
 ( };   ) p n
-(158) # (    ) S
+(188) # (    ) S
 (for) K
 (\( ) p
 (auto) K
 ( it : *c11 \) { ) p
 (/* process it */) c
 ( };   ) p n
-(159) # (  }) N
-(160) # (};) N
-(161) # () N
-(162) # (class Program     : public Node {    ) N
-(163) # (public:) N
-(164) # (  Program\(Functions *c1\) ) N
-(165) # (  { ) S
+(189) # (  }) N
+(190) # (};) N
+(191) # () N
+(192) # () N
+(193) # (class Program     : public Node {    ) N
+(194) # (public:) N
+(195) # (  Program\(Functions *c1\) ) N
+(196) # (  { ) S
 (for) K
-(\( ) p
-(auto) K
-( it : *c1 \) { ) p
-(/* process it */) c
-( } }  ) p n
-(166) # (};) N
-(167) # () N
-(168) # () N
-(169) # ( ) N
-(nodes.h) (Page 3/3) (May 26, 17 6:18) title
+(\( Function* it : *c1 \) { ) p n
+(197) # (      code += it->code;  ) S
+(// may need a newline here) c n
+(198) # () S
+(    } ) p n
+(199) # (    cout << code;) N
+(200) # (  }  ) N
+(201) # (};) N
+(202) # () N
+(203) # () N
+(204) # () N
+(205) # ( ) N
+(206) # () N
+(207) # () N
+(nodes.h) (Page 3/3) (Jun 01, 17 5:07) title
 border
 grestore
 (Printed by Tom Payne) rhead
-(nodes.h) (8/8) (Friday May 26, 2017) footer
+(nodes.h) (8/8) (Thursday June 01, 2017) footer
 end % of iso1dict
 pagesave restore
 showpage
