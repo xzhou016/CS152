@@ -58,8 +58,8 @@ public:
 // It's attributes can be filled in later.
 
   bool newVar( string name ) {
-    if(Vars.pushback(name)){
-      
+    if(false){
+      return false;
     }// install into symbol table and report collisions
   }
 
@@ -94,7 +94,7 @@ private:
 class BoolExpr    : public Node {
 public:   
   BoolExpr( Expression* c1, int c2, Expression* c3 ) {
-    code += ()
+  
   }
   BoolExpr( BoolExpr* c1,   int c2, BoolExpr* c3 ) {}
   BoolExpr( int c1, BoolExpr* c2 ) {}
@@ -118,7 +118,9 @@ public:
     // check to see that it has been declared
     place = c1->place;    // Var
   }
-  Expression( int c1 ) {}   // NUMBER 
+  Expression( int c1 ) {
+    
+  }   // NUMBER 
   Expression( int c1, Expression* c2, int c3 ) {} // '(" Expression ')'
   Expression( string* c1, int c2, Expressions* c3, int c4 ) {} 
   Expression( Expression* c1, int c2, Expression* c3 ) {}
@@ -134,14 +136,17 @@ public:
       // var table contains both scalars and arrays.
       // should construct a Var and add it to the symbol table.
       vartab[*it] = new Var( it );
+      
       code += ( ". " + *it + "\n" );
+      id = *it;
     }
   }
 
   Declaration( list<string*>* c1, int c2, int c3, int c4, int c5, int c6,
 	       int c7, int c8 )
   { }
-
+ 
+  string id ;
 };
 
 class Statement : public Node {
@@ -159,7 +164,10 @@ public:
 class IfThenStmt : public Statement {
 public:   
 public:   
-  IfThenStmt( int c1, BoolExpr* c2, int c3, Statements* c4, int c5 ) {}
+  IfThenStmt( int c1, BoolExpr* c2, int c3, Statements* c4, int c5 ) {
+    code += c2->code;
+    
+  }
 };
 
 class IfThenElseStmt : public Statement {
@@ -181,7 +189,11 @@ public:
 
 class ReadStmt : public Statement {
 public:   
-  ReadStmt( int c1, Vars* c2 ) {}
+  ReadStmt( int c1, Vars* c2 ) {
+    for (auto it : *c2){
+      code += (".< " + it->place + "\n");
+    }
+  }
 };
 
 class WriteStmt : public Statement {
@@ -193,7 +205,7 @@ public:
   }
 };
 
-class ContinueStmt : public Statement {
+class ContinueStmt : public Statement { // very hard check all l
 public:
   ContinueStmt( int c1 ) {}
 };
@@ -209,10 +221,11 @@ public:
       int c7, Declarations* c8, int c9, int c10, Statements* c11, int c12)
   {
     // add *c2 to function symbol table
-    
+    int param_counter = 0;
     ( code += "func ") += *c2 += "\n";
     for( auto it : *c5  ) {  
       // add each param to symbol table
+      code += it->code + "= " + it->id + ", $" + itoa(param_counter++) + "\n";
     };   
     for( auto it : *c8  ) { 
       // add each local to symbol table
@@ -222,7 +235,7 @@ public:
       // add each statement's code to this function's code
       code += it->code;
     };   
-    code += "endfunc\n";
+    code += "endfunc\n\n";
   }
 };
 
