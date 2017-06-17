@@ -1,14 +1,14 @@
 # Makefile
 
-OBJS      =  yac.o  lex.o  main.o  
+OBJS      =  yac.o  lex.o  main.o
 #nodes.o
-SFLS      =  yac.c  lex.c  main.cc 
+SFLS      =  yac.c  lex.c  main.cc
 #nodes.cc
 
-CC        =  g++ 
+CC        =  g++
 #CC        =  gcc
-CXXFLAGS  =  -std=c++11 -w 
-CFLAGS    =  -std=c++11 -w 
+CXXFLAGS  =  -std=c++11 -w
+CFLAGS    =  -std=c++11 -w
 
 # CFLAGS    =  -g -I/usr/local/include/sgi-stl -Wall -DYYDEBUG=1
 # CFLAGS    =  -g -Wall -DYYDEBUG=1
@@ -19,14 +19,14 @@ CFLAGS    =  -std=c++11 -w
 
 
 compile:	$(OBJS)
-		$(CC) $(CFLAGS) $(OBJS)  -o compile 
-#		$(CC) $(CFLAGS) $(OBJS)  -o compile -lfl 
+		$(CC) $(CFLAGS) $(OBJS)  -o compile
+#		$(CC) $(CFLAGS) $(OBJS)  -o compile -lfl
 
-lex.o yac.o main.o /*nodes.o*/	: heading.H 
+lex.o yac.o main.o /*nodes.o*/	: heading.H
 lex.o main.o /*nodes.o*/	: tok.h
-# yac.o main.o lex.o nodes.o : nodes.cc 
+# yac.o main.o lex.o nodes.o : nodes.cc
 
-lex.c:		lex.src 
+lex.c:		lex.src
 		flex lex.src
 		-cmp -s lex.yy.c lex.c || cp lex.yy.c lex.c
 
@@ -37,13 +37,13 @@ yac.c:		source.y
 
 clean:
 		rm *.o lex.c lex.yy.c yac.c source.tab.c\
-		source.output source.tab.h tok.h printout.ps core
+		source.output source.tab.h tok.h
 
-print:		
+print:
 		a2ps --line-numbers=1 -M letter /*README*/ Makefile heading.H\
                 lex.src main.cc source.y nodes.h /*nodes.cc*/ -o printout.ps
 
-size:		
+size:
 		cat lex.src source.y nodes.h /*nodes.cc*/ main.cc heading.H | wc
 
 # checkin:
@@ -54,6 +54,5 @@ size:
 # 		co -l  README Makefile lex.src source.y nodes.h nodes.cc\
 # 		main.cc heading.H lib.h
 
-test:		
+test:
 		./testscript
-

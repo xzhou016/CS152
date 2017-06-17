@@ -1,0 +1,140 @@
+func main
+. n
+. a
+. i
+. j
+. x
+. sqrt_n
+.< n
+. Temp0
+= Temp0, n
+= x,Temp0
+. Temp4
+= Temp4, x
+. Temp0
+= Temp0, n
+. Temp4
+= Temp4, x
+. Temp6
+/ Temp6, Temp0, Temp4
+. Temp7
+>  Temp7, Temp4, Temp6
+. Temp4
+= Temp4, x
+. Temp0
+= Temp0, n
+. Temp4
+= Temp4, x
+. Temp8
+/ Temp8, Temp0, Temp4
+. Temp9
++ Temp9, Temp4, Temp8
+. Temp10
+= Temp10, 2
+. Temp11
+/ Temp11, Temp9, Temp10
+= x,Temp11
+. Temp4
+= Temp4, x
+= sqrt_n,Temp4
+. Temp12
+= Temp12, 2
+= i,Temp12
+. Temp2
+= Temp2, i
+. Temp0
+= Temp0, n
+. Temp13
+<=  Temp13, Temp2, Temp0
+. Temp15
+= Temp15, 0
+= a,Temp15
+. Temp2
+= Temp2, i
+. Temp16
+= Temp16, 1
+. Temp17
++ Temp17, Temp2, Temp16
+= i,Temp17
+. Temp18
+= Temp18, 2
+= i,Temp18
+. Temp2
+= Temp2, i
+. Temp5
+= Temp5, sqrt_n
+. Temp19
+<=  Temp19, Temp2, Temp5
+. Temp20
+. Temp2
+= Temp2, i
+=[] Temp20, a, Temp2
+. Temp21
+= Temp21, 0
+. Temp22
+==  Temp22, Temp20, Temp21
+?:= Label0, Temp22
+:= Label1
+: Label0
+. Temp2
+= Temp2, i
+. Temp2
+= Temp2, i
+. Temp23
++ Temp23, Temp2, Temp2
+= j,Temp23
+. Temp3
+= Temp3, j
+. Temp0
+= Temp0, n
+. Temp24
+<=  Temp24, Temp3, Temp0
+. Temp26
+= Temp26, 1
+= a,Temp26
+. Temp3
+= Temp3, j
+. Temp2
+= Temp2, i
+. Temp27
++ Temp27, Temp3, Temp2
+= j,Temp27
+: Label1
+. Temp2
+= Temp2, i
+. Temp28
+= Temp28, 1
+. Temp29
++ Temp29, Temp2, Temp28
+= i,Temp29
+. Temp30
+= Temp30, 2
+= i,Temp30
+. Temp2
+= Temp2, i
+. Temp0
+= Temp0, n
+. Temp31
+<=  Temp31, Temp2, Temp0
+. Temp32
+. Temp2
+= Temp2, i
+=[] Temp32, a, Temp2
+. Temp33
+= Temp33, 0
+. Temp34
+==  Temp34, Temp32, Temp33
+?:= Label2, Temp34
+:= Label3
+: Label2
+.> i
+: Label3
+. Temp2
+= Temp2, i
+. Temp35
+= Temp35, 1
+. Temp36
++ Temp36, Temp2, Temp35
+= i,Temp36
+endfunc
+
