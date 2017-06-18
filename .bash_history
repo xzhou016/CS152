@@ -1,11 +1,6 @@
 cat primes.min | compile
 make clean
 make
-make clean
-make
-cat primes.min | compile
-make clean
-make
 cat primes.min | compile
 make clean
 make
@@ -98,3 +93,8 @@ make
 make clean
 make
 cat primes.min | compile
+ls
+git add --all :/
+git commit -m 
+git commit -m "82% on phase III"
+git push
